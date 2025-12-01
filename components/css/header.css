@@ -396,6 +396,46 @@
         pointer-events: none !important;
     }
 
+    .header-actions {
+        position: fixed !important;
+        right: 1rem !important;
+        top: 12.5px !important;
+        gap: 0.5rem !important;
+        background: transparent !important;
+        z-index: 101 !important;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    .notification-btn {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+    }
+
+    .notification-btn i {
+        font-size: 1.2rem !important;
+    }
+
+    .user-menu-btn {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+    }
+
+    .user-menu-btn i {
+        font-size: 1.2rem !important;
+    }
+
+    .notification-count {
+        top: -6px !important;
+        right: -6px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        font-size: 0.65rem !important;
+    }
 
     .notifications-dropdown {
         position: fixed;
