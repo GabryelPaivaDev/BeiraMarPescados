@@ -1,0 +1,429 @@
+/* =========================
+   HEADER (TOPO) - VISUAL FINAL
+   ========================= */
+
+
+.top-header {
+    background: #ffffff;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* LADO ESQUERDO */
+.header-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    z-index: 20;
+    position: relative;
+}
+
+
+.brand-logo-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    outline: none;
+}
+
+
+.header-logo-img {
+    height: 55px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+
+.header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    white-space: nowrap;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+
+/* LADO DIREITO */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    z-index: 20;
+    position: relative;
+}
+
+
+.notification-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+/* BOTÕES - NOTIFICAÇÃO E USUÁRIO */
+.notification-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 25%;
+    background: #ffffff;
+    border: none;
+    color: #4B5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    position: relative;
+}
+
+
+.user-menu-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    position: relative;
+}
+
+
+.notification-btn i,
+.user-menu-btn i {
+    font-size: 1.4rem !important;
+    pointer-events: none;
+}
+
+
+.notification-btn:hover {
+    background: #f1f5f9;
+    color: #4B5563;
+    border-color: #cbd5e1;
+}
+
+
+.user-menu-btn:hover {
+    background: #f1f5f9;
+    color: #3b82f6;
+    border-color: #cbd5e1;
+}
+
+
+.notification-btn:active,
+.user-menu-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* BADGE DE NOTIFICAÇÃO */
+.notification-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: #ffffff !important;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
+    z-index: 2;
+}
+
+
+/* BANDEJA DROPDOWN */
+.notifications-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 340px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px -5px rgba(0,0,0,0.15);
+    border: 1px solid #f1f5f9;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+
+.notifications-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 500px;
+}
+
+
+.notifications-dropdown-header {
+    padding: 1.2rem;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+}
+
+
+.notifications-dropdown-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+
+.mark-all-read {
+    font-size: 0.8rem;
+    color: #3b82f6;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+
+.mark-all-read:hover {
+    color: #2563eb;
+}
+
+
+.notifications-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+
+.notification-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #f8fafc;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: background 0.2s;
+}
+
+
+.notification-item:hover {
+    background: #f8fafc;
+}
+
+
+.notification-item.warning {
+    border-left-color: #f59e0b;
+}
+
+
+.notification-item.success {
+    border-left-color: #10b981;
+}
+
+
+.notification-item.error {
+    border-left-color: #ef4444;
+}
+
+
+.notification-item.info {
+    border-left-color: #3b82f6;
+}
+
+
+.notification-item-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+
+.notification-item-icon.warning {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+
+.notification-item-icon.success {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+
+.notification-item-icon.error {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+
+.notification-item-icon.info {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+
+.notification-item-content {
+    flex: 1;
+}
+
+
+.notification-item-title {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+
+.notification-item-text {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+
+.notification-item-time {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: block;
+    margin-top: 0.4rem;
+}
+
+
+/* =========================================
+   MOBILE (LOGO NÃO REDONDA + CLICÁVEL)
+   ========================================= */
+
+
+@media (max-width: 768px) {
+    .top-header {
+        padding: 0 1rem;
+        height: 65px;
+        left: 0 !important;
+    }
+
+
+    .header-title {
+        display: none !important;
+    }
+
+
+    .header-left {
+        flex: 0 0 auto !important;
+        width: 60px !important;
+        min-width: 60px !important;
+        z-index: 9999 !important;
+    }
+
+
+    #brandLogo.brand-logo-btn {
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        pointer-events: auto !important;
+    }
+
+
+    #brandLogo img.header-logo-img {
+        width: 45px !important;
+        height: 45px !important;
+        min-width: 45px !important;
+        max-width: 45px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        display: block !important;
+        pointer-events: none !important;
+    }
+
+
+    .notifications-dropdown {
+        position: fixed;
+        top: 65px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+}
+
+
+/* =========================================
+   TABLET (80px sidebar)
+   ========================================= */
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .top-header {
+        left: 80px !important;
+    }
+}
+
+
+/* =========================================
+   MODO COMPACTO
+   ========================================= */
+
+
+body.compact-mode .top-header {
+    left: 80px !important;
+}

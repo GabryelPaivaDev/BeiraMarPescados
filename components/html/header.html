@@ -1,0 +1,29 @@
+<header class="top-header">
+    <div class="header-left">
+        <button id="brandLogo" class="brand-logo-btn" type="button" onclick="window.BeiraMarSidebar.toggleMobileMenu(event)">
+            <img src="assets/BeiraMar.jpg" alt="Logo" class="header-logo-img">
+        </button>
+    </div>
+
+    <h1 id="pageTitle" class="header-title">Dashboard</h1>
+
+    <div class="header-actions">
+        <div class="notification-wrapper">
+            <button class="notification-btn" id="btnSininho">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count">0</span>
+            </button>
+            <div class="notifications-dropdown" id="dropdownSininho">
+                <div class="notifications-dropdown-header">
+                    <h3>Notificações</h3>
+                    <button class="mark-all-read">Marcar todas</button>
+                </div>
+                <div class="notifications-list"><div style="padding:20px;text-align:center;color:#999">Vazio</div></div>
+            </div>
+        </div>
+        
+        <button class="user-menu-btn" type="button" onclick="window.BeiraMarUser.handleUserClick()">
+            <i class="fas fa-user-circle"></i>
+        </button>
+    </div>
+</header>

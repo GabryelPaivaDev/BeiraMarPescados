@@ -1,0 +1,700 @@
+<!-- Modal de Login -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Login - Beira Mar Pescados</h2>
+            <button class="modal-close" data-modal="loginModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" required placeholder="Digite sua senha">
+                </div>
+                <div class="form-actions mb-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-sign-in-alt me-2"></i>
+                        Entrar
+                    </button>
+                </div>
+                <div class="form-footer text-center">
+                    <a href="#" class="forgot-password text-decoration-none">Esqueceu sua senha?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Adicionar Item Estoque -->
+<div id="addItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Adicionar Item ao Estoque</h2>
+        </div>
+        <div class="modal-body p-4">
+            <form id="addItemForm">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="itemName" class="form-label">Nome do Produto</label>
+                        <select class="form-select" id="itemName" name="itemName" required>
+                            <option value="">Selecione o produto...</option>
+                            <option value="salmao-fresco" data-category="peixe-fresco" data-price="45.00">Salmão Fresco</option>
+                            <option value="tilapia-inteira" data-category="peixe-inteiro" data-price="18.00">Tilápia Inteira</option>
+                            <option value="camarao-medio" data-category="crustaceo" data-price="85.00">Camarão Médio</option>
+                            <option value="file-tilapia" data-category="peixe-fresco" data-price="25.00">Filé de Tilápia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="itemCategory" class="form-label">Categoria</label>
+                        <select class="form-select" id="itemCategory" name="itemCategory" required>
+                            <option value="">Selecione...</option>
+                            <option value="peixe-fresco">Peixe Fresco</option>
+                            <option value="peixe-inteiro">Peixe Inteiro</option>
+                            <option value="crustaceo">Crustáceo</option>
+                            <option value="molusco">Molusco</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="itemQuantity" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" id="itemQuantity" name="itemQuantity" required placeholder="0" min="0" step="0.1">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="itemUnit" class="form-label">Unidade</label>
+                        <select class="form-select" id="itemUnit" name="itemUnit" required>
+                            <option value="kg">Kg</option>
+                            <option value="unidade">Unidade</option>
+                            <option value="caixa">Caixa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="itemLocation" class="form-label">Localização</label>
+                        <select class="form-select" id="itemLocation" name="itemLocation" required>
+                            <option value="">Selecione...</option>
+                            <option value="camara-fria-a">Câmara Fria A</option>
+                            <option value="camara-fria-b">Câmara Fria B</option>
+                            <option value="freezer-1">Freezer 1</option>
+                            <option value="freezer-2">Freezer 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="itemStatus" class="form-label">Status</label>
+                        <select class="form-select" id="itemStatus" name="itemStatus" required>
+                            <option value="Normal">Normal</option>
+                            <option value="Mediano">Mediano</option>
+                            <option value="Crítico">Crítico</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="itemPrice" class="form-label">Preço (R$)</label>
+                        <input type="number" class="form-control" id="itemPrice" name="itemPrice" placeholder="0,00" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="itemNotes" class="form-label">Observações</label>
+                    <textarea class="form-control" id="itemNotes" name="itemNotes" rows="3" placeholder="Informações adicionais sobre o produto..."></textarea>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-modal="addItemModal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Adicionar Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="newBatchModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Criar Novo Lote de Produção</h2>
+        </div>
+        <div class="modal-body p-4">
+            <form id="newBatchForm">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="batchProduct" class="form-label">Produto</label>
+                        <select class="form-select" id="batchProduct" name="batchProduct" required>
+                            <option value="">Selecione o produto...</option>
+                            <option value="file-tilapia">Filé de Tilápia</option>
+                            <option value="file-salmao">Filé de Salmão</option>
+                            <option value="camarao-limpo">Camarão Limpo</option>
+                            <option value="peixe-inteiro">Peixe Inteiro</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="batchQuantity" class="form-label">Quantidade (kg)</label>
+                        <input type="number" class="form-control" id="batchQuantity" name="batchQuantity" required placeholder="0" min="1" step="0.1">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="batchDate" class="form-label">Data de Produção</label>
+                        <input type="date" class="form-control" id="batchDate" name="batchDate" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="batchTime" class="form-label">Horário de Início</label>
+                        <input type="time" class="form-control" id="batchTime" name="batchTime" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="batchResponsible" class="form-label">Responsável</label>
+                    <select class="form-select" id="batchResponsible" name="batchResponsible" required>
+                        <option value="">Selecione...</option>
+                        <option value="joao-silva">João Silva</option>
+                        <option value="maria-santos">Maria Santos</option>
+                        <option value="pedro-oliveira">Pedro Oliveira</option>
+                        <option value="ana-costa">Ana Costa</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="batchNotes" class="form-label">Observações</label>
+                    <textarea class="form-control" id="batchNotes" name="batchNotes" rows="3" placeholder="Instruções especiais para o lote..."></textarea>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-modal="newBatchModal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Criar Lote
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="newOrderModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Novo Pedido de Venda</h2>
+        </div>
+        <div class="modal-body p-4">
+            <form id="newOrderForm">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label for="clientSelect" class="form-label">Selecione o Cliente</label>
+                        <select class="form-select" id="clientSelect" name="clientSelect" required>
+                            <option value="">Selecione um cliente...</option>
+                            <option value="1" data-client='{"id":1,"name":"Restaurante Mar Azul","type":"restaurante","email":"contato@marazul.com.br","phone":"(48) 3214-5678","address":"Rua das Praias, 123 - Centro"}'>Restaurante Mar Azul</option>
+                            <option value="2" data-client='{"id":2,"name":"Distribuidora Oceano","type":"distribuidora","email":"vendas@oceano.com.br","phone":"(48) 3221-9876","address":"Av. Beira Mar, 456 - Zona Portuária"}'>Distribuidora Oceano</option>
+                            <option value="3" data-client='{"id":3,"name":"Feira do Peixe","type":"feira","email":"feiradopeixe@email.com","phone":"(48) 3233-4444","address":"Mercado Central - Box 12"}'>Feira do Peixe</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="button" class="btn btn-outline-primary w-100" id="newClientBtn">
+                            <i class="fas fa-plus me-2"></i>
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="clientName" class="form-label">Nome do Cliente</label>
+                        <input type="text" class="form-control" id="clientName" name="clientName" required placeholder="Nome do cliente ou empresa" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="clientType" class="form-label">Tipo de Cliente</label>
+                        <select class="form-select" id="clientType" name="clientType" required>
+                            <option value="">Selecione...</option>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="distribuidora">Distribuidora</option>
+                            <option value="feira">Feira Livre</option>
+                            <option value="varejo">Varejo</option>
+                            <option value="atacado">Atacado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="orderDate" class="form-label">Data do Pedido</label>
+                        <input type="date" class="form-control" id="orderDate" name="orderDate" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="deliveryDate" class="form-label">Data de Entrega</label>
+                        <input type="date" class="form-control" id="deliveryDate" name="deliveryDate" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Produtos do Pedido</label>
+                    <div class="product-list mb-2">
+                        <div class="product-item mb-2">
+                            <div class="product-row d-flex gap-2 align-items-end">
+                                <select class="form-select flex-grow-1 product-select" name="product[]" required>
+                                    <option value="">Selecione o produto...</option>
+                                    <option value="salmao-fresco">Salmão Fresco</option>
+                                    <option value="tilapia-inteira">Tilápia Inteira</option>
+                                    <option value="camarao-medio">Camarão Médio</option>
+                                    <option value="file-tilapia">Filé de Tilápia</option>
+                                </select>
+                                <div class="qty-group d-flex flex-column align-items-center">
+                                    <h2 class="kg-h2">(Kg)</h2>
+                                    <input type="number" class="form-control" style="width: 120px;" name="quantity[]" placeholder="(Kg)" min="1" step="0.1" value="1" required>
+                                </div>
+                                <input type="text" class="form-control product-price-input" style="width: 140px; background-color: #f8f9fa;" name="price[]" placeholder="Preço" readonly>
+                                <button type="button" class="btn btn-danger btn-remove-product">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm btn-add-product">
+                        <i class="fas fa-plus me-2"></i>
+                        Adicionar Produto
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="orderNotes" class="form-label">Observações</label>
+                    <textarea class="form-control" id="orderNotes" name="orderNotes" rows="3" placeholder="Informações adicionais sobre o pedido..."></textarea>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-modal="newOrderModal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Criar Pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Novo Cliente -->
+<div id="newClientModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Cadastrar Novo Cliente</h2>
+        </div>
+        <div class="modal-body p-4">
+            <form id="newClientForm">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label for="newClientName" class="form-label">Nome do Cliente / Empresa</label>
+                        <input type="text" class="form-control" id="newClientName" name="newClientName" required placeholder="Nome do cliente ou empresa">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="newClientType" class="form-label">Tipo de Cliente</label>
+                        <select class="form-select" id="newClientType" name="newClientType" required>
+                            <option value="">Selecione...</option>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="distribuidora">Distribuidora</option>
+                            <option value="feira">Feira Livre</option>
+                            <option value="varejo">Varejo</option>
+                            <option value="atacado">Atacado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="newClientEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="newClientEmail" name="newClientEmail" placeholder="email@exemplo.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="newClientPhone" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="newClientPhone" name="newClientPhone" placeholder="(00) 0000-0000">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="newClientAddress" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="newClientAddress" name="newClientAddress" placeholder="Rua, número - Bairro">
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" id="cancelNewClientBtn">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>
+                        Criar Cliente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Visualizar Detalhes do Produto -->
+<div id="viewItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Detalhes do Produto</h2>
+            <button class="modal-close" data-modal="viewItemModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <div class="list-group list-group-flush">
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Produto</span>
+                    <span class="fw-bold" id="viewItemName">-</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Categoria</span>
+                    <span class="fw-bold" id="viewItemCategory">-</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Quantidade</span>
+                    <span class="fw-bold" id="viewItemQuantity">-</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Status</span>
+                    <span class="fw-bold" id="viewItemStatus">-</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Localização</span>
+                    <span class="fw-bold" id="viewItemLocation">-</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <span class="text-muted">Preço</span>
+                    <span class="fw-bold" id="viewItemPrice">-</span>
+                </div>
+            </div>
+            <div class="form-actions mt-3 d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary" data-modal="viewItemModal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Editar Produto -->
+<div id="editItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Editar Produto</h2>
+            <button class="modal-close" data-modal="editItemModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <form id="editItemForm">
+                <input type="hidden" id="editItemId" name="editItemId">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editItemName" class="form-label">Nome do Produto</label>
+                        <select class="form-select" id="editItemName" name="editItemName" required>
+                            <option value="">Selecione o produto...</option>
+                            <option value="salmao-fresco" data-category="peixe-fresco" data-price="45.00">Salmão Fresco</option>
+                            <option value="tilapia-inteira" data-category="peixe-inteiro" data-price="18.00">Tilápia Inteira</option>
+                            <option value="camarao-medio" data-category="crustaceo" data-price="85.00">Camarão Médio</option>
+                            <option value="file-tilapia" data-category="peixe-fresco" data-price="25.00">Filé de Tilápia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editItemCategory" class="form-label">Categoria</label>
+                        <select class="form-select" id="editItemCategory" name="editItemCategory" required>
+                            <option value="">Selecione...</option>
+                            <option value="peixe-fresco">Peixe Fresco</option>
+                            <option value="peixe-inteiro">Peixe Inteiro</option>
+                            <option value="crustaceo">Crustáceo</option>
+                            <option value="molusco">Molusco</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editItemQuantity" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" id="editItemQuantity" name="editItemQuantity" required placeholder="0" min="0" step="0.1">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editItemUnit" class="form-label">Unidade</label>
+                        <select class="form-select" id="editItemUnit" name="editItemUnit" required>
+                            <option value="kg">Kg</option>
+                            <option value="unidade">Unidade</option>
+                            <option value="caixa">Caixa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editItemLocation" class="form-label">Localização</label>
+                        <select class="form-select" id="editItemLocation" name="editItemLocation" required>
+                            <option value="">Selecione...</option>
+                            <option value="camara-fria-a">Câmara Fria A</option>
+                            <option value="camara-fria-b">Câmara Fria B</option>
+                            <option value="freezer-1">Freezer 1</option>
+                            <option value="freezer-2">Freezer 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editItemStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editItemStatus" name="editItemStatus" required>
+                            <option value="Normal">Normal</option>
+                            <option value="Mediano">Mediano</option>
+                            <option value="Crítico">Crítico</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editItemPrice" class="form-label">Preço (R$)</label>
+                        <input type="number" class="form-control" id="editItemPrice" name="editItemPrice" placeholder="0,00" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-modal="editItemModal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>
+                        Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Editar Pedido -->
+<div id="editOrderModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">Editar Pedido</h2>
+            <button class="modal-close" data-modal="editOrderModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <form id="editOrderForm">
+                <input type="hidden" id="editOrderId" name="editOrderId">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label for="editClientSelect" class="form-label">Selecione o Cliente</label>
+                        <select class="form-select" id="editClientSelect" name="editClientSelect" required>
+                            <option value="">Selecione um cliente...</option>
+                            <option value="1" data-client='{"id":1,"name":"Restaurante Mar Azul","type":"restaurante","email":"contato@marazul.com.br","phone":"(48) 3214-5678","address":"Rua das Praias, 123 - Centro"}'>Restaurante Mar Azul</option>
+                            <option value="2" data-client='{"id":2,"name":"Distribuidora Oceano","type":"distribuidora","email":"vendas@oceano.com.br","phone":"(48) 3221-9876","address":"Av. Beira Mar, 456 - Zona Portuária"}'>Distribuidora Oceano</option>
+                            <option value="3" data-client='{"id":3,"name":"Feira do Peixe","type":"feira","email":"feiradopeixe@email.com","phone":"(48) 3233-4444","address":"Mercado Central - Box 12"}'>Feira do Peixe</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="button" class="btn btn-outline-primary w-100" id="editNewClientBtn">
+                            <i class="fas fa-plus me-2"></i>
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editClientName" class="form-label">Nome do Cliente</label>
+                        <input type="text" class="form-control" id="editClientName" name="editClientName" required placeholder="Nome do cliente ou empresa" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editClientType" class="form-label">Tipo de Cliente</label>
+                        <select class="form-select" id="editClientType" name="editClientType" required>
+                            <option value="">Selecione...</option>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="distribuidora">Distribuidora</option>
+                            <option value="feira">Feira Livre</option>
+                            <option value="varejo">Varejo</option>
+                            <option value="atacado">Atacado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editOrderDate" class="form-label">Data do Pedido</label>
+                        <input type="date" class="form-control" id="editOrderDate" name="editOrderDate" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editDeliveryDate" class="form-label">Data de Entrega</label>
+                        <input type="date" class="form-control" id="editDeliveryDate" name="editDeliveryDate" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Produtos do Pedido</label>
+                    <div class="product-list mb-2" id="editProductList">
+                        <!-- Produtos serão adicionados aqui dinamicamente -->
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm btn-add-product-edit">
+                        <i class="fas fa-plus me-2"></i>
+                        Adicionar Produto
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <label for="editOrderNotes" class="form-label">Observações</label>
+                    <textarea class="form-control" id="editOrderNotes" name="editOrderNotes" rows="3" placeholder="Informações adicionais sobre o pedido..."></textarea>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-modal="editOrderModal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>
+                        Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Visualizar Detalhes da Notificação -->
+<div id="viewNotificationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center p-4 border-bottom">
+            <h2 class="h5 mb-0 text-white">
+                <i class="fas fa-bell me-2"></i>Detalhes da Notificação
+            </h2>
+            <button class="modal-close" data-modal="viewNotificationModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <div class="text-center mb-4">
+                <div class="notification-detail-icon d-inline-flex align-items-center justify-content-center rounded-circle mb-3" id="viewNotificationIcon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #3b82f6, #60a5fa);">
+                    <i class="fas fa-bell text-white fs-2"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2" id="viewNotificationTitle">-</h3>
+                <span class="badge bg-primary mb-3" id="viewNotificationType">-</span>
+            </div>
+            
+            <div class="card border-0 bg-light mb-4">
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="text-muted small text-uppercase fw-semibold mb-2 d-block">Mensagem</label>
+                        <p class="mb-0" id="viewNotificationMessage" style="line-height: 1.6;">-</p>
+                    </div>
+                    <div class="border-top pt-3">
+                        <label class="text-muted small text-uppercase fw-semibold mb-2 d-block">Horário</label>
+                        <p class="mb-0">
+                            <i class="far fa-clock me-2 text-primary"></i>
+                            <span id="viewNotificationTime">-</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions mt-3 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-primary" data-modal="viewNotificationModal">
+                    <i class="fas fa-check me-2"></i>Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content" style="max-width: 380px;">
+        <div class="modal-header border-0 pb-0">
+            <button class="modal-close ms-auto" onclick="window.BeiraMarModais.closeModal('loginModal')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body text-center p-4">
+            <div class="mb-4">
+                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                    <i class="fas fa-user text-primary" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+            <h3 class="fw-bold mb-1">Bem-vindo!</h3>
+            <p class="text-muted mb-4">Faça login para acessar.</p>
+            
+            <form onsubmit="window.BeiraMarUser.login(event)">
+                <div class="clean-form-group mb-3 text-start">
+                    <label>Usuário</label>
+                    <input type="text" class="clean-input" value="Altemir" required>
+                </div>
+                <div class="clean-form-group mb-4 text-start">
+                    <label>Senha</label>
+                    <input type="password" class="clean-input" value="123" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill fw-bold">
+                    Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="profileModal" class="modal">
+    <div class="modal-content" style="max-width: 380px;">
+        <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold ps-3">Perfil</h5>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('profileModal')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body text-center p-4">
+            <div class="mb-3">
+                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center border" style="width: 90px; height: 90px;">
+                    <i class="fas fa-user-circle text-secondary" style="font-size: 4rem;"></i>
+                </div>
+            </div>
+            
+            <h3 class="fw-bold mb-0" id="modalProfileName">Altemir</h3>
+            <p class="text-muted small">Administrador</p>
+            
+            <hr class="my-4">
+
+            <button onclick="window.BeiraMarUser.logout()" class="btn btn-outline-danger w-100 py-2 rounded-pill fw-bold">
+                <i class="fas fa-sign-out-alt me-2"></i> Sair da Conta
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="addItemModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Adicionar Novo Item</h2>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('addItemModal')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="addItemForm">
+                <div class="clean-form-group">
+                    <label>Nome do Produto</label>
+                    <input type="text" id="itemName" class="clean-input" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 clean-form-group">
+                        <label>Categoria</label>
+                        <select id="itemCategory" class="clean-input"><option>Peixe Fresco</option><option>Peixe Inteiro</option><option>Crustáceo</option></select>
+                    </div>
+                    <div class="col-md-6 clean-form-group">
+                        <label>Localização</label>
+                        <select id="itemLocation" class="clean-input"><option>Câmara Fria A</option><option>Freezer 1</option></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 clean-form-group">
+                        <label>Quantidade</label>
+                        <input type="number" id="itemQuantity" class="clean-input" required>
+                    </div>
+                    <div class="col-md-6 clean-form-group">
+                        <label>Preço</label>
+                        <input type="text" id="itemValue" class="clean-input" placeholder="0,00">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('addItemModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

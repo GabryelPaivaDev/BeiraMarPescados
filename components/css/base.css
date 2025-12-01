@@ -1,0 +1,202 @@
+/* =========================
+   BASE CSS - LAYOUT ESTRUTURAL
+   ========================= */
+
+:root {
+    /* Variáveis Padrão (PC) */
+    --sidebar-width: 280px;
+    --header-height: 80px;
+}
+
+/* Quando recolhido manualmente no PC */
+body.compact-mode {
+    --sidebar-width: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+/* Container Geral */
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* --- HEADER COLADO NO TOPO --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: 99;
+}
+
+/* --- CONTEÚDO PRINCIPAL (REGRAS GERAIS) --- */
+.main-content {
+    /* PC Padrão: Usa a variável (280px ou 80px) */
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    margin-top: var(--header-height);
+    min-height: 100vh;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   PADDING RESPONSIVO PARA TODAS AS PÁGINAS
+   ========================================= */
+
+.page {
+    padding: 1.5rem;
+    padding-top: 2px;
+    animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   ESPAÇAMENTO DO HEADER
+   ========================================= */
+
+/* Container dos elementos da direita do header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+/* Espaçamento entre elementos do header */
+.top-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Transições/Animações suaves na interface */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Barra de rolagem com visual customizado */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================
+   CORREÇÃO TABLET (769px - 1024px)
+   ========================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    :root {
+        --sidebar-width: 80px; /* Atualiza a variável */
+    }
+
+    /* FORÇA BRUTA: Garante o espaço de 80px */
+    .main-content {
+        margin-left: 80px !important;
+        width: calc(100% - 80px) !important;
+        margin-top: 80px !important;
+    }
+
+    .page {
+        padding: 1.25rem;
+        padding-top: 2px;
+    }
+
+    .header-actions {
+        gap: 1rem;
+    }
+}
+
+/* =========================================
+   CORREÇÃO MOBILE (< 768px)
+   ========================================= */
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 0px;
+    }
+
+    /* No celular, margem é zero (ocupa tudo) */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        margin-top: 65px !important;
+    }
+
+    .page {
+        padding: 1rem;
+        padding-top: 2px;
+    }
+
+    .header-actions {
+        gap: 0.8rem;
+    }
+}
+
+/* =========================================
+   CORREÇÃO MOBILE PEQUENO (< 480px)
+   ========================================= */
+
+@media (max-width: 480px) {
+    .page {
+        padding: 0.8rem;
+        padding-top: 2px;
+    }
+
+    .header-actions {
+        gap: 0.6rem;
+    }
+}
+
+/* Fundo Escuro ao abrir menu */
+body.mobile-menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    animation: fadeIn 0.3s;
+}

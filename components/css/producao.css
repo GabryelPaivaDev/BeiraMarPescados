@@ -1,0 +1,66 @@
+/* Seção de Produção (kanban e cartões) */
+.producao-content {
+    display: grid;
+    gap: 2rem;
+}
+
+.lotes-ativos {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lotes-ativos h3 {
+    margin: 0 0 1.5rem 0;
+    color: #1f2937;
+}
+
+.lote-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.lote-card:last-child {
+    margin-bottom: 0;
+}
+
+.lote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.lote-header h4 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.1rem;
+}
+
+.lote-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.lote-status.processing {
+    background: #3b82f6;
+    color: white;
+}
+
+.lote-status.ready {
+    background: #10b981;
+    color: white;
+}
+
+.lote-card p {
+    margin: 0.5rem 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+

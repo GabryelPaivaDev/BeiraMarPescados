@@ -1,0 +1,72 @@
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar-container">
+    <!-- Header da Sidebar -->
+    <div class="sidebar-header">
+        <div class="logo" id="brandLogo">
+            <i class="fas fa-fish"></i>
+            <h2>Beira Mar</h2>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <!-- Menu de Navegação -->
+    <nav class="nav-menu">
+        <!-- Dashboard -->
+        <li class="nav-item active">
+            <a href="#" class="nav-link" data-page="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <!-- Estoque -->
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="estoque">
+                <i class="fas fa-boxes"></i>
+                <span>Estoque</span>
+            </a>
+        </li>
+
+        <!-- Produção -->
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="producao">
+                <i class="fas fa-cogs"></i>
+                <span>Produção</span>
+            </a>
+        </li>
+        <!-- Vendas -->
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="vendas">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Vendas</span>
+            </a>
+        </li>
+
+        <!-- Fluxo -->
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="fluxo">
+                <i class="fas fa-stream"></i>
+                <span>Fluxo</span>
+            </a>
+        </li>
+
+        <!-- Notificações -->
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="notificacoes">
+                <i class="fas fa-bell"></i>
+                <span>Notificações</span>
+                <span class="notification-badge">3</span>
+            </a>
+        </li>
+    </nav>
+
+    <!-- Rodapé com Usuário -->
+    <div class="sidebar-footer" onclick="window.BeiraMarUser.handleUserClick()">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span id="sidebarUserName">Altemir</span>
+        </div>
+    </div>
+</aside>

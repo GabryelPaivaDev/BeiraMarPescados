@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Beira Mar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div class="dash-container-new">
+        
+        <!-- BANNER DE BOAS-VINDAS -->
+        <div class="welcome-banner-new">
+            <div class="welcome-text">
+                <h1>Painel de Controle</h1>
+                <p>Visão geral das operações Beira Mar</p>
+            </div>
+            <div class="date-badge-new">
+                <i class="fas fa-calendar-day"></i>
+                <span id="dash-data-hoje">Data Atual</span>
+            </div>
+        </div>
+
+        <!-- CARDS KPI -->
+        <div class="dash-cards-new">
+            
+            <!-- ESTOQUE TOTAL -->
+            <div class="d-card-new card-blue-new" onclick="window.BeiraMarNavigation.navigateToPage('estoque')">
+                <div class="d-header-new">
+                    <div>
+                        <h3>Estoque Total</h3>
+                        <p class="d-number-new" id="kpi-estoque-total">...</p>
+                    </div>
+                    <div class="d-icon-new"><i class="fas fa-cube"></i></div>
+                </div>
+                <div class="d-footer-new">
+                    <span class="d-badge-new">
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        <span id="kpi-estoque-critico">0</span> Críticos
+                    </span>
+                </div>
+            </div>
+
+            <!-- VENDAS HOJE -->
+            <div class="d-card-new card-green-new" onclick="window.BeiraMarNavigation.navigateToPage('vendas')">
+                <div class="d-header-new">
+                    <div>
+                        <h3>Vendas Hoje</h3>
+                        <p class="d-number-new" id="kpi-vendas-total">...</p>
+                    </div>
+                    <div class="d-icon-new"><i class="fas fa-shopping-bag"></i></div>
+                </div>
+                <div class="d-footer-new">
+                    <span class="d-badge-new">
+                        <i class="fas fa-clock"></i> 
+                        <span id="kpi-vendas-pendentes">0</span> Pendentes
+                    </span>
+                </div>
+            </div>
+
+            <!-- EM PRODUÇÃO -->
+            <div class="d-card-new card-purple-new" onclick="window.BeiraMarNavigation.navigateToPage('producao')">
+                <div class="d-header-new">
+                    <div>
+                        <h3>Em Produção</h3>
+                        <p class="d-number-new" id="kpi-producao-ativos">...</p>
+                    </div>
+                    <div class="d-icon-new"><i class="fas fa-industry"></i></div>
+                </div>
+                <div class="d-footer-new">
+                    <span class="d-badge-new"><i class="fas fa-cog fa-spin"></i> Em andamento</span>
+                </div>
+            </div>
+
+            <!-- FLUXO LOGÍSTICO -->
+            <div class="d-card-new card-orange-new" onclick="window.BeiraMarNavigation.navigateToPage('fluxo')">
+                <div class="d-header-new">
+                    <div>
+                        <h3>Fluxo Logístico</h3>
+                        <p class="d-number-new" id="kpi-fluxo-ativos">...</p>
+                    </div>
+                    <div class="d-icon-new"><i class="fas fa-truck-loading"></i></div>
+                </div>
+                <div class="d-footer-new">
+                    <span class="d-badge-new"><i class="fas fa-bolt"></i> Operação ativa</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRID INFERIOR -->
+        <div class="dash-grid-bottom-new">
+            
+            <!-- ATIVIDADES RECENTES -->
+            <div class="section-card-new">
+                <div class="section-header-new">
+                    <h3><i class="fas fa-bell" style="color: #3b82f6"></i> Atividades Recentes</h3>
+                </div>
+                <div class="activity-list-new" id="dash-lista-atividades">
+                    <p class="text-muted small">Carregando histórico...</p>
+                </div>
+            </div>
+
+            <!-- AÇÕES RÁPIDAS -->
+            <div class="section-card-new">
+                <div class="section-header-new">
+                    <h3><i class="fas fa-bolt" style="color: #f59e0b"></i> Ações Rápidas</h3>
+                </div>
+                <div class="shortcuts-list-new">
+                    
+                    <button class="shortcut-btn-new" onclick="window.BeiraMarUtils.executeQuickAction('novoPedido')">
+                        <i class="fas fa-cart-plus"></i> Novo Pedido
+                    </button>
+                    
+                    <button class="shortcut-btn-new" onclick="window.BeiraMarUtils.executeQuickAction('novoLote')">
+                        <i class="fas fa-box-open"></i> Iniciar Lote
+                    </button>
+                    
+                    <button class="shortcut-btn-new" onclick="window.BeiraMarUtils.executeQuickAction('novoItem')">
+                        <i class="fas fa-plus-circle"></i> Entrada de Estoque
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

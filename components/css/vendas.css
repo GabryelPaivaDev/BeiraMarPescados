@@ -1,0 +1,283 @@
+/* Seção de Vendas (sumário e pedidos) */
+
+.vendas-content {
+    display: grid;
+    gap: 2rem;
+}
+
+/* ===== SUMMARY CARDS ===== */
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card .card-content {
+    flex: 1;
+}
+
+.summary-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.summary-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.summary-card span {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.summary-card .card-icon {
+    font-size: 2.2rem;
+    opacity: 0.6;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.summary-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+/* ===== CORES DOS CARDS ===== */
+
+/* Azul (Total de Vendas) */
+.card-blue {
+    border-left: 4px solid #3b82f6 !important;
+}
+
+.card-blue .summary-number {
+    color: #3b82f6 !important;
+}
+
+.card-blue .card-icon {
+    color: #3b82f6 !important;
+}
+
+/* Verde (Pedidos Confirmados) */
+.card-green {
+    border-left: 4px solid #10b981 !important;
+}
+
+.card-green .summary-number {
+    color: #10b981 !important;
+}
+
+.card-green .card-icon {
+    color: #10b981 !important;
+}
+
+/* Roxo (Ticket Médio) */
+.card-purple {
+    border-left: 4px solid #8b5cf6 !important;
+}
+
+.card-purple .summary-number {
+    color: #8b5cf6 !important;
+}
+
+.card-purple .card-icon {
+    color: #8b5cf6 !important;
+}
+
+/* Laranja (Pedidos Pendentes) */
+.card-orange {
+    border-left: 4px solid #f59e0b !important;
+}
+
+.card-orange .summary-number {
+    color: #f59e0b !important;
+}
+
+.card-orange .card-icon {
+    color: #f59e0b !important;
+}
+
+/* ===== PEDIDOS RECENTES ===== */
+
+.pedidos-recentes {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pedidos-recentes h3 {
+    margin: 0 0 1.5rem 0;
+    color: #1f2937;
+}
+
+.pedido-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pedido-card:last-child {
+    margin-bottom: 0;
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pedido-header h4 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.1rem;
+}
+
+.pedido-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.pedido-status.confirmed {
+    background: #10b981;
+    color: white;
+}
+
+.pedido-status.pending {
+    background: #f59e0b;
+    color: white;
+}
+
+.pedido-card p {
+    margin: 0.5rem 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* Ajustes para lista simples de pedidos (.pedido-item) */
+
+.pedido-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pedido-item .pedido-info {
+    flex: 1 1 auto;
+}
+
+.pedido-item .pedido-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+}
+
+.pedido-item .pedido-value .d-flex {
+    margin-top: 0.25rem;
+}
+
+.pedido-item .pedido-value p {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Reordena elementos dentro de .pedido-value */
+
+.pedido-item .pedido-value p { order: 0; }
+
+.pedido-item .pedido-value .btn, .pedido-item .pedido-value .d-flex, .pedido-item .pedido-value button { order: 1; }
+
+.pedido-item .pedido-value .status-badge { order: 2; margin-top: 0.25rem; }
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 768px) {
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .summary-card {
+        padding: 1.25rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .summary-card .card-icon {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .summary-number {
+        font-size: 1.6rem;
+    }
+
+    .summary-card h3 {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .summary-card {
+        padding: 1rem;
+    }
+
+    .summary-number {
+        font-size: 1.4rem;
+    }
+
+    .summary-card h3 {
+        font-size: 0.85rem;
+    }
+
+    .summary-card span {
+        font-size: 0.8rem;
+    }
+
+    .summary-card .card-icon {
+        font-size: 1.8rem;
+    }
+}

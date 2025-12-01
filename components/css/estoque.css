@@ -1,0 +1,259 @@
+/* =========================================
+   ESTILO DA PÁGINA DE ESTOQUE (CORRIGIDO)
+   ========================================= */
+
+/* --- 1. CABEÇALHO E ESTATÍSTICAS --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.page-header h2 {
+    margin: 0;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Grid dos Cards */
+.estoque-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilo Base do Card */
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: transform 0.2s;
+    /* Borda padrão cinza caso não tenha cor específica */
+    border-left: 4px solid #cbd5e1; 
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1e293b; /* Cor padrão */
+}
+
+/* --- CORES DOS CARDS (Correção das faixas cinzas) --- */
+
+/* Azul (Total de Itens) */
+.stat-card.card-blue {
+    border-left-color: #3b82f6;
+}
+.stat-card.card-blue .stat-number {
+    color: #3b82f6;
+}
+
+/* Verde (Valor Patrimonial) */
+.stat-card.card-green {
+    border-left-color: #10b981;
+}
+.stat-card.card-green .stat-number {
+    color: #10b981;
+}
+
+/* Vermelho (Críticos) */
+.stat-card.card-red {
+    border-left-color: #ef4444;
+}
+.stat-card.card-red .stat-number {
+    color: #ef4444;
+}
+
+
+/* --- 2. MODAL DE ADICIONAR ITEM --- */
+.clean-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.clean-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.clean-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.clean-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* CAIXA DO VALOR TOTAL (Correção do corte de zeros) */
+.total-value-box {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.currency-symbol {
+    font-size: 1.5rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.total-input {
+    background: transparent;
+    border: none;
+    font-size: 2.5rem; /* Fonte grande */
+    font-weight: 800;
+    color: #1e293b;
+    outline: none;
+    text-align: left;
+    
+    /* Truque para o input crescer e não cortar */
+    width: 100%; 
+    min-width: 150px;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- 3. TABELA DE ESTOQUE --- */
+.estoque-table {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Botão de Excluir (Lixeira) */
+.btn-icon-danger {
+    color: #ef4444;
+    background: #fef2f2;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-icon-danger:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Badges de Status */
+.badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge.bg-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge.bg-warning {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.badge.bg-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .estoque-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .total-input {
+        font-size: 2rem; /* Fonte um pouco menor no celular */
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+}

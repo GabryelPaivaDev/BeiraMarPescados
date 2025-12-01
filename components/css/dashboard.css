@@ -1,0 +1,610 @@
+/* =========================================
+   DASHBOARD - MODERN CLEAN UI (FINAL)
+   ========================================= */
+
+/* --- 1. VARIÁVEIS E CONTAINER --- */
+.dash-container-new {
+    /* Paleta de Cores */
+    --dash-text: #2c3e50;
+    --dash-muted: #64748b;
+    
+    /* Cores de Acento (Fundo Suave / Texto Forte) */
+    --dash-blue: #3b82f6; 
+    --dash-blue-soft: #eff6ff;
+    
+    --dash-green: #10b981; 
+    --dash-green-soft: #ecfdf5;
+    
+    --dash-purple: #8b5cf6; 
+    --dash-purple-soft: #f5f3ff;
+    
+    --dash-orange: #f59e0b; 
+    --dash-orange-soft: #fffbeb;
+
+    /* Sombras e Bordas */
+    --radius: 16px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Layout */
+    padding: 1.5rem;
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    
+    /* Animação de Entrada */
+    animation: slideUpFade 0.5s ease-out;
+}
+
+@keyframes slideUpFade {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* --- 2. BANNER DE BOAS-VINDAS MELHORADO --- */
+.welcome-banner-new {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elemento decorativo de fundo - círculo superior direito */
+.welcome-banner-new::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Elemento decorativo de fundo - círculo inferior esquerdo */
+.welcome-banner-new::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Texto de boas-vindas */
+.welcome-text {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+.welcome-text h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+}
+
+.welcome-text p {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Badge de data */
+.date-badge-new {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.date-badge-new:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.date-badge-new i {
+    font-size: 1.1rem;
+}
+
+/* --- 3. CARDS PRINCIPAIS (KPIs) --- */
+.dash-cards-new {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* Estilo Base do Card */
+.d-card-new {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 170px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito Hover do Card */
+.d-card-new:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: transparent;
+}
+
+/* Cabeçalho do Card */
+.d-header-new {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.d-header-new h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--dash-muted);
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+}
+
+.d-number-new {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--dash-text);
+    margin: 0;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ícone do Card */
+.d-icon-new {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.d-card-new:hover .d-icon-new {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Rodapé do Card (Badge) */
+.d-footer-new {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f8fafc;
+}
+
+.d-badge-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+}
+
+/* --- CORES ESPECÍFICAS DOS CARDS --- */
+
+/* Azul (Estoque) */
+.card-blue-new .d-icon-new { background: var(--dash-blue-soft); color: var(--dash-blue); }
+.card-blue-new .d-badge-new { background: #eff6ff; color: #3b82f6; }
+
+/* Verde (Vendas) */
+.card-green-new .d-icon-new { background: var(--dash-green-soft); color: var(--dash-green); }
+.card-green-new .d-badge-new { background: #ecfdf5; color: #10b981; }
+
+/* Roxo (Produção) */
+.card-purple-new .d-icon-new { background: var(--dash-purple-soft); color: var(--dash-purple); }
+.card-purple-new .d-badge-new { background: #f5f3ff; color: #8b5cf6; }
+
+/* Laranja (Fluxo) */
+.card-orange-new .d-icon-new { background: var(--dash-orange-soft); color: var(--dash-orange); }
+.card-orange-new .d-badge-new { background: #fffbeb; color: #f59e0b; }
+
+/* --- 4. GRID INFERIOR (LISTAS E AÇÕES) --- */
+.dash-grid-bottom-new {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.section-card-new {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid #f1f5f9;
+    height: 100%;
+}
+
+.section-header-new {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-header-new h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dash-text);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* --- 5. LISTA DE ATIVIDADES --- */
+.activity-list-new {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.activity-item-new {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+    border: 1px solid #f8f9fa;
+    background: #fff;
+}
+
+.activity-item-new:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    transform: translateX(3px);
+}
+
+.act-icon-new {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.act-content-new h4 {
+    margin: 0 0 0.3rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dash-text);
+}
+
+.act-content-new p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--dash-muted);
+    line-height: 1.4;
+}
+
+/* --- 6. BOTÕES DE AÇÃO RÁPIDA --- */
+.shortcuts-list-new {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.shortcut-btn-new {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+    color: var(--dash-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.shortcut-btn-new:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #2563eb;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.shortcut-btn-new i {
+    font-size: 1.2rem;
+    color: #3b82f6;
+    width: 24px;
+    text-align: center;
+}
+
+/* --- 7. RESPONSIVIDADE --- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .welcome-banner-new {
+        padding: 2rem 1.5rem;
+    }
+
+    .welcome-text h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Tablets Médias */
+@media (max-width: 991px) {
+    .dash-grid-bottom-new {
+        grid-template-columns: 1fr;
+    }
+    
+    .welcome-banner-new {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+    }
+    
+    .date-badge-new {
+        width: 100%;
+        justify-content: center;
+        white-space: normal;
+    }
+
+    .dash-cards-new {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .d-number-new {
+        font-size: 2rem;
+    }
+}
+
+/* Tablets Pequenas */
+@media (max-width: 768px) {
+    .dash-container-new {
+        padding: 1rem;
+    }
+
+    .welcome-banner-new {
+        padding: 1.5rem;
+    }
+
+    .welcome-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .welcome-text p {
+        font-size: 0.9rem;
+    }
+
+    .d-number-new {
+        font-size: 1.8rem;
+    }
+
+    .d-card-new {
+        min-height: 150px;
+        padding: 1.25rem;
+    }
+
+    .dash-cards-new {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Celulares Grandes */
+@media (max-width: 640px) {
+    .dash-cards-new {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .welcome-banner-new::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .welcome-banner-new::after {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 576px) {
+    .dash-container-new {
+        padding: 0.8rem;
+    }
+    
+    .welcome-banner-new {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .welcome-text h1 {
+        font-size: 1.3rem;
+    }
+
+    .welcome-text p {
+        font-size: 0.85rem;
+    }
+
+    .date-badge-new {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .d-number-new {
+        font-size: 1.6rem;
+    }
+
+    .d-card-new {
+        min-height: 140px;
+        padding: 1rem;
+    }
+
+    .d-header-new h3 {
+        font-size: 0.75rem;
+    }
+
+    .d-icon-new {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    .d-badge-new {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .section-card-new {
+        padding: 1rem;
+    }
+
+    .section-header-new h3 {
+        font-size: 1rem;
+    }
+
+    .activity-item-new {
+        gap: 0.8rem;
+        padding: 0.8rem;
+    }
+
+    .act-icon-new {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+
+    .act-content-new h4 {
+        font-size: 0.9rem;
+    }
+
+    .act-content-new p {
+        font-size: 0.8rem;
+    }
+
+    .shortcut-btn-new {
+        padding: 0.9rem 1rem;
+        font-size: 0.9rem;
+        gap: 0.8rem;
+    }
+
+    .shortcut-btn-new i {
+        font-size: 1rem;
+        width: 20px;
+    }
+}
+
+/* Celulares Pequenas */
+@media (max-width: 480px) {
+    .dash-container-new {
+        padding: 0.6rem;
+    }
+
+    .welcome-text h1 {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .d-number-new {
+        font-size: 1.4rem;
+    }
+
+    .d-card-new {
+        padding: 0.9rem;
+        min-height: 130px;
+    }
+
+    .section-header-new h3 {
+        font-size: 0.95rem;
+    }
+}
+
+/* Celulares Muito Pequenas */
+@media (max-width: 380px) {
+    .dash-container-new {
+        padding: 0.5rem;
+    }
+
+    .welcome-banner-new {
+        padding: 1rem 0.8rem;
+    }
+
+    .welcome-text h1 {
+        font-size: 1.1rem;
+    }
+
+    .welcome-text p {
+        font-size: 0.8rem;
+    }
+
+    .date-badge-new {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .d-number-new {
+        font-size: 1.3rem;
+    }
+
+    .d-card-new {
+        padding: 0.8rem;
+        min-height: 120px;
+    }
+}
