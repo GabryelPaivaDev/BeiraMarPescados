@@ -1,312 +1,347 @@
 /* =========================================
-   BARRA LATERAL (SIDEBAR) - FINAL
-   ========================================= */
+
+BARRA LATERAL (SIDEBAR) - FINAL
+
+========================================= */
 
 .sidebar {
-    width: var(--sidebar-width); /* Segue a variável do base.css */
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 1050;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
-    overflow-y: auto;
+  width: var(--sidebar-width);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1050;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Cabeçalho Interno */
+
 .sidebar-header {
-    height: 80px;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    flex-shrink: 0;
-    gap: 0.8rem;
+  height: 80px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  gap: 0.8rem;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.8rem;
-    overflow: visible;
-    min-width: 0;
-    flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  overflow: visible;
+  min-width: 0;
+  flex: 1;
 }
 
 .logo i {
-    font-size: 1.8rem;
-    min-width: 30px;
-    min-height: 30px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: visible;
+  font-size: 1.8rem;
+  min-width: 30px;
+  min-height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
 .logo h2 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 0;
-    transition: opacity 0.2s;
-    white-space: nowrap;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
 }
 
 .sidebar-toggle {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .sidebar-toggle i {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Chevron visível por padrão */
+
 .sidebar-toggle .chevron-icon {
-    display: inline;
-    opacity: 1;
+  display: inline;
+  opacity: 1;
 }
 
 .sidebar-toggle .menu-icon {
-    display: none;
-    opacity: 0;
-    position: absolute;
+  display: none;
+  opacity: 0;
+  position: absolute;
 }
 
 /* Quando minimizado - chevron gira e esconde, hamburger aparece */
+
 body.compact-mode .sidebar-toggle .chevron-icon {
-    opacity: 0;
-    transform: rotate(180deg);
+  opacity: 0;
+  transform: rotate(180deg);
 }
 
 body.compact-mode .sidebar-toggle .menu-icon {
-    display: inline;
-    opacity: 1;
+  display: inline;
+  opacity: 1;
 }
 
 /* Menu */
+
 .nav-menu {
-    padding: 1rem 0.5rem;
-    margin: 0;
-    list-style: none;
-    flex-grow: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+  padding: 1rem 0.5rem;
+  margin: 0;
+  list-style: none;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .nav-item {
-    margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0.9rem 1rem;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.9rem 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(3px);
 }
 
 .nav-item.active .nav-link {
-    background: rgba(255,255,255,0.2);
-    font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 500;
 }
 
 .nav-link i {
-    font-size: 1.2rem;
-    min-width: 24px;
-    min-height: 24px;
-    text-align: center;
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: visible;
+  font-size: 1.2rem;
+  min-width: 24px;
+  min-height: 24px;
+  text-align: center;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
 .nav-link span {
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
 }
 
 /* Badge */
+
 .notification-badge {
-    background: #ef4444;
-    color: #fff !important;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 12px;
-    margin-left: auto;
-    min-width: 18px;
-    text-align: center;
-    flex-shrink: 0;
+  background: #ef4444;
+  color: #fff !important;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 /* Rodapé */
+
 .sidebar-footer {
-    padding: 1.2rem 1.5rem 2rem 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    background: rgba(0,0,0,0.15);
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 1.2rem 1.5rem 2rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar-footer:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .user-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    overflow: visible;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  overflow: visible;
+  white-space: nowrap;
 }
 
 .user-info i {
-    font-size: 2.2rem;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    min-width: 40px;
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
+  font-size: 2.2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  color: #ffffff !important;
+}
+
+.user-info i.fa-user-circle {
+  color: #ffffff !important;
+  background: transparent !important;
 }
 
 .user-info span {
-    font-size: 1rem;
-    font-weight: 600;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 /* =========================================
-   REGRAS ESPECÍFICAS DE ESTADO E RESOLUÇÃO
-   ========================================= */
+
+REGRAS ESPECÍFICAS DE ESTADO E RESOLUÇÃO
+
+========================================= */
 
 /* 1. MODO COMPACTO (Ativado pelo botão no PC) */
+
 body.compact-mode .logo h2,
 body.compact-mode .nav-link span,
 body.compact-mode .user-info span {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }
 
 body.compact-mode .logo {
-    justify-content: center;
+  justify-content: center;
 }
 
 body.compact-mode .nav-link {
-    justify-content: center;
-    padding: 0.9rem;
+  justify-content: center;
+  padding: 0.9rem;
 }
 
 body.compact-mode .nav-link i {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 body.compact-mode .sidebar-footer {
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 body.compact-mode .user-info {
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 body.compact-mode .notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 2px 5px;
+  font-size: 0.6rem;
+}
+
+/* 2. TABLET (Força visual compacto AUTOMATICAMENTE) */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Força largura */
+
+  .sidebar {
+    width: 80px !important;
+  }
+
+  /* Esconde textos */
+
+  .logo h2,
+  .nav-link span,
+  .user-info span,
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  /* Centraliza ícones */
+
+  .nav-link {
+    justify-content: center !important;
+    padding: 0.9rem !important;
+  }
+
+  .nav-link i {
+    margin: 0 !important;
+  }
+
+  .sidebar-footer {
+    padding: 1rem !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .user-info {
+    justify-content: center !important;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .user-info i {
+    color: #ffffff !important;
+  }
+
+  .user-info i.fa-user-circle {
+    color: #ffffff !important;
+  }
+
+  .notification-badge {
     position: absolute;
     top: 5px;
     right: 5px;
     padding: 2px 5px;
     font-size: 0.6rem;
-}
-
-/* 2. TABLET (Força visual compacto AUTOMATICAMENTE) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    /* Força largura */
-    .sidebar {
-        width: 80px !important;
-    }
-
-    /* Esconde textos */
-    .logo h2,
-    .nav-link span,
-    .user-info span,
-    .sidebar-toggle {
-        display: none !important;
-    }
-
-    /* Centraliza ícones */
-    .nav-link {
-        justify-content: center !important;
-        padding: 0.9rem !important;
-    }
-
-    .nav-link i {
-        margin: 0 !important;
-    }
-
-    .sidebar-footer {
-        padding: 1rem !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .user-info {
-        justify-content: center !important;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .notification-badge {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        padding: 2px 5px;
-        font-size: 0.6rem;
-    }
+  }
 }
 
 /* 3. MOBILE (Overlay) */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 260px !important;
-        transform: translateX(-100%); /* Escondido */
-        transition: transform 0.3s ease;
-    }
 
-    /* Classe adicionada pelo JS no Body */
-    body.mobile-menu-open .sidebar {
-        transform: translateX(0);
-    }
+@media (max-width: 768px) {
+  .sidebar {
+    width: 260px !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  /* Classe adicionada pelo JS no Body */
+
+  body.mobile-menu-open .sidebar {
+    transform: translateX(0);
+  }
 }
