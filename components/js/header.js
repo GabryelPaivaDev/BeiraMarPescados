@@ -14,6 +14,7 @@ const BeiraMarHeader = {
     console.log('📢 Inicializando Header...');
     this.setupNotificationButton();
     this.setupClickOutside();
+    this.updateBadgeCount();
     this.initialized = true;
   },
 
@@ -105,29 +106,53 @@ const BeiraMarHeader = {
     }
   },
 
-  updateBadge() {
+  updateBadgeCount() {
     console.log('🔢 Atualizando badge de notificações...');
-    if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.updateBadge) {
-      window.BeiraMarNotificacoes.updateBadge();
+    
+    if (!window.notificationsData) {
+      console.warn('⚠️ notificationsData não disponível ainda');
+      return;
     }
+
+    const count = window.notificationsData.filter((n) => !n.read).length;
+    console.log(`📊 Notificações não lidas: ${count}`);
+
+    const badges = document.querySelectorAll('.notification-count');
+    console.log(`🔍 Encontrados ${badges.length} badges na página`);
+
+    badges.forEach((badge, index) => {
+      badge.textContent = count;
+      console.log(`📍 Atualizando badge ${index + 1}: ${count}`);
+
+      if (count === 0) {
+        badge.style.display = 'none';
+      } else {
+        badge.style.display = 'flex';
+      }
+    });
   }
 };
 
 // Inicializa quando a página carrega
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('⏳ DOM carregado, aguardando 500ms para garantir carregamento de notificacoes.js...');
+    console.log('⏳ DOM carregado, aguardando 800ms para garantir carregamento completo...');
     setTimeout(() => {
       BeiraMarHeader.init();
-      BeiraMarHeader.updateBadge();
       console.log('✅ Header inicializado com sucesso!');
-    }, 500);
+    }, 800);
   });
 } else {
   console.log('📍 DOM já carregado, inicializando header agora...');
   BeiraMarHeader.init();
-  BeiraMarHeader.updateBadge();
 }
+
+// Inicializa badge também no notificacoes.js quando adiciona notificações
+document.addEventListener('notificationAdded', () => {
+  setTimeout(() => {
+    BeiraMarHeader.updateBadgeCount();
+  }, 100);
+});
 
 // Exporta globalmente
 window.BeiraMarHeader = BeiraMarHeader;
