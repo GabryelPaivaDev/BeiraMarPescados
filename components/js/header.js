@@ -3,86 +3,105 @@
 // =========================================
 
 const BeiraMarHeader = {
+  initialized: false,
+
   init() {
-    console.log('📢 Inicializando Header...');
-    this.setupNotificationButton();
-    this.setupClickOutside();
-  },
-
-  setupNotificationButton() {
-    // Tenta ambos os IDs possíveis
-    const btnSininho = document.getElementById('notificationToggle') || 
-                       document.getElementById('btnSininho') ||
-                       document.querySelector('.notification-btn');
-    
-    const dropdownSininho = document.getElementById('notificationsDropdown') || 
-                            document.getElementById('dropdownSininho') ||
-                            document.querySelector('.notifications-dropdown');
-
-    if (!btnSininho || !dropdownSininho) {
-      console.error('❌ Elementos do header não encontrados!');
-      console.error('btnSininho:', btnSininho);
-      console.error('dropdownSininho:', dropdownSininho);
+    if (this.initialized) {
+      console.log('⚠️ Header já inicializado, pulando...');
       return;
     }
 
-    console.log('✅ Botão sino encontrado:', btnSininho);
-    console.log('✅ Dropdown sino encontrado:', dropdownSininho);
+    console.log('📢 Inicializando Header...');
+    this.setupNotificationButton();
+    this.setupClickOutside();
+    this.initialized = true;
+  },
 
-    // Remove eventos anteriores (evita duplicação)
-    const newBtnSininho = btnSininho.cloneNode(true);
-    btnSininho.parentNode.replaceChild(newBtnSininho, btnSininho);
+  setupNotificationButton() {
+    // Aguarda o dropdown estar pronto
+    const maxAttempts = 20; // 20 tentativas = 2 segundos
+    let attempts = 0;
 
-    // Evento do botão sino
-    newBtnSininho.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('🔔 Clicou no sino!');
+    const trySetup = () => {
+      const btnSininho = document.getElementById('notificationToggle') || 
+                         document.getElementById('btnSininho') ||
+                         document.querySelector('.notification-btn');
       
-      const isOpen = dropdownSininho.classList.contains('show');
-      console.log('Estado anterior:', isOpen ? 'ABERTO' : 'FECHADO');
-      
-      dropdownSininho.classList.toggle('show');
-      
-      console.log('Estado novo:', dropdownSininho.classList.contains('show') ? 'ABERTO' : 'FECHADO');
+      const dropdownSininho = document.getElementById('notificationsDropdown') || 
+                              document.getElementById('dropdownSininho') ||
+                              document.querySelector('.notifications-dropdown');
 
-      // Atualiza a lista de notificações quando abre
-      if (dropdownSininho.classList.contains('show')) {
-        this.updateNotificationsList();
+      if (!btnSininho || !dropdownSininho) {
+        attempts++;
+        if (attempts < maxAttempts) {
+          console.log(`⏳ Tentativa ${attempts}/${maxAttempts}: Aguardando elementos...`);
+          setTimeout(trySetup, 100);
+        } else {
+          console.error('❌ Elementos do header não encontrados após 20 tentativas!');
+        }
+        return;
       }
-    });
 
-    console.log('✅ Evento de clique do sino adicionado');
+      console.log('✅ Botão sino encontrado:', btnSininho);
+      console.log('✅ Dropdown sino encontrado:', dropdownSininho);
+
+      // Remove eventos anteriores (evita duplicação)
+      const newBtnSininho = btnSininho.cloneNode(true);
+      btnSininho.parentNode.replaceChild(newBtnSininho, btnSininho);
+
+      // Evento do botão sino
+      newBtnSininho.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = dropdownSininho.classList.contains('show');
+        console.log('🔔 Clicou no sino! Estado anterior:', isOpen ? 'ABERTO' : 'FECHADO');
+        
+        dropdownSininho.classList.toggle('show');
+        
+        console.log('Estado novo:', dropdownSininho.classList.contains('show') ? 'ABERTO' : 'FECHADO');
+
+        // Atualiza a lista quando abre
+        if (dropdownSininho.classList.contains('show')) {
+          this.updateNotificationsList();
+        }
+      });
+
+      console.log('✅ Evento de clique do sino adicionado');
+    };
+
+    trySetup();
   },
 
   setupClickOutside() {
-    const dropdownSininho = document.getElementById('notificationsDropdown') || 
-                            document.getElementById('dropdownSininho') ||
-                            document.querySelector('.notifications-dropdown');
-    
-    const btnSininho = document.getElementById('notificationToggle') || 
-                       document.getElementById('btnSininho') ||
-                       document.querySelector('.notification-btn');
-
-    if (!dropdownSininho || !btnSininho) return;
-
     document.addEventListener('click', (e) => {
+      const dropdownSininho = document.getElementById('notificationsDropdown') || 
+                              document.getElementById('dropdownSininho') ||
+                              document.querySelector('.notifications-dropdown');
+      
+      const btnSininho = document.getElementById('notificationToggle') || 
+                         document.getElementById('btnSininho') ||
+                         document.querySelector('.notification-btn');
+
+      if (!dropdownSininho || !btnSininho) return;
+
       // Se clicou fora do dropdown e do botão, fecha
       if (!dropdownSininho.contains(e.target) && !btnSininho.contains(e.target)) {
-        dropdownSininho.classList.remove('show');
-        console.log('❌ Dropdown fechado (clicou fora)');
+        if (dropdownSininho.classList.contains('show')) {
+          dropdownSininho.classList.remove('show');
+          console.log('❌ Dropdown fechado (clicou fora)');
+        }
       }
     });
   },
 
   updateNotificationsList() {
     console.log('📋 Atualizando lista de notificações...');
-    // Chama a função do notificacoes.js
     if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.renderDropdownNotifications) {
       window.BeiraMarNotificacoes.renderDropdownNotifications();
       console.log('✅ Lista de notificações atualizada');
     } else {
-      console.warn('⚠️ BeiraMarNotificacoes não está disponível');
+      console.warn('⚠️ BeiraMarNotificacoes não está disponível ainda');
     }
   },
 
@@ -94,16 +113,17 @@ const BeiraMarHeader = {
   }
 };
 
-// Inicializa quando a página carrega - SEM DELAY
+// Inicializa quando a página carrega
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('⏳ DOM carregado, inicializando header...');
-    BeiraMarHeader.init();
-    BeiraMarHeader.updateBadge();
-    console.log('✅ Header inicializado com sucesso!');
+    console.log('⏳ DOM carregado, aguardando 500ms para garantir carregamento de notificacoes.js...');
+    setTimeout(() => {
+      BeiraMarHeader.init();
+      BeiraMarHeader.updateBadge();
+      console.log('✅ Header inicializado com sucesso!');
+    }, 500);
   });
 } else {
-  // Se já passou do DOMContentLoaded
   console.log('📍 DOM já carregado, inicializando header agora...');
   BeiraMarHeader.init();
   BeiraMarHeader.updateBadge();
