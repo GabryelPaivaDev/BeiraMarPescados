@@ -1,203 +1,181 @@
-// Inicialização do sistema
+// =========================================
+// INICIALIZAÇÃO DO SISTEMA BEIRA MAR
+// =========================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('Sistema Beira Mar carregando...');
 
-console.log('Sistema Beira Mar carregando...');
+  // Aguarda 500ms para garantir que os HTMLs foram carregados
+  setTimeout(function () {
+    console.log('🔄 Inicializando módulos...');
 
-// Aguarda 500ms para garantir que os HTMLs foram carregados
+    // Inicializa módulos principais
+    if (typeof initializeSidebar === 'function') {
+      initializeSidebar();
+    } else {
+      console.warn('⚠️ initializeSidebar não encontrada');
+    }
 
-setTimeout(function() {
+    if (typeof initializeNavigation === 'function') {
+      initializeNavigation();
+    } else {
+      console.warn('⚠️ initializeNavigation não encontrada');
+    }
 
-console.log('🔄 Inicializando módulos...');
+    // Carrega conteúdo inicial
+    if (window.BeiraMarDashboard && window.BeiraMarDashboard.loadDashboardContent) {
+      window.BeiraMarDashboard.loadDashboardContent();
+    }
 
-// Inicializa módulos principais
+    // Inicializa módulos principais
+    if (typeof initializeSidebar === 'function') {
+      initializeSidebar();
+    } else {
+      console.warn('⚠️ initializeSidebar não encontrada');
+    }
 
-if (typeof initializeSidebar === 'function') {
+    if (typeof initializeNavigation === 'function') {
+      initializeNavigation();
+    } else {
+      console.warn('⚠️ initializeNavigation não encontrada');
+    }
 
-initializeSidebar();
+    // Carrega conteúdo inicial
+    if (window.BeiraMarDashboard && window.BeiraMarDashboard.loadDashboardContent) {
+      window.BeiraMarDashboard.loadDashboardContent();
+    }
 
-} else {
+    // Inicializa bandeja de notificações do header
+    // REMOVIDO: Agora é controlado pelo header.js para evitar conflitos
+    // initNotificationDropdown();
 
-console.warn('⚠️ initializeSidebar não encontrada');
+    // Atualiza badges inicialmente
+    if (window.BeiraMarNotificacoes) {
+      window.BeiraMarNotificacoes.updateBadge();
+    }
 
-}
+    console.log('✅ Sistema Beira Mar carregado!');
+  }, 500);
 
-if (typeof initializeNavigation === 'function') {
-
-initializeNavigation();
-
-} else {
-
-console.warn('⚠️ initializeNavigation não encontrada');
-
-}
-
-// Carrega conteúdo inicial
-
-if (window.BeiraMarDashboard && window.BeiraMarDashboard.loadDashboardContent) {
-
-window.BeiraMarDashboard.loadDashboardContent();
-
-}
-
-// Inicializa bandeja de notificações do header
-// REMOVIDO: Agora é controlado pelo header.js para evitar conflitos
-// initNotificationDropdown();
-
-// Atualiza badges inicialmente
-
-if (window.BeiraMarNotificacoes) {
-
-window.BeiraMarNotificacoes.updateBadge();
-
-}
-
-console.log('✅ Sistema Beira Mar carregado!');
-
-}, 500);
-
+    console.log('✅ Sistema Beira Mar carregado!');
+  }, 500);
 });
 
-// Função para abrir/fechar bandeja de notificações
+// =========================================
+// FUNÇÃO PARA ABRIR/FECHAR BANDEJA
+// =========================================
 
 function initNotificationDropdown() {
+  const notificationBtn = document.querySelector('.notification-btn');
+  const notificationDropdown = document.querySelector('.notifications-dropdown');
 
-const notificationBtn = document.querySelector('.notification-btn');
+  if (!notificationBtn) {
+    console.warn('⚠️ Botão de notificação não encontrado (.notification-btn)');
+    return;
+  }
 
-const notificationDropdown = document.querySelector('.notifications-dropdown');
+  if (!notificationDropdown) {
+    console.warn('⚠️ Bandeja de notificações não encontrada (.notifications-dropdown)');
+    return;
+  }
 
-if (!notificationBtn) {
+  console.log('✅ Inicializando dropdown de notificações...');
 
-console.warn('⚠️ Botão de notificação não encontrado (.notification-btn)');
+  // Toggle dropdown ao clicar no botão
+  notificationBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-return;
+    return;
+  }
 
-}
+  if (!notificationDropdown) {
+    console.warn('⚠️ Bandeja de notificações não encontrada (.notifications-dropdown)');
+    return;
+  }
 
-if (!notificationDropdown) {
+  console.log('✅ Inicializando dropdown de notificações...');
 
-console.warn('⚠️ Bandeja de notificações não encontrada (.notifications-dropdown)');
+  // Toggle dropdown ao clicar no botão
+  notificationBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-return;
+    const isOpen = notificationDropdown.classList.contains('show');
+    console.log('🔔 Botão clicado! Estado:', isOpen ? 'aberto' : 'fechado');
 
-}
+    if (isOpen) {
+      notificationDropdown.classList.remove('show');
+      notificationBtn.classList.remove('active');
+      console.log('➡️ Fechando dropdown');
+    } else {
+      notificationDropdown.classList.add('show');
+      notificationBtn.classList.add('active');
+      console.log('➡️ Abrindo dropdown');
 
-console.log('✅ Inicializando dropdown de notificações...');
-
-// Toggle dropdown ao clicar no botão
-
-notificationBtn.addEventListener('click', function(e) {
-
-e.preventDefault();
-
-e.stopPropagation();
-
-const isOpen = notificationDropdown.classList.contains('show');
-
-console.log('🔔 Botão clicado! Estado:', isOpen ? 'aberto' : 'fechado');
-
-if (isOpen) {
-
-notificationDropdown.classList.remove('show');
-
-notificationBtn.classList.remove('active');
-
-console.log('➡️ Fechando dropdown');
-
-} else {
-
-notificationDropdown.classList.add('show');
-
-notificationBtn.classList.add('active');
-
-console.log('➡️ Abrindo dropdown');
-
-}
-
-});
-
-// Fechar ao clicar fora
-
-document.addEventListener('click', function(e) {
-
-if (!notificationDropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
-
-notificationDropdown.classList.remove('show');
-
-notificationBtn.classList.remove('active');
-
-}
-
-});
-
-// Marcar todas como lidas (dentro do dropdown)
-
-const markAllReadBtn = notificationDropdown.querySelector('.mark-all-read');
-
-if (markAllReadBtn) {
-
-markAllReadBtn.addEventListener('click', function(e) {
-
-e.preventDefault();
-
-e.stopPropagation();
-
-// Verifica se está na página do cliente
-const isCliente = window.location.pathname.includes('cliente.html') || 
-                 sessionStorage.getItem('userType') === 'cliente';
-
-if (isCliente && window.ClienteNotificacoes && window.ClienteNotificacoes.marcarTodasComoLidas) {
-    window.ClienteNotificacoes.marcarTodasComoLidas();
-} else if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.markAllAsRead) {
-    window.BeiraMarNotificacoes.markAllAsRead();
-}
-
-});
-
-}
-
-// Marcar individual como lida ao clicar (evento delegado, pois os itens são dinâmicos)
-document.addEventListener('click', function(e) {
-    const notificationItem = e.target.closest('.notification-item-dropdown');
-    if (notificationItem) {
-        e.preventDefault();
-        // A ação já está no onclick do item renderizado
-        // Apenas atualiza a lista
-        const isCliente = window.location.pathname.includes('cliente.html') || 
-                         sessionStorage.getItem('userType') === 'cliente';
-        
-        if (isCliente && window.ClienteNotificacoes && window.ClienteNotificacoes.renderDropdownNotifications) {
-            setTimeout(() => window.ClienteNotificacoes.renderDropdownNotifications(), 100);
-        } else if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.renderDropdownNotifications) {
-            window.BeiraMarNotificacoes.renderDropdownNotifications();
-        }
+      // Renderiza notificações quando abre
+      if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.renderDropdownNotifications) {
+        window.BeiraMarNotificacoes.renderDropdownNotifications();
+      }
     }
-});
+  });
 
-// Link "Ver todas as notificações"
+  // Fechar ao clicar fora
+  document.addEventListener('click', function (e) {
+    if (!notificationDropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
+      notificationDropdown.classList.remove('show');
+      notificationBtn.classList.remove('active');
+    }
+  });
 
-const viewAllLink = notificationDropdown.querySelector('.notifications-dropdown-footer a');
+  // Fechar com ESC
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      notificationDropdown.classList.remove('show');
+      notificationBtn.classList.remove('active');
+    }
+  });
 
-if (viewAllLink) {
+  // Marcar todas como lidas (dentro do dropdown)
+  const markAllReadBtn = notificationDropdown.querySelector('.mark-all-read');
+  if (markAllReadBtn) {
+    markAllReadBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-viewAllLink.addEventListener('click', function(e) {
+      if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.markAllAsRead) {
+        window.BeiraMarNotificacoes.markAllAsRead();
+        console.log('✅ Todas as notificações marcadas como lidas');
+      }
+    });
+  }
 
-e.preventDefault();
+  // Marcar individual como lida ao clicar
+  const notificationItems = notificationDropdown.querySelectorAll('.notification-item-dropdown');
+  notificationItems.forEach((item) => {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
 
-notificationDropdown.classList.remove('show');
+      if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.renderDropdownNotifications) {
+        window.BeiraMarNotificacoes.renderDropdownNotifications();
+      }
+    });
+  });
 
-notificationBtn.classList.remove('active');
+  // Link "Ver todas as notificações"
+  const viewAllLink = notificationDropdown.querySelector('.notifications-dropdown-footer a');
+  if (viewAllLink) {
+    viewAllLink.addEventListener('click', function (e) {
+      e.preventDefault();
 
-if (window.BeiraMarNavigation && window.BeiraMarNavigation.navigateToPage) {
+      notificationDropdown.classList.remove('show');
+      notificationBtn.classList.remove('active');
 
-window.BeiraMarNavigation.navigateToPage('notificacoes');
+      if (window.BeiraMarNavigation && window.BeiraMarNavigation.navigateToPage) {
+        window.BeiraMarNavigation.navigateToPage('notificacoes');
+      }
+    });
+  }
 
-}
-
-});
-
-}
-
-console.log('✅ Dropdown de notificações inicializado com sucesso!');
-
+  console.log('✅ Dropdown de notificações inicializado com sucesso!');
 }
