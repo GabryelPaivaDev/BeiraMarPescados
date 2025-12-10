@@ -1,0 +1,132 @@
+<div class="module-container">
+    <div class="module-header">
+        <h2><i class="fas fa-map-marker-alt me-2"></i> Sede Local</h2>
+    </div>
+
+    <div class="location-container">
+        <div class="location-header">
+            <h2 class="location-title">Nossa Sede Local</h2>
+        </div>
+        
+        <div class="map-container-full">
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.9543429455994!2d-37.0829958!3d-10.8910745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab2d8bca0ae09%3A0x9a9d2b38ca78efce!2sPescados%20Beira%20Mar!5e0!3m2!1spt-BR!2sbr!4v1765069524080!5m2!1spt-BR!2sbr" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.location-container {
+    padding: 2rem;
+}
+
+.location-header {
+    margin-bottom: 2rem;
+}
+
+.location-title {
+    color: #1e293b;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #3b82f6;
+}
+
+.map-container-full {
+    width: 100%;
+}
+
+.map-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.map-wrapper iframe {
+    border-radius: 8px;
+    width: 100%;
+    min-height: 450px;
+}
+
+[data-theme="dark"] .map-wrapper {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .location-title {
+    color: #f1f5f9;
+}
+
+/* Remove o sino do h2::before que vem do CSS de notificações */
+#sedelocal .module-header h2::before,
+.module-header h2::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Estilização do module-header da Sede Local */
+#sedelocal .module-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+#sedelocal .module-header h2 {
+    margin: 0;
+    color: white;
+    font-weight: 700;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+#sedelocal .module-header h2 i {
+    font-size: 1.75rem;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .location-container {
+        padding: 1rem;
+    }
+    
+    .map-wrapper iframe {
+        min-height: 350px;
+    }
+    
+    #sedelocal .module-header {
+        padding: 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    #sedelocal .module-header h2 {
+        font-size: 1.25rem !important;
+        gap: 0.5rem !important;
+    }
+    
+    #sedelocal .module-header h2 i {
+        font-size: 1.25rem !important;
+    }
+}
+</style>
+

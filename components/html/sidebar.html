@@ -1,6 +1,4 @@
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar-container">
-    <!-- Header da Sidebar -->
     <div class="sidebar-header">
         <div class="logo" id="brandLogo">
             <i class="fas fa-fish"></i>
@@ -11,9 +9,7 @@
         </button>
     </div>
 
-    <!-- Menu de Navegação -->
     <nav class="nav-menu">
-        <!-- Dashboard -->
         <li class="nav-item active">
             <a href="#" class="nav-link" data-page="dashboard">
                 <i class="fas fa-chart-line"></i>
@@ -21,7 +17,6 @@
             </a>
         </li>
 
-        <!-- Estoque -->
         <li class="nav-item">
             <a href="#" class="nav-link" data-page="estoque">
                 <i class="fas fa-boxes"></i>
@@ -29,14 +24,12 @@
             </a>
         </li>
 
-        <!-- Produção -->
         <li class="nav-item">
             <a href="#" class="nav-link" data-page="producao">
                 <i class="fas fa-cogs"></i>
                 <span>Produção</span>
             </a>
         </li>
-        <!-- Vendas -->
         <li class="nav-item">
             <a href="#" class="nav-link" data-page="vendas">
                 <i class="fas fa-dollar-sign"></i>
@@ -44,7 +37,6 @@
             </a>
         </li>
 
-        <!-- Fluxo -->
         <li class="nav-item">
             <a href="#" class="nav-link" data-page="fluxo">
                 <i class="fas fa-stream"></i>
@@ -52,7 +44,6 @@
             </a>
         </li>
 
-        <!-- Notificações -->
         <li class="nav-item">
             <a href="#" class="nav-link" data-page="notificacoes">
                 <i class="fas fa-bell"></i>
@@ -60,13 +51,20 @@
                 <span class="notification-badge">3</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="funcionarios">
+                <i class="fas fa-users"></i>
+                <span>Gestão de Funcionários</span>
+            </a>
+        </li>
     </nav>
 
-    <!-- Rodapé com Usuário -->
-    <div class="sidebar-footer" onclick="window.BeiraMarUser.handleUserClick()">
+    <div class="sidebar-footer" onclick="if(window.BeiraMarUser) window.BeiraMarUser.openProfile()">
         <div class="user-info">
             <i class="fas fa-user-circle"></i>
-            <span id="sidebarUserName">Altemir</span>
+            <span id="sidebarUserName">Carregando...</span>
         </div>
+        <i class="fas fa-sign-out-alt logout-icon" title="Sair" onclick="event.stopPropagation(); window.BeiraMarUser.logout()"></i>
     </div>
 </aside>

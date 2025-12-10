@@ -10,12 +10,22 @@
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e5e7eb;
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] .page-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .page-header h2 {
     margin: 0;
     color: #1e293b;
     font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .page-header h2 {
+    color: #f1f5f9;
 }
 
 /* Grid dos Cards */
@@ -37,13 +47,23 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.3s ease, border-color 0.3s ease;
     /* Borda padrão cinza caso não tenha cor específica */
     border-left: 4px solid #cbd5e1; 
 }
 
+[data-theme="dark"] .stat-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #475569;
+}
+
 .stat-card:hover {
     transform: translateY(-3px);
+}
+
+[data-theme="dark"] .stat-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .stat-card h3 {
@@ -53,6 +73,11 @@
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .stat-card h3 {
+    color: #cbd5e1;
 }
 
 .stat-number {
@@ -61,6 +86,7 @@
     font-weight: 700;
     line-height: 1.2;
     color: #1e293b; /* Cor padrão */
+    transition: color 0.3s ease;
 }
 
 /* --- CORES DOS CARDS (Correção das faixas cinzas) --- */
@@ -100,6 +126,11 @@
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: #475569;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .clean-form-group label {
+    color: #cbd5e1;
 }
 
 .clean-input {
@@ -108,12 +139,25 @@
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background-color 0.3s ease, color 0.3s ease;
+    background: #ffffff;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .clean-input {
+    background: #334155;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
 }
 
 .clean-input:focus {
     border-color: #3b82f6;
     outline: none;
+}
+
+[data-theme="dark"] .clean-input:focus {
+    background: #475569;
+    border-color: #60a5fa;
 }
 
 /* CAIXA DO VALOR TOTAL (Correção do corte de zeros) */
@@ -128,12 +172,23 @@
     gap: 0.5rem;
     margin: 1.5rem 0;
     width: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .total-value-box {
+    background: #334155;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
 }
 
 .currency-symbol {
     font-size: 1.5rem;
     color: #64748b;
     font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .currency-symbol {
+    color: #cbd5e1;
 }
 
 .total-input {
@@ -144,6 +199,7 @@
     color: #1e293b;
     outline: none;
     text-align: left;
+    transition: color 0.3s ease;
     
     /* Truque para o input crescer e não cortar */
     width: 100%; 
@@ -153,6 +209,10 @@
     margin: 0;
 }
 
+[data-theme="dark"] .total-input {
+    color: #f1f5f9;
+}
+
 /* --- 3. TABELA DE ESTOQUE --- */
 .estoque-table {
     background: white;
@@ -160,6 +220,12 @@
     padding: 1.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .estoque-table {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .table {
@@ -176,12 +242,26 @@
     padding: 1rem;
     text-align: left;
     border-bottom: 2px solid #e2e8f0;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .table thead th {
+    background-color: #334155;
+    color: #cbd5e1;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .table tbody td {
     padding: 1rem;
     border-bottom: 1px solid #f1f5f9;
     vertical-align: middle;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .table tbody td {
+    color: #f1f5f9;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .table tbody tr:last-child td {
@@ -190,6 +270,10 @@
 
 .table tbody tr:hover {
     background-color: #f8fafc;
+}
+
+[data-theme="dark"] .table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Botão de Excluir (Lixeira) */
@@ -207,10 +291,20 @@
     cursor: pointer;
 }
 
+[data-theme="dark"] .btn-icon-danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
 .btn-icon-danger:hover {
     background: #fee2e2;
     color: #dc2626;
     transform: scale(1.05);
+}
+
+[data-theme="dark"] .btn-icon-danger:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
 }
 
 /* Badges de Status */

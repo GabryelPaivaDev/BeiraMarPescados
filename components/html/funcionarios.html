@@ -1,0 +1,249 @@
+<!-- PAGE GESTÃO DE FUNCIONÁRIOS - CONTEÚDO -->
+<!-- HEADER DA PÁGINA -->
+<div class="module-header">
+    <h2>Gestão de Funcionários</h2>
+    <p class="module-subtitle">Gerencie os funcionários da empresa Beira Mar</p>
+</div>
+
+<!-- BOTÕES DE AÇÃO -->
+<div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+    <button class="btn btn-primary" id="btnAdicionarFuncionario" onclick="if(typeof abrirModalFuncionario === 'function'){abrirModalFuncionario();}else if(window.BeiraMarFuncionarios){window.BeiraMarFuncionarios.openAddModal();}else{const modal=document.getElementById('addFuncionarioModal');if(modal){modal.style.display='flex';setTimeout(()=>{modal.classList.add('active');document.body.style.overflow='hidden';},10);}else{alert('Modal não encontrado. Recarregue a página.');}}">
+        <i class="fas fa-user-plus"></i> Adicionar Funcionário
+    </button>
+    <button class="btn btn-outline" id="btnExportarFuncionarios">
+        <i class="fas fa-file-export"></i> Exportar Lista
+    </button>
+</div>
+
+<!-- CONTAINER DE FUNCIONÁRIOS -->
+<div class="funcionarios-container">
+    <div class="empty-state">
+        <i class="fas fa-users"></i>
+        <h3>Gestão de Funcionários</h3>
+        <p>Área em desenvolvimento. Em breve você poderá gerenciar todos os funcionários aqui.</p>
+    </div>
+</div>
+
+<!-- CSS PARA PÁGINA DE FUNCIONÁRIOS -->
+<style>
+.module-header {
+    position: relative;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.module-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.module-header h2 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.module-header .module-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .module-header {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.funcionarios-container {
+    background: var(--bg-primary, #ffffff);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px var(--shadow, rgba(0, 0, 0, 0.05));
+    min-height: 400px;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .funcionarios-container {
+    background: var(--bg-primary, #1e293b);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--text-secondary, #64748b);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary, #94a3b8);
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary, #1e293b);
+}
+
+.empty-state p {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--text-secondary, #64748b);
+}
+
+[data-theme="dark"] .empty-state h3 {
+    color: var(--text-primary, #f1f5f9);
+}
+
+[data-theme="dark"] .empty-state p {
+    color: var(--text-secondary, #94a3b8);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover i {
+    transform: scale(1.15) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.btn-outline {
+    background: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #1e293b);
+    border: 2px solid var(--border-color, #e2e8f0);
+}
+
+.btn-outline:hover {
+    background: var(--bg-tertiary, #f8fafc);
+    border-color: var(--border-color, #cbd5e1);
+}
+
+[data-theme="dark"] .btn-outline {
+    background: var(--bg-primary, #1e293b);
+    color: var(--text-primary, #f1f5f9);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para os botões dos cards de funcionários */
+.btn-funcionario {
+    transition: all 0.3s ease !important;
+}
+
+.btn-funcionario:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-funcionario:active {
+    transform: translateY(0) !important;
+}
+
+.btn-detalhes:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+}
+
+.btn-editar:hover {
+    background: linear-gradient(135deg, #d97706, #b45309) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4) !important;
+}
+
+.btn-excluir:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Estilos para os cards de funcionários */
+.funcionario-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="dark"] .funcionario-card {
+    background: var(--bg-secondary, #1e293b) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .funcionario-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+</style>
+

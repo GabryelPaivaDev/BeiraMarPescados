@@ -2,7 +2,201 @@
 // PRODUÇÃO & LOGÍSTICA - DADOS E INTERATIVIDADE (VALIDAÇÃO RIGOROSA)
 // =========================================
 
+// --- FUNÇÃO AUXILIAR: OBTER NÍVEL DE ACESSO DO USUÁRIO LOGADO ---
+function obterNivelAcessoUsuarioProducao() {
+    try {
+        const email = sessionStorage.getItem('userEmail');
+        if (!email) return null;
+        
+        // Garante que a lista de funcionários esteja disponível
+        if (!window.funcionariosLista || window.funcionariosLista.length === 0) {
+            // Tenta carregar do localStorage se disponível
+            const funcionariosSalvos = localStorage.getItem('funcionariosLista');
+            if (funcionariosSalvos) {
+                window.funcionariosLista = JSON.parse(funcionariosSalvos);
+            }
+        }
+        
+        if (window.funcionariosLista && window.funcionariosLista.length > 0) {
+            const funcionario = window.funcionariosLista.find(f => 
+                f.email && f.email.toLowerCase() === email.toLowerCase()
+            );
+            return funcionario ? (funcionario.nivelAcesso || 'visualizador') : null;
+        }
+        
+        return null;
+    } catch (e) {
+        console.error('Erro ao obter nível de acesso:', e);
+        return null;
+    }
+}
+
+// --- FUNÇÃO PARA MOSTRAR OVERLAY DE ACESSO NEGADO ---
+function mostrarOverlayAcessoNegadoProducao() {
+    const producaoPage = document.getElementById('producao');
+    if (!producaoPage) return;
+    
+    // Remove overlay anterior se existir
+    const overlayAnterior = producaoPage.querySelector('.overlay-acesso-negado-producao');
+    if (overlayAnterior) {
+        overlayAnterior.remove();
+    }
+    
+    // Cria o overlay que cobre apenas a área de conteúdo
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay-acesso-negado-producao';
+    overlay.style.cssText = `
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        min-height: calc(100vh - 80px);
+        background: var(--bg-secondary, #f8fafc);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem;
+        animation: fadeIn 0.3s ease;
+        overflow: auto;
+        box-sizing: border-box;
+    `;
+    
+    overlay.innerHTML = `
+        <div style="background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); max-width: 550px; width: 100%; padding: 3rem; text-align: center; border: 1px solid var(--border-color, #e2e8f0);">
+            <div style="width: 100px; height: 100px; margin: 0 auto 2rem; border-radius: 50%; background: linear-gradient(135deg, #fee2e2, #fecaca); display: flex; align-items: center; justify-content: center; position: relative;">
+                <div style="position: absolute; inset: -4px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #dc2626); opacity: 0.2; animation: pulse 2s infinite;"></div>
+                <i class="fas fa-lock" style="font-size: 2.5rem; color: #ef4444; position: relative; z-index: 1;"></i>
+            </div>
+            
+            <h2 style="margin: 0 0 1rem 0; color: var(--text-primary, #1e293b); font-size: 2rem; font-weight: 700;">
+                Acesso Negado
+            </h2>
+            
+            <p style="margin: 0 0 2.5rem 0; color: var(--text-secondary, #64748b); font-size: 1.1rem; line-height: 1.7;">
+                Você não tem acesso a essa parte do sistema, seu nível é baixo
+            </p>
+            
+            <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; display: flex; align-items: start; gap: 1rem; text-align: left;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: #fee2e2; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fas fa-info-circle" style="color: #ef4444; font-size: 1.2rem;"></i>
+                </div>
+                <p style="margin: 0; color: #991b1b; font-size: 0.95rem; line-height: 1.6;">
+                    Esta área é restrita para funcionários com nível de acesso superior ao seu.
+                </p>
+            </div>
+            
+            <button onclick="const overlay=document.querySelector('.overlay-acesso-negado-producao');if(overlay)overlay.remove();if(window.BeiraMarNavigation&&window.BeiraMarNavigation.navigateToPage){window.BeiraMarNavigation.navigateToPage('dashboard');}" style="
+                width: 100%;
+                padding: 1rem 2rem;
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(59, 130, 246, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.3)'">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar ao Dashboard</span>
+            </button>
+        </div>
+    `;
+    
+    // Garante que a página tenha position relative e altura mínima
+    if (getComputedStyle(producaoPage).position === 'static') {
+        producaoPage.style.position = 'relative';
+    }
+    if (!producaoPage.style.minHeight) {
+        producaoPage.style.minHeight = 'calc(100vh - 80px)';
+    }
+    
+    producaoPage.appendChild(overlay);
+    
+    // Adiciona animações CSS se não existirem
+    if (!document.getElementById('overlay-producao-animations')) {
+        const style = document.createElement('style');
+        style.id = 'overlay-producao-animations';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); opacity: 0.2; }
+                50% { transform: scale(1.1); opacity: 0.3; }
+            }
+            .overlay-acesso-negado-producao > div {
+                animation: fadeIn 0.4s ease;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao {
+                background: var(--bg-secondary, #1e293b) !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao > div {
+                background: #334155 !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao h2 {
+                color: #f1f5f9 !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao p {
+                color: #cbd5e1 !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao div[style*="background: #fef2f2"] {
+                background: rgba(239, 68, 68, 0.15) !important;
+                border-color: rgba(239, 68, 68, 0.3) !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao div[style*="color: #991b1b"] {
+                color: #fca5a5 !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao div[style*="background: #fee2e2"] {
+                background: rgba(239, 68, 68, 0.2) !important;
+            }
+            [data-theme="dark"] .overlay-acesso-negado-producao i[style*="color: #ef4444"] {
+                color: #fca5a5 !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
 // Dados Simulados - PRODUÇÃO
+// Funções para salvar/carregar do localStorage
+function carregarProducaoDoLocalStorage() {
+    try {
+        const producaoSalva = localStorage.getItem('producaoItems');
+        const logisticaSalva = localStorage.getItem('logisticaItems');
+        
+        if (producaoSalva) {
+            producaoItems = JSON.parse(producaoSalva);
+            console.log('✅ [Produção] Dados carregados do localStorage:', producaoItems.length, 'itens');
+        }
+        
+        if (logisticaSalva) {
+            logisticaItems = JSON.parse(logisticaSalva);
+            console.log('✅ [Logística] Dados carregados do localStorage:', logisticaItems.length, 'itens');
+        }
+    } catch (e) {
+        console.error('❌ [Produção] Erro ao carregar do localStorage:', e);
+    }
+}
+
+function salvarProducaoNoLocalStorage() {
+    try {
+        localStorage.setItem('producaoItems', JSON.stringify(producaoItems));
+        localStorage.setItem('logisticaItems', JSON.stringify(logisticaItems));
+        console.log('💾 [Produção] Dados salvos no localStorage');
+    } catch (e) {
+        console.error('❌ [Produção] Erro ao salvar no localStorage:', e);
+    }
+}
+
 let producaoItems = [
     { 
         id: 'prod-001', 
@@ -76,14 +270,81 @@ let logisticaItems = [
 
 function loadProducaoContent() {
     const producaoPage = document.getElementById('producao');
+    if (!producaoPage) return;
+    
+    // Verifica permissões usando o novo sistema
+    const userType = sessionStorage.getItem('userType');
+    
+    // Se for admin, tem acesso total
+    if (userType === 'adm' || userType === 'admin') {
+        // Remove overlay se existir
+        const overlayExistente = producaoPage.querySelector('.overlay-acesso-negado-producao');
+        if (overlayExistente) {
+            overlayExistente.remove();
+        }
+    } else if (userType === 'funcionario') {
+        // Verifica se o sistema de permissões está disponível
+        if (!window.BeiraMarPermissoes) {
+            console.error('❌ [Produção] Sistema de permissões não disponível!');
+            producaoPage.innerHTML = '';
+            mostrarOverlayAcessoNegadoProducao();
+            return;
+        }
+        
+        // Força recarregamento das permissões antes de verificar
+        window.BeiraMarPermissoes.recarregarFuncionarios();
+        
+        // Verifica se o funcionário tem acesso à página de produção OU logística
+        const temAcessoProducao = window.BeiraMarPermissoes.temAcesso('producao');
+        const temAcessoLogistica = window.BeiraMarPermissoes.temAcesso('logistica');
+        
+        // Obtém o funcionário para debug
+        const funcionario = window.BeiraMarPermissoes.obterFuncionarioLogado();
+        if (funcionario) {
+            console.log(`👤 [Produção] Funcionário: ${funcionario.nome}`);
+            console.log(`📋 [Produção] Permissões de logística:`, funcionario.permissoes?.logistica || []);
+        }
+        
+        console.log(`🔍 [Produção] Verificando acesso - Produção: ${temAcessoProducao}, Logística: ${temAcessoLogistica}`);
+        
+        if (!temAcessoProducao && !temAcessoLogistica) {
+            // Não tem acesso nem a produção nem a logística, mostra overlay
+            console.log('❌ [Produção] Acesso negado - sem permissões');
+            producaoPage.innerHTML = '';
+            mostrarOverlayAcessoNegadoProducao();
+            return;
+        }
+        
+        console.log('✅ [Produção] Acesso permitido');
+        
+        // Remove overlay se existir
+        const overlayExistente = producaoPage.querySelector('.overlay-acesso-negado-producao');
+        if (overlayExistente) {
+            overlayExistente.remove();
+        }
+    } else {
+        // Outros tipos de usuário - remove overlay se existir
+        const overlayExistente = producaoPage.querySelector('.overlay-acesso-negado-producao');
+        if (overlayExistente) {
+            overlayExistente.remove();
+        }
+    }
+    
+    // Verifica permissões para mostrar/ocultar botões
+    const podeAdicionar = (userType === 'adm' || userType === 'admin') || 
+                         (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeAdicionar('producao'));
+    const podeAdicionarLogistica = (userType === 'adm' || userType === 'admin') || 
+                                  (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeAdicionar('logistica'));
+    const podeVisualizarLogistica = (userType === 'adm' || userType === 'admin') || 
+                                    (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeVisualizar('logistica'));
     
     producaoPage.innerHTML = `
         <div class="module-header">
             <h2>Produção (Chão de Fábrica)</h2>
-            <button class="btn btn-primary" onclick="abrirModalNovoLote()">
+            ${podeAdicionar ? `<button class="btn btn-primary" onclick="abrirModalNovoLote()">
                 <i class="fas fa-plus"></i>
                 Novo Lote
-            </button>
+            </button>` : ''}
         </div>
         
         <section class="producao-section">
@@ -92,18 +353,20 @@ function loadProducaoContent() {
             </div>
         </section>
         
+        ${podeVisualizarLogistica ? `
         <section class="logistica-section">
             <div class="section-title">
                 <h3>Logística e Entregas</h3>
-                <button class="btn btn-secondary-outline" onclick="abrirModalNovaLogistica()">
+                ${podeAdicionarLogistica ? `<button class="btn btn-secondary-outline" onclick="abrirModalNovaLogistica()">
                     <i class="fas fa-truck"></i>
                     Nova Entrega
-                </button>
+                </button>` : ''}
             </div>
             <div class="logistica-kanban">
                 <div class="kanban-board" id="boardLogistica"></div>
             </div>
         </section>
+        ` : ''}
 
         <div id="modalDetalheProd" class="custom-modal-overlay" style="display: none;">
             <div class="custom-modal-content">
@@ -352,7 +615,16 @@ function loadProducaoContent() {
     
     addProducaoStyles();
     atualizarKanbanProducao();
-    renderKanbanBoard('boardLogistica', logisticaItems, ['transporte', 'recebimento', 'expedicao', 'entregue'], ['Transporte', 'Recebimento', 'Expedição', 'Entregue']);
+    
+    // Só renderiza logística se o usuário tiver permissão de visualizar
+    const podeVisualizarLogisticaRender = (userType === 'adm' || userType === 'admin') || 
+                                          (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeVisualizar('logistica'));
+    if (podeVisualizarLogisticaRender) {
+        const boardLogistica = document.getElementById('boardLogistica');
+        if (boardLogistica) {
+            renderKanbanBoard('boardLogistica', logisticaItems, ['transporte', 'recebimento', 'expedicao', 'entregue'], ['Transporte', 'Recebimento', 'Expedição', 'Entregue']);
+        }
+    }
 
     // Configura eventos dos formulários
     const formLote = document.getElementById('formNovoLote');
@@ -373,10 +645,16 @@ function loadProducaoContent() {
 }
 
 function atualizarKanbanProducao() {
-    renderKanbanBoard('boardProducao', producaoItems, ['recebimento', 'processamento', 'embalagem', 'pronto'], ['Recebimento', 'Processamento', 'Embalagem', 'Pronto']);
+    renderKanbanBoard(
+        'boardProducao',
+        producaoItems,
+        ['recebimento', 'processamento', 'embalagem', 'pronto'],
+        ['Recebimento', 'Processamento', 'Embalagem', 'Pronto'],
+        'producao'
+    );
 }
 
-function renderKanbanBoard(containerId, items, colunasKeys, colunasTitulos) {
+function renderKanbanBoard(containerId, items, colunasKeys, colunasTitulos, boardKey) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -386,23 +664,24 @@ function renderKanbanBoard(containerId, items, colunasKeys, colunasTitulos) {
         const itensDaColuna = items.filter(i => i.coluna === key);
         
         html += `
-            <div class="kanban-column">
+            <div class="kanban-column" data-col="${key}">
                 <div class="column-header">
                     <h3>${titulo}</h3>
                     <span class="item-count">${itensDaColuna.length}</span>
                 </div>
                 <div class="kanban-items">
-                    ${itensDaColuna.map(item => createCardHTML(item)).join('')}
+                    ${itensDaColuna.map(item => createCardHTML(item, boardKey)).join('')}
                 </div>
             </div>
         `;
     });
     container.innerHTML = html;
+    setupKanbanDragAndDrop(containerId, items);
 }
 
-function createCardHTML(item) {
+function createCardHTML(item, boardKey) {
     return `
-        <div class="kanban-item">
+        <div class="kanban-item" draggable="true" data-id="${item.id}" data-board="${boardKey}">
             <div class="d-flex justify-content-between align-items-start">
                 <div class="kanban-item-content">
                     <h4>${item.titulo}</h4>
@@ -415,6 +694,97 @@ function createCardHTML(item) {
             <span class="item-date">${item.data}</span>
         </div>
     `;
+}
+
+// -----------------------------
+// DRAG & DROP KANBAN
+// -----------------------------
+let currentDraggedCard = null;
+
+function setupKanbanDragAndDrop(containerId, items) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.kanban-item');
+    const columns = container.querySelectorAll('.kanban-column');
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', (e) => {
+            currentDraggedCard = card;
+            card.classList.add('dragging');
+            columns.forEach(col => col.classList.add('drop-available'));
+            if (e.dataTransfer) {
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', card.getAttribute('data-id') || '');
+            }
+        });
+
+        card.addEventListener('dragend', () => {
+            if (!currentDraggedCard) return;
+            currentDraggedCard.classList.remove('dragging');
+            columns.forEach(col => {
+                col.classList.remove('drop-available');
+                col.classList.remove('drop-over');
+            });
+            currentDraggedCard = null;
+        });
+    });
+
+    columns.forEach(col => {
+        col.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+            col.classList.add('drop-over');
+        });
+
+        col.addEventListener('dragleave', () => {
+            col.classList.remove('drop-over');
+        });
+
+        col.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (!currentDraggedCard) return;
+
+            const itemsContainer = col.querySelector('.kanban-items');
+            if (itemsContainer && !itemsContainer.contains(currentDraggedCard)) {
+                itemsContainer.appendChild(currentDraggedCard);
+            }
+
+            const itemId = currentDraggedCard.getAttribute('data-id');
+            const colKey = col.getAttribute('data-col');
+            if (itemId && colKey) {
+                const item = items.find(i => i.id === itemId);
+                if (item) {
+                    item.coluna = colKey;
+                }
+            }
+
+            updateKanbanCounts(container, items);
+        });
+    });
+}
+
+function updateKanbanCounts(container, items) {
+    const cols = container.querySelectorAll('.kanban-column');
+    cols.forEach(col => {
+        const key = col.getAttribute('data-col');
+        const span = col.querySelector('.item-count');
+        const list = col.querySelector('.kanban-items');
+        if (!key || !span || !list) return;
+
+        // Ordena visualmente os cards pelo texto da data (item-date),
+        // mantendo a consistência com a lista de itens.
+        const cards = Array.from(list.querySelectorAll('.kanban-item'));
+        cards.sort((a, b) => {
+            const ta = (a.querySelector('.item-date')?.textContent || '').trim();
+            const tb = (b.querySelector('.item-date')?.textContent || '').trim();
+            return ta.localeCompare(tb, 'pt-BR');
+        });
+        cards.forEach(card => list.appendChild(card));
+
+        const total = items.filter(i => i.coluna === key).length;
+        span.textContent = total;
+    });
 }
 
 // =========================================
@@ -472,6 +842,7 @@ function salvarNovoLote() {
     };
 
     producaoItems.push(novoLote);
+    salvarProducaoNoLocalStorage(); // Salva após adicionar
     atualizarKanbanProducao();
     fecharModalNovoLote();
     
@@ -532,7 +903,14 @@ function salvarNovaLogistica() {
     };
 
     logisticaItems.push(novaLogistica);
-    renderKanbanBoard('boardLogistica', logisticaItems, ['transporte', 'recebimento', 'expedicao', 'entregue'], ['Transporte', 'Recebimento', 'Expedição', 'Entregue']);
+    salvarProducaoNoLocalStorage(); // Salva após adicionar
+    renderKanbanBoard(
+        'boardLogistica',
+        logisticaItems,
+        ['transporte', 'recebimento', 'expedicao', 'entregue'],
+        ['Transporte', 'Recebimento', 'Expedição', 'Entregue'],
+        'logistica'
+    );
     
     fecharModalNovaLogistica();
     
@@ -654,6 +1032,7 @@ function addProducaoStyles() {
             }
             #producao .kanban-column {
                 background: #ebf0f5; border-radius: 12px; padding: 1rem; min-height: 450px;
+                transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
             }
             #producao .column-header {
                 display: flex; justify-content: space-between; align-items: center;
@@ -674,6 +1053,23 @@ function addProducaoStyles() {
             #producao .kanban-item:hover {
                 transform: translateY(-4px); box-shadow: var(--prod-shadow-hover);
                 border-left-color: var(--prod-primary);
+            }
+            /* Estado enquanto está sendo arrastado */
+            #producao .kanban-item.dragging {
+                opacity: 0.8;
+                transform: scale(1.02);
+                border-left-color: var(--prod-primary);
+            }
+            /* Colunas que aceitam drop (quando está segurando um card) */
+            #producao .kanban-column.drop-available {
+                background: #e1edff;
+                box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.25);
+            }
+            /* Coluna em foco (hover do drop) */
+            #producao .kanban-column.drop-over {
+                background: #d2e5ff;
+                box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.6);
+                transform: translateY(-2px);
             }
             #producao .kanban-item h4 { margin: 0 0 0.5rem 0; font-size: 1rem; font-weight: 700; color: var(--prod-text-dark); }
             #producao .kanban-item p { margin: 0 0 0.8rem 0; font-size: 0.9rem; color: var(--prod-text-light); }
@@ -753,9 +1149,200 @@ function addProducaoStyles() {
                 .modal-footer { flex-direction: column-reverse; gap: 0.5rem; padding: 1rem; }
                 .modal-footer button { width: 100%; }
             }
+
+            /* =========================================
+               TEMA ESCURO - PRODUÇÃO E MODAIS
+               ========================================= */
+
+            [data-theme="dark"] #producao .module-header {
+                background: #1e293b;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] #producao .module-header h2 {
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] #producao .section-title h3 {
+                color: #f1f5f9;
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] #producao .kanban-column {
+                background: #334155;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] #producao .column-header {
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] #producao .column-header h3 {
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] #producao .item-count {
+                background: #475569;
+                color: #60a5fa;
+            }
+
+            [data-theme="dark"] #producao .kanban-item {
+                background: #475569;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] #producao .kanban-item:hover {
+                background: #526280;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+            }
+
+            [data-theme="dark"] #producao .kanban-item h4 {
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] #producao .kanban-item p {
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] #producao .item-date {
+                color: #94a3b8;
+            }
+
+            [data-theme="dark"] #producao .btn-icon-eye {
+                background: rgba(96, 165, 250, 0.2);
+                color: #60a5fa;
+            }
+
+            [data-theme="dark"] #producao .btn-icon-eye:hover {
+                background: #3b82f6;
+                color: white;
+            }
+
+            [data-theme="dark"] #producao .btn-secondary-outline {
+                background: #334155;
+                border-color: rgba(255, 255, 255, 0.2);
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] #producao .btn-secondary-outline:hover {
+                background: #475569;
+                border-color: #60a5fa;
+                color: #60a5fa;
+            }
+
+            /* Colunas de drop em tema escuro */
+            [data-theme="dark"] #producao .kanban-column.drop-available {
+                background: #1e3a5f;
+                box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+            }
+
+            [data-theme="dark"] #producao .kanban-column.drop-over {
+                background: #1e4a7f;
+                box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.6);
+            }
+
+            /* Modais - Tema Escuro */
+            [data-theme="dark"] .custom-modal-overlay {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            [data-theme="dark"] .custom-modal-content {
+                background: #1e293b;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .modal-body {
+                background: #1e293b;
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .modal-footer {
+                background: #1e293b;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .prod-form-group label {
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] .prod-form-control {
+                background: #334155;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .prod-form-control:focus {
+                background: #475569;
+                border-color: #60a5fa;
+            }
+
+            [data-theme="dark"] .readonly-field {
+                background: #475569;
+                color: #94a3b8;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .input-suffix-group .suffix {
+                color: #94a3b8;
+            }
+
+            [data-theme="dark"] #producao .btn-secondary {
+                background: #334155;
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] #producao .btn-secondary:hover {
+                background: #475569;
+            }
+
+            [data-theme="dark"] .detalhe-row {
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .prod-separator {
+                border-top-color: rgba(255, 255, 255, 0.1);
+            }
+
+            [data-theme="dark"] .prod-form-actions {
+                border-top-color: rgba(255, 255, 255, 0.1);
+            }
         `;
         document.head.appendChild(styles);
     }
 }
 
 window.BeiraMarProducao = { loadProducaoContent, addProducaoStyles };
+
+// ==========================================================
+// AUTO-CARREGAMENTO DA PRODUÇÃO (GARANTE QUE A PÁGINA NÃO FIQUE VAZIA)
+// ==========================================================
+function verificarECarregarProducao() {
+    const producaoPage = document.getElementById('producao');
+    if (!producaoPage) return;
+    
+    const isVisible = producaoPage.classList.contains('active') || 
+                     producaoPage.style.display === 'block';
+    const temLoading = producaoPage.querySelector('.producao-loading');
+    
+    if (isVisible && temLoading) {
+        console.log('🏭 Auto-carregando conteúdo da Produção...');
+        loadProducaoContent();
+    }
+}
+
+const producaoObserver = new MutationObserver(function() {
+    verificarECarregarProducao();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        const producaoPage = document.getElementById('producao');
+        if (producaoPage) {
+            producaoObserver.observe(producaoPage, { attributes: true, attributeFilter: ['class', 'style'] });
+            verificarECarregarProducao();
+        }
+    }, 500);
+});
+
+setInterval(verificarECarregarProducao, 500);

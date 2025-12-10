@@ -9,11 +9,22 @@
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .lotes-ativos {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .lotes-ativos h3 {
     margin: 0 0 1.5rem 0;
     color: #1f2937;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .lotes-ativos h3 {
+    color: #f1f5f9;
 }
 
 .lote-card {
@@ -22,6 +33,12 @@
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .lote-card {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .lote-card:last-child {
@@ -39,6 +56,11 @@
     margin: 0;
     color: #1f2937;
     font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .lote-header h4 {
+    color: #f1f5f9;
 }
 
 .lote-status {
@@ -62,5 +84,10 @@
     margin: 0.5rem 0;
     color: #6b7280;
     font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .lote-card p {
+    color: #cbd5e1;
 }
 

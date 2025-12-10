@@ -5,13 +5,6 @@
         width: var(--sidebar-collapsed);
     }
 
-    .sidebar .logo h2,
-    .sidebar .nav-link span,
-    .sidebar .user-info span {
-        opacity: 0;
-        width: 0;
-    }
-
     .main-content {
         margin-left: var(--sidebar-current);
         padding: 0;
@@ -86,22 +79,9 @@
 }
 
 @media (max-width: 768px) {
-    /* Mobile: sidebar não ocupa espaço por padrão */
+    /* Mobile: barra lateral de ícones sempre visível */
     .app-container {
-        --sidebar-current: 0px;
-    }
-
-    .sidebar {
-        transform: translateX(-100%);
-        width: var(--sidebar-width);
-    }
-
-    /* Labeles são visíveis quando o menu abrir como overlay (classe .open) */
-    .sidebar.open .logo h2,
-    .sidebar.open .nav-link span,
-    .sidebar.open .user-info span {
-        opacity: 1;
-        width: auto;
+        --sidebar-current: 64px;
     }
 
     /* Força elementos internos a usarem 100% da largura restante do main-content */
@@ -117,19 +97,8 @@
     }
 
     .sidebar {
-        transform: translateX(-100%);
-        width: var(--sidebar-width);
-    }
-
-    .sidebar.open {
+        width: 64px;
         transform: translateX(0);
-    }
-
-    .sidebar .logo h2,
-    .sidebar .nav-link span,
-    .sidebar .user-info span {
-        opacity: 1;
-        width: auto;
     }
 
     .main-content {

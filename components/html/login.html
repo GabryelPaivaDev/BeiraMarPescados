@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐟</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beira Mar - Login</title>
+    
+    <link rel="stylesheet" href="../css/login.css?v=final_fix">
+</head>
+<body>
+    <label class="theme-toggle-container">
+        <input type="checkbox" id="theme-toggle" class="theme-checkbox" />
+        <div class="theme-toggle-track">
+            <svg class="theme-icon theme-sun" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5ZM13,0h-2V5h2V0Zm0,19h-2v5h2v-5ZM5,11H0v2H5v-2Zm19,0h-5v2h5v-2Zm-2.81-6.78l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54ZM7.76,17.66l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54Zm0-11.31l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Zm13.44,13.44l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Z" fill="#ffffff"/>
+            </svg>
+            <svg class="theme-icon theme-moon" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.009,24A12.067,12.067,0,0,1,.075,10.725,12.121,12.121,0,0,1,10.1.152a13,13,0,0,1,5.03.206,2.5,2.5,0,0,1,1.8,1.8,2.47,2.47,0,0,1-.7,2.425c-4.559,4.168-4.165,10.645.807,14.412h0a2.5,2.5,0,0,1-.7,4.319A13.875,13.875,0,0,1,12.009,24Zm.074-22a10.776,10.776,0,0,0-1.675.127,10.1,10.1,0,0,0-8.344,8.8A9.928,9.928,0,0,0,4.581,18.7a10.473,10.473,0,0,0,11.093,2.734.5.5,0,0,0,.138-.856h0C9.883,16.1,9.417,8.087,14.865,3.124a.459.459,0,0,0,.127-.465.491.491,0,0,0-.356-.362A10.68,10.68,0,0,0,12.083,2ZM20.5,12a1,1,0,0,1-.97-.757l-.358-1.43L17.74,9.428a1,1,0,0,1,.035-1.94l1.4-.325.351-1.406a1,1,0,0,1,1.94,0l.355,1.418,1.418.355a1,1,0,0,1,0,1.94l-1.418.355-.355,1.418A1,1,0,0,1,20.5,12ZM16,14a1,1,0,0,0,2,0A1,1,0,0,0,16,14Zm6,4a1,1,0,0,0,2,0A1,1,0,0,0,22,18Z"/>
+            </svg>
+            <div class="theme-slider-circle"></div>
+        </div>
+    </label>
+
+    <div class="login-box">
+        <div class="login-header">
+            <div class="logo-text">
+                <span class="logo-beira">Beira</span><span class="logo-mar">Mar</span>
+            </div>
+            <p class="subtitle">Gestão de Pesca & Estoque</p>
+        </div>
+
+        <div class="tabs-container">
+            <button class="tab-btn tab-active" data-tab="login">Login</button>
+            <button class="tab-btn" data-tab="registro">Registro</button>
+        </div>
+
+        <div id="alertMsg" class="alert"></div>
+        <div id="alertMsgReg" class="alert"></div>
+
+        <form id="loginForm" class="login-form tab-content active" data-tab="login">
+            <label class="form-label">EMAIL:</label>
+            <input type="email" id="email" class="form-input" list="login-emails" placeholder="seu@email.com" required>
+            <datalist id="login-emails">
+                <option value="Altermiradm@gmail.com">Administrador</option>
+                <option value="Joãodasilva@gmail.com">Funcionário</option>
+                <option value="Fernanda12@gmail.com">Cliente</option>
+            </datalist>
+
+            <label class="form-label">SENHA:</label>
+            <div class="password-group">
+                <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                <button type="button" id="togglePassword" class="password-toggle">👁</button>
+            </div>
+
+            <div class="remember-forgot">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="rememberMe">
+                    <div class="checkmark"></div>
+                    <span class="checkbox-label">Lembrar-me</span>
+                </label>
+                <a href="#" class="forgot-link">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Entrar</button>
+            
+            <p class="signup-text">
+                Não tem conta? <a href="#" class="switch-tab" data-tab="registro">Crie uma agora</a>
+            </p>
+        </form>
+
+        <form id="registroForm" class="login-form tab-content" data-tab="registro">
+            <label class="form-label">NOME COMPLETO:</label>
+            <input type="text" id="nomeReg" class="form-input" placeholder="Seu nome" required>
+
+            <label class="form-label">EMAIL:</label>
+            <input type="email" id="emailReg" class="form-input" placeholder="seu@email.com" required>
+
+            <label class="form-label">SENHA:</label>
+            <div class="password-group">
+                <input type="password" id="passwordReg" class="form-input" placeholder="••••••••" required>
+                <button type="button" id="togglePasswordReg" class="password-toggle">👁</button>
+            </div>
+
+            <label class="form-label">CONFIRMAR SENHA:</label>
+            <div class="password-group">
+                <input type="password" id="passwordConfirm" class="form-input" placeholder="••••••••" required>
+                <button type="button" id="togglePasswordConfirm" class="password-toggle">👁</button>
+            </div>
+
+            <label class="checkbox-container">
+                <input type="checkbox" id="termsCheckbox" required>
+                <div class="checkmark"></div>
+                <span class="checkbox-label">Concordo com os <a href="#" id="termsLink" class="terms-link">termos e condições</a></span>
+            </label>
+
+            <button type="submit" class="btn-login">Registrar</button>
+
+            <p class="signup-text">
+                Já tem conta? <a href="#" class="switch-tab" data-tab="login">Faça login</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Modal Esqueceu a Senha -->
+    <div id="forgotPasswordModal" class="forgot-password-modal">
+        <div class="forgot-password-modal-overlay"></div>
+        <div class="forgot-password-modal-content">
+            <div class="forgot-password-modal-header">
+                <h5 class="forgot-password-modal-title">Recuperar Senha</h5>
+                <button class="forgot-password-modal-close" id="closeForgotPasswordModal">&times;</button>
+            </div>
+            <div class="forgot-password-modal-body">
+                <!-- Formulário de email -->
+                <div id="forgotPasswordFormContainer">
+                    <p class="forgot-password-text">Digite seu email para receber instruções de redefinição de senha:</p>
+                    <form id="forgotPasswordForm">
+                        <label class="form-label">EMAIL:</label>
+                        <input type="email" id="forgotPasswordEmail" class="form-input" placeholder="seu@email.com" required>
+                        <div class="form-actions" style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn-login">
+                                <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Animação de sucesso -->
+                <div id="forgotPasswordSuccess" class="forgot-password-success" style="display: none;">
+                    <div class="success-checkmark">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                            <path class="checkmark-check" fill="none" d="m14.1 27.2l7.1 7.2 16.7-16.8"/>
+                        </svg>
+                    </div>
+                    <p class="success-message">Sua redefinição de senha foi enviada ao gmail informado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Termos e Condições -->
+    <div id="termsModal" class="terms-modal">
+        <div class="terms-modal-overlay"></div>
+        <div class="terms-modal-content">
+            <div class="terms-modal-header">
+                <h2>Termos e Condições de Uso – BeiraMar Pescados</h2>
+                <button class="terms-modal-close" id="closeTermsModal">&times;</button>
+            </div>
+            <div class="terms-modal-body">
+                <div class="terms-section">
+                    <p><strong>Última atualização: <span id="currentDate">DD/MM/YYYY</span></strong></p>
+                    <p>Bem-vindo(a) ao site da BeiraMar Pescados. Ao criar uma conta, navegar ou realizar compras em nossa plataforma, você concorda com estes Termos e Condições de Uso. Por favor, leia atentamente.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>1. Aceitação dos Termos</h3>
+                    <p>Ao registrar-se e utilizar a plataforma da BeiraMar Pescados, o usuário declara ter lido, compreendido e aceitado todos os termos deste documento.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>2. Cadastro de Clientes</h3>
+                    <p>2.1. O cadastro é permitido apenas para clientes maiores de 18 anos.</p>
+                    <p>2.2. Para efetivar o registro, o usuário deve fornecer informações verdadeiras, completas e atualizadas.</p>
+                    <p>2.3. É de responsabilidade do usuário manter a confidencialidade de suas credenciais de acesso (login e senha).</p>
+                    <p>2.4. O usuário é responsável por todas as atividades realizadas em sua conta.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>3. Uso da Plataforma</h3>
+                    <p>3.1. O usuário concorda em utilizar o site de forma legal, ética e de acordo com estes Termos.</p>
+                    <p>3.2. É proibido:</p>
+                    <ul>
+                        <li>Tentar acessar áreas restritas ou sistemas internos;</li>
+                        <li>Realizar ações que causem instabilidade, falhas ou riscos ao site;</li>
+                        <li>Utilizar dados falsos ou de terceiros sem consentimento.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3>4. Política de Privacidade e Dados</h3>
+                    <p>4.1. A BeiraMar Pescados realiza o tratamento de dados pessoais conforme a LGPD (Lei nº 13.709/2018).</p>
+                    <p>4.2. Os dados fornecidos serão utilizados para:</p>
+                    <ul>
+                        <li>Processamento de pedidos;</li>
+                        <li>Entregas;</li>
+                        <li>Emissão de notas fiscais;</li>
+                        <li>Comunicação comercial;</li>
+                        <li>Melhorias no funcionamento da plataforma.</li>
+                    </ul>
+                    <p>4.3. O usuário pode solicitar a exclusão, atualização ou acesso a seus dados pelo nosso canal de atendimento.</p>
+                    <p><em>(Se quiser, gero também a Política de Privacidade separada.)</em></p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>5. Produtos e Informações</h3>
+                    <p>5.1. Trabalhamos para manter descrições, fotos, pesos e valores atualizados, porém podem ocorrer variações nos produtos, especialmente por serem alimentos perecíveis.</p>
+                    <p>5.2. Alguns produtos podem ter variação de peso no momento da pesagem e finalização do pedido.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>6. Pedidos, Pagamentos e Confirmação</h3>
+                    <p>6.1. O usuário deve revisar todas as informações antes de concluir a compra.</p>
+                    <p>6.2. Os pagamentos são processados por operadoras/parceiros externos, seguindo suas políticas próprias.</p>
+                    <p>6.3. A BeiraMar Pescados poderá cancelar pedidos em casos de:</p>
+                    <ul>
+                        <li>Falta de estoque;</li>
+                        <li>Erros evidentes de preço ou informação;</li>
+                        <li>Suspeita de fraude.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3>7. Entrega e Retirada</h3>
+                    <p>7.1. Os prazos de entrega variam conforme região, disponibilidade e logística.</p>
+                    <p>7.2. O usuário é responsável por fornecer endereço correto e acessível.</p>
+                    <p>7.3. Caso a entrega não seja concluída por erro do usuário, poderá haver cobrança adicional para nova tentativa.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>8. Trocas, Devoluções e Reembolsos</h3>
+                    <p>8.1. Por se tratar de produtos perecíveis, solicitações de troca ou devolução devem ser feitas imediatamente após o recebimento, caso o usuário identifique:</p>
+                    <ul>
+                        <li>Produto estragado;</li>
+                        <li>Temperatura inadequada;</li>
+                        <li>Embalagem violada;</li>
+                        <li>Divergência no pedido.</li>
+                    </ul>
+                    <p>8.2. A BeiraMar Pescados analisará o caso e poderá realizar reembolso, troca ou crédito conforme a situação.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>9. Propriedade Intelectual</h3>
+                    <p>Todo o conteúdo do site (marca, textos, imagens, logos, designs e códigos) é propriedade da BeiraMar Pescados. É proibida a reprodução ou distribuição sem autorização.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>10. Modificações dos Termos</h3>
+                    <p>A BeiraMar Pescados pode alterar estes Termos a qualquer momento. As alterações terão efeito imediato a partir da publicação no site.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3>11. Encerramento de Conta</h3>
+                    <p>A empresa pode suspender ou encerrar contas que:</p>
+                    <ul>
+                        <li>violem estes termos;</li>
+                        <li>utilizem dados falsos;</li>
+                        <li>tentem fraudar o sistema;</li>
+                        <li>pratiquem condutas abusivas.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3>12. Limitação de Responsabilidade</h3>
+                    <p>A BeiraMar Pescados não se responsabiliza por:</p>
+                    <ul>
+                        <li>problemas de conexão ou disponibilidade do site;</li>
+                        <li>danos causados por uso indevido da plataforma;</li>
+                        <li>erros de terceiros responsáveis por pagamentos e entregas.</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3>13. Foro e Legislação</h3>
+                    <p>Este documento é regido pelas leis brasileiras. Eventuais disputas serão resolvidas no foro da comarca da sede da BeiraMar Pescados, salvo determinação legal em contrário.</p>
+                </div>
+
+                <div class="terms-footer">
+                    <p>Ao utilizar a plataforma BeiraMar Pescados, você declara ter lido, compreendido e aceito todos os termos e condições aqui estabelecidos.</p>
+                </div>
+            </div>
+            <div class="terms-modal-footer">
+                <button class="btn-terms-close" id="acceptTermsBtn">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Atualiza a data atual nos Termos e Condições
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateElement = document.getElementById('currentDate');
+            if (dateElement) {
+                const today = new Date();
+                const day = String(today.getDate()).padStart(2, '0');
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const year = today.getFullYear();
+                dateElement.textContent = `${day}/${month}/${year}`;
+            }
+        });
+    </script>
+    <script src="../js/login.js?v=99"></script>
+</body>
+</html>

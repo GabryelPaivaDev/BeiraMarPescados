@@ -1,0 +1,168 @@
+<div class="cliente-compras-container">
+    <div class="compras-header">
+        <h1>Minhas Compras</h1>
+        <p class="subtitle">Acompanhe seus pedidos</p>
+    </div>
+    
+    <div class="compras-cards-grid">
+        <div class="compra-status-card" data-status="a-pagar">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h2>A Pagar</h2>
+            </div>
+            <div class="card-content">
+                <div class="card-count">0</div>
+                <p class="card-description">Pedidos aguardando pagamento</p>
+            </div>
+        </div>
+
+        <div class="compra-status-card" data-status="preparando">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h2>Preparando</h2>
+            </div>
+            <div class="card-content">
+                <div class="card-count">0</div>
+                <p class="card-description">Pedidos em preparação</p>
+            </div>
+        </div>
+
+        <div class="compra-status-card" data-status="a-caminho">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h2>A Caminho</h2>
+            </div>
+            <div class="card-content">
+                <div class="card-count">0</div>
+                <p class="card-description">Pedidos em trânsito</p>
+            </div>
+        </div>
+
+        <div class="compra-status-card" data-status="a-avaliar">
+            <div class="card-header">
+                <div class="card-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h2>A Avaliar</h2>
+            </div>
+            <div class="card-content">
+                <div class="card-count">0</div>
+                <p class="card-description">Pedidos para avaliar</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal A Pagar -->
+<div id="modalAPagar" class="modal modal-compras">
+    <div class="modal-content modal-compras-content">
+        <div class="modal-header">
+            <h2>
+                <i class="fas fa-credit-card"></i>
+                Compras Pendentes de Pagamento
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalAPagar')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color: #ffffff;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal Preparando -->
+<div id="modalPreparando" class="modal modal-compras">
+    <div class="modal-content modal-compras-content">
+        <div class="modal-header preparando-header">
+            <h2>
+                <i class="fas fa-cog"></i>
+                Pedidos em Preparação
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalPreparando')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color: #ffffff;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal A Caminho -->
+<div id="modalACaminho" class="modal modal-compras">
+    <div class="modal-content modal-compras-content modal-acaminho-content">
+        <div class="modal-header acaminho-header">
+            <h2>
+                <i class="fas fa-truck"></i>
+                Pedidos A Caminho
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalACaminho')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color: #ffffff;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal A Avaliar -->
+<div id="modalAAvaliar" class="modal modal-compras">
+    <div class="modal-content modal-compras-content modal-avaliar-content">
+        <div class="modal-header avaliar-header">
+            <h2>
+                <i class="fas fa-star"></i>
+                Avaliar Pedidos
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalAAvaliar')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color: #ffffff;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detalhes do Pedido -->
+<div id="modalDetalhesPedido" class="modal modal-compras">
+    <div class="modal-content modal-compras-content modal-detalhes-content">
+        <div class="modal-header detalhes-header">
+            <h2>
+                <i class="fas fa-info-circle"></i>
+                Detalhamento do Pedido
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalDetalhesPedido')" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color: #ffffff;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Pagamento -->
+<div id="modalPagamento" class="modal modal-pagamento">
+    <div class="modal-content modal-pagamento-content">
+        <div class="modal-header pagamento-header">
+            <h2>
+                <i class="fas fa-credit-card"></i>
+                Finalizar Pagamento
+            </h2>
+            <button class="modal-close" onclick="if(window.BeiraMarModais) window.BeiraMarModais.closeModal('modalPagamento')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body pagamento-body">
+            <!-- Conteúdo será inserido dinamicamente -->
+        </div>
+    </div>
+</div>

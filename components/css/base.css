@@ -21,8 +21,8 @@ body.compact-mode {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8fafc;
-    color: #334155;
+    background-color: var(--bg-secondary, #f8fafc);
+    color: var(--text-primary, #334155);
     overflow-x: hidden;
 }
 
@@ -31,6 +31,7 @@ body {
     width: 100%;
     min-height: 100vh;
     position: relative;
+    display: none; /* Começa escondido até o login */
 }
 
 /* --- HEADER COLADO NO TOPO --- */
@@ -109,16 +110,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #e2e8f0;
+    background: var(--bg-tertiary, #e2e8f0);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3b82f6;
+    background: var(--accent-color, #3b82f6);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8;
+    background: var(--accent-color, #1d4ed8);
+    opacity: 0.8;
 }
 
 /* =========================================
@@ -153,14 +155,22 @@ body {
 
 @media (max-width: 768px) {
     :root {
-        --sidebar-width: 0px;
+        /* No celular, mantemos uma barrinha lateral de ícones */
+        --sidebar-width: 64px;
     }
 
-    /* No celular, margem é zero (ocupa tudo) */
+    /* No celular, o conteúdo já considera a barrinha lateral - SEM VÃO */
     .main-content {
-        margin-left: 0 !important;
-        width: 100% !important;
+        margin-left: 64px !important;
+        width: calc(100% - 64px) !important;
         margin-top: 65px !important;
+    }
+    
+    /* Garantir que header fique colado na sidebar - SEM VÃO */
+    .top-header {
+        left: 64px !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
 
     .page {

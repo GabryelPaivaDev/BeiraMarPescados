@@ -1,0 +1,195 @@
+/* =========================
+   TELA DE CARREGAMENTO
+   ========================= */
+
+.loader-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    transition: opacity 0.3s ease;
+}
+
+.loader-page.hidden {
+    display: none;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.loader-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+    margin-top: 20px;
+    transition: color 0.3s ease;
+}
+
+/* Estilo para o h4 CARREGANDO */
+.loader-content h4 {
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .loader-content h4 {
+    color: #ffffff !important;
+}
+
+/* Animação do Caminhão */
+.loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding: 0 200px;
+}
+
+.truckWrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+/* truck upper body */
+.truckBody {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: motion 1s linear infinite;
+}
+
+/* truck suspension animation*/
+@keyframes motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* truck's tires */
+.truckTires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
+}
+
+.truckTires svg {
+  width: 24px;
+}
+
+.road {
+    width: 100%;
+    height: 1.5px;
+    background-color: #282828;
+    position: relative;
+    bottom: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .road {
+    background-color: #ffffff;
+}
+
+.road::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: #282828;
+    right: -35%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 10px solid white;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .road::before {
+    background-color: #ffffff;
+    border-left: 10px solid #0f172a;
+}
+
+.road::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: #282828;
+    right: -50%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 4px solid white;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .road::after {
+    background-color: #ffffff;
+    border-left: 4px solid #0f172a;
+}
+
+.lampPost {
+    position: absolute;
+    bottom: 0;
+    right: -65%;
+    height: 90px;
+    width: auto;
+    animation: roadAnimation 1.4s linear infinite;
+    fill: #282828;
+    z-index: 1;
+    opacity: 1;
+    display: block;
+    transition: fill 0.3s ease;
+}
+
+.lampPost-path {
+    fill: #282828;
+    transition: fill 0.3s ease;
+}
+
+[data-theme="dark"] .lampPost,
+[data-theme="dark"] .lampPost-path {
+    fill: #ffffff !important;
+}
+
+[data-theme="dark"] .lampPost path,
+[data-theme="dark"] .lampPost .lampPost-path {
+    fill: #ffffff !important;
+}
+
+@keyframes roadAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+}

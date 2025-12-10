@@ -1,167 +1,242 @@
 // =========================================
-// CONTROLE DA SIDEBAR - NAVEGAÇÃO E TOGGLE
+// SIDEBAR - CONTROLE VISUAL E FUNCIONAL
 // =========================================
 
 function initializeSidebar() {
-  console.log("🚀 Sidebar Inicializado");
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
+    console.log("🚀 Sidebar Inicializado");
+    
+    // 1. Remove sinos ANTES de qualquer coisa
+    removeBellFromMenuItems();
+    
+    // 2. ATUALIZA O NOME DO USUÁRIO IMEDIATAMENTE
+    updateUserName();
 
-  // Evento ÚNICO de clique global
-  document.addEventListener('click', handleSidebarClick);
+    // 2. LISTENER DE CLIQUES (Menu e Toggle)
+    document.addEventListener('click', function(e) {
+        
+        // Botão de Recolher (Toggle)
+        const toggleBtn = e.target.closest('#sidebarToggle');
+        if (toggleBtn) {
+            e.preventDefault();
+            document.body.classList.toggle('compact-mode');
+            return;
+        }
+
+        // Links de Navegação
+        const navLink = e.target.closest('.nav-link');
+        if (navLink) {
+            e.preventDefault();
+            const pageName = navLink.getAttribute('data-page');
+            
+            if (pageName) {
+                // Remove sinos antes de navegar
+                removeBellFromMenuItems();
+                
+                // Efeito visual
+                updateVisualActiveState(pageName);
+                
+                // Navegação real
+                if (window.BeiraMarNavigation && window.BeiraMarNavigation.navigateToPage) {
+                    window.BeiraMarNavigation.navigateToPage(pageName);
+                }
+                
+                // Fecha menu no mobile
+                if (window.innerWidth <= 768) {
+                    document.body.classList.remove('mobile-menu-open');
+                }
+                
+                // Remove sinos depois de navegar também
+                setTimeout(removeBellFromMenuItems, 100);
+            }
+        }
+    });
 }
 
-/**
- * Manipulador único de cliques do sidebar
- */
-function handleSidebarClick(e) {
-  const body = document.body;
-
-  // 1. BOTÃO HAMBURGER (Desktop)
-  if (e.target.closest('#sidebarToggle')) {
-    if (window.innerWidth > 768) {
-      e.preventDefault();
-      body.classList.toggle('compact-mode');
-      console.log('📦 Modo Compacto Alternado');
+// === FUNÇÃO MÁGICA: PREENCHE O NOME ===
+function updateUserName() {
+    const userSpan = document.getElementById('sidebarUserName');
+    
+    // Tenta pegar o email salvo na sessão
+    const userEmail = sessionStorage.getItem('userEmail');
+    
+    if (userSpan) {
+        if (userEmail) {
+            // Pega o que vem antes do @ (ex: joao@gmail.com -> joao)
+            let nick = userEmail.split('@')[0];
+            // Deixa a primeira letra maiúscula (Joao)
+            nick = nick.charAt(0).toUpperCase() + nick.slice(1);
+            
+            userSpan.textContent = nick;
+        } else {
+            // Se não tiver login (caso raro), mostra Visitante
+            userSpan.textContent = "Visitante";
+        }
     }
-    return;
-  }
-
-  // 2. LOGO (Mobile ou Dashboard)
-  if (e.target.closest('#brandLogo')) {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      e.stopPropagation();
-      body.classList.toggle('mobile-menu-open');
-      console.log('📱 Menu Mobile Alternado');
-    } else {
-      navigateToPage('dashboard');
-    }
-    return;
-  }
-
-  // 3. LINKS DO MENU
-  if (e.target.closest('.nav-link')) {
-    const link = e.target.closest('.nav-link');
-    const page = link.getAttribute('data-page');
-    if (page) {
-      e.preventDefault();
-      e.stopPropagation();
-      navigateToPage(page);
-    }
-    return;
-  }
-
-  // 4. FECHAR MENU MOBILE AO CLICAR FORA
-  if (window.innerWidth <= 768 && body.classList.contains('mobile-menu-open')) {
-    const sidebar = document.querySelector('.sidebar');
-    const btnLogo = document.getElementById('brandLogo');
-    if (sidebar && !sidebar.contains(e.target) && (!btnLogo || !btnLogo.contains(e.target))) {
-      body.classList.remove('mobile-menu-open');
-      console.log('📱 Menu Mobile Fechado');
-    }
-  }
 }
 
-/**
- * Verifica o tamanho da tela e ajusta classe
- */
+function updateVisualActiveState(pageName) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    const activeLink = document.querySelector(`.nav-link[data-page="${pageName}"]`);
+    if (activeLink) {
+        const parentLi = activeLink.closest('.nav-item');
+        if (parentLi) {
+            parentLi.classList.add('active');
+        }
+    }
+}
+
+// Funções de responsividade
 function checkScreenSize() {
-  const body = document.body;
-  const sidebar = document.querySelector('.sidebar');
-
-  if (window.innerWidth > 768 && window.innerWidth <= 1024) {
-    // Tablet: Força compacto automaticamente
-    body.classList.add('compact-mode');
-    body.classList.remove('mobile-menu-open');
-    console.log('📊 Tablet: Compacto Ativado');
-  } else if (window.innerWidth > 1024) {
-    // PC: Remove ambas as classes
-    body.classList.remove('compact-mode');
-    body.classList.remove('mobile-menu-open');
-    console.log('🖥️ Desktop');
-  } else {
-    // Mobile: Remove compact, mantém mobile-menu-open se necessário
-    body.classList.remove('compact-mode');
-    console.log('📱 Mobile');
-  }
-
-  // Força reflow para atualizar layout
-  if (sidebar) {
-    sidebar.offsetHeight; // Trigger reflow
-  }
+    // Remove mobile-menu-open quando não está em mobile e limpa todas as classes relacionadas
+    if (window.innerWidth > 768) {
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarContainer = document.getElementById('sidebar-container');
+        const appContainer = document.querySelector('.app-container');
+        
+        document.body.classList.remove('mobile-menu-open');
+        sidebar?.classList.remove('open');
+        sidebarContainer?.classList.remove('open');
+        appContainer?.classList.remove('sidebar-open');
+        
+        // Limpa estilos inline
+        sidebar?.style.setProperty('width', '');
+        sidebar?.style.setProperty('transform', '');
+        document.body.style.overflow = '';
+    }
+    
+    if (window.innerWidth <= 1024 && window.innerWidth > 768) {
+        document.body.classList.add('compact-mode');
+    } else if (window.innerWidth > 1024) {
+        document.body.classList.remove('compact-mode');
+    }
 }
 
-/**
- * Navega para uma página
- */
-function navigateToPage(page) {
-  console.log(`🔗 Navegando para: ${page}`);
+window.addEventListener('resize', checkScreenSize);
 
-  // Fecha menu mobile
-  if (window.innerWidth <= 768) {
-    document.body.classList.remove('mobile-menu-open');
-  }
-
-  // Atualiza link ativo
-  updateActiveLink(page);
-
-  // Chama sistema de app se disponível
-  if (window.BeiraMarApp && window.BeiraMarApp.loadPage) {
-    window.BeiraMarApp.loadPage(page);
-  } else if (window.BeiraMarNavigation && window.BeiraMarNavigation.navigateToPage) {
-    window.BeiraMarNavigation.navigateToPage(page);
-  } else {
-    console.warn('⚠️ Sistema de navegação não encontrado');
-  }
-}
-
-/**
- * Atualiza o link ativo no menu
- */
-function updateActiveLink(page) {
-  // Remove active de todos
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.classList.remove('active');
-  });
-
-  // Adiciona no correto
-  const activeLink = document.querySelector(`[data-page="${page}"]`);
-  if (activeLink) {
-    activeLink.closest('.nav-item').classList.add('active');
-    console.log(`✅ Link ativo: ${page}`);
-  }
-}
-
-/**
- * Define página ativa (útil ao carregar)
- */
-function setActivePage(page) {
-  updateActiveLink(page);
-}
-
-// =========================================
-// EXPORTAR API GLOBAL
-// =========================================
-
+// Exportação Global
 window.BeiraMarSidebar = {
-  initializeSidebar,
-  navigateToPage,
-  setActivePage
+    initializeSidebar,
+    setActivePage: updateVisualActiveState,
+    updateUserName, // Exportamos para poder chamar de fora se precisar
+    toggleMobileMenu: () => document.body.classList.toggle('mobile-menu-open')
 };
 
-// =========================================
-// INICIALIZAR
-// =========================================
+// Remove qualquer ícone de sino dos itens do menu
+function removeBellFromMenuItems() {
+    console.log('🔍 Verificando sinos nos itens do menu...');
+    
+    // Remove sino de Sede Local
+    const sedeLocalLink = document.querySelector('.nav-link[data-page="sedelocal"]');
+    if (sedeLocalLink) {
+        console.log('📍 Sede Local encontrado. Ícones antes:', sedeLocalLink.querySelectorAll('i').length);
+        // Remove TODOS os ícones primeiro
+        const allIcons = sedeLocalLink.querySelectorAll('i');
+        allIcons.forEach(icon => {
+            const iconClass = icon.className || '';
+            // Se for sino, remove
+            if (iconClass.includes('bell') || iconClass.includes('fa-bell')) {
+                console.log('🔔 Removendo sino de Sede Local:', icon, iconClass);
+                icon.remove();
+            }
+        });
+        
+        // Garante que apenas o ícone de mapa está presente
+        const mapIcon = sedeLocalLink.querySelector('i.fa-map-marker-alt, i.fas.fa-map-marker-alt');
+        if (!mapIcon) {
+            const newMapIcon = document.createElement('i');
+            newMapIcon.className = 'fas fa-map-marker-alt';
+            const span = sedeLocalLink.querySelector('span');
+            if (span) {
+                sedeLocalLink.insertBefore(newMapIcon, span);
+            } else {
+                sedeLocalLink.appendChild(newMapIcon);
+            }
+        }
+        
+        // Remove qualquer ícone extra (deve ter apenas 1 ícone)
+        const remainingIcons = sedeLocalLink.querySelectorAll('i');
+        if (remainingIcons.length > 1) {
+            const mapIconToKeep = sedeLocalLink.querySelector('i.fa-map-marker-alt, i.fas.fa-map-marker-alt');
+            remainingIcons.forEach(icon => {
+                if (icon !== mapIconToKeep) {
+                    console.log('🗑️ Removendo ícone extra de Sede Local:', icon);
+                    icon.remove();
+                }
+            });
+        }
+    }
+    
+    // Remove sino de Contato
+    const contatoLink = document.querySelector('.nav-link[data-page="contato"]');
+    if (contatoLink) {
+        console.log('📞 Contato encontrado. Ícones antes:', contatoLink.querySelectorAll('i').length);
+        // Remove TODOS os ícones primeiro
+        const allIcons = contatoLink.querySelectorAll('i');
+        allIcons.forEach(icon => {
+            const iconClass = icon.className || '';
+            // Se for sino, remove
+            if (iconClass.includes('bell') || iconClass.includes('fa-bell')) {
+                console.log('🔔 Removendo sino de Contato:', icon, iconClass);
+                icon.remove();
+            }
+        });
+        
+        // Garante que apenas o ícone de telefone está presente
+        const phoneIcon = contatoLink.querySelector('i.fa-phone-alt, i.fas.fa-phone-alt');
+        if (!phoneIcon) {
+            const newPhoneIcon = document.createElement('i');
+            newPhoneIcon.className = 'fas fa-phone-alt';
+            const span = contatoLink.querySelector('span');
+            if (span) {
+                contatoLink.insertBefore(newPhoneIcon, span);
+            } else {
+                contatoLink.appendChild(newPhoneIcon);
+            }
+        }
+        
+        // Remove qualquer ícone extra (deve ter apenas 1 ícone)
+        const remainingIcons = contatoLink.querySelectorAll('i');
+        if (remainingIcons.length > 1) {
+            const phoneIconToKeep = contatoLink.querySelector('i.fa-phone-alt, i.fas.fa-phone-alt');
+            remainingIcons.forEach(icon => {
+                if (icon !== phoneIconToKeep) {
+                    console.log('🗑️ Removendo ícone extra de Contato:', icon);
+                    icon.remove();
+                }
+            });
+        }
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  initializeSidebar();
-  console.log('✅ Sidebar Sistema Pronto!');
+// Inicialização Automática
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeSidebar();
+        setTimeout(removeBellFromMenuItems, 100);
+        setTimeout(removeBellFromMenuItems, 500);
+        setTimeout(removeBellFromMenuItems, 1000);
+        setTimeout(removeBellFromMenuItems, 2000);
+    });
+} else {
+    initializeSidebar();
+    setTimeout(removeBellFromMenuItems, 100);
+    setTimeout(removeBellFromMenuItems, 500);
+    setTimeout(removeBellFromMenuItems, 1000);
+    setTimeout(removeBellFromMenuItems, 2000);
+}
+
+// Observa mudanças no DOM para remover sino se aparecer
+const observer = new MutationObserver(() => {
+    removeBellFromMenuItems();
 });
 
-// Se carregar antes do DOM
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeSidebar);
-} else {
-  initializeSidebar();
-}
+// Inicia observação após um pequeno delay
+setTimeout(() => {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        observer.observe(sidebar, { childList: true, subtree: true });
+    }
+}, 500);

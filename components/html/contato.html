@@ -1,0 +1,209 @@
+<div class="module-container">
+    <div class="module-header">
+        <h2><i class="fas fa-phone-alt me-2"></i> Contato</h2>
+    </div>
+
+    <div class="contact-container">
+        <!-- Sobre a Beira Mar Pescados -->
+        <div class="about-section">
+            <h2 class="about-title">Sobre a Beira Mar Pescados</h2>
+            <div class="about-content">
+                <p>A Beira Mar Pescados é uma distribuidora e atacadista de pescados e frutos do mar localizada em Aracaju, Sergipe, especializada em fornecer peixe fresco e beneficiado para o mercado local e regional. Atua tanto no atendimento a comércios do ramo alimentício quanto na entrega de produtos in natura para consumidores e empresas em Sergipe e em outros estados próximos.</p>
+                
+                <h3 class="about-subtitle">Atuação e especialidade</h3>
+                <p>A empresa trabalha com seleção, beneficiamento e distribuição de peixes e frutos do mar, prezando por protocolos de higienização e controle de qualidade em toda a cadeia, do recebimento à entrega do produto final. Seu foco principal é garantir pescado de primeira linha para peixarias, restaurantes, supermercados e outros estabelecimentos que dependem de fornecimento constante e confiável.</p>
+                
+                <h3 class="about-subtitle">Localização e estrutura</h3>
+                <p>A Beira Mar Pescados está sediada em Aracaju e é reconhecida como uma referência no segmento de pescados na capital sergipana, atendendo especialmente o público que busca produto fresco com procedência. A empresa opera como comércio atacadista de pescados e frutos do mar e também possui atividade de transporte rodoviário de cargas, o que facilita a distribuição para diferentes pontos de venda.</p>
+                
+                <h3 class="about-subtitle">História e presença no mercado</h3>
+                <p>Constituída sob a razão social Pescados Beira Mar Comércio e Transportes Ltda., a empresa atua há vários anos no mercado, consolidando uma imagem de tradição e experiência no segmento de pescados em Sergipe. Ao longo do tempo, construiu parcerias com diversos clientes do setor alimentício, tornando-se um dos nomes mais lembrados quando o assunto é fornecimento de peixe e frutos do mar na região.</p>
+            </div>
+        </div>
+
+        <!-- Entre em contato conosco -->
+        <div class="contact-social-section">
+            <h2 class="contact-social-title">Entre em contato conosco</h2>
+            <div class="social-buttons">
+                <a href="https://www.instagram.com/beira_pescados/" target="_blank" class="social-btn instagram-btn">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://wa.me/5579991166601" target="_blank" class="social-btn whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.contact-container {
+    padding: 2rem;
+}
+
+.about-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.about-title {
+    color: #1e293b;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #3b82f6;
+}
+
+.about-content {
+    color: #475569;
+    line-height: 1.8;
+}
+
+.about-content p {
+    margin: 0 0 1.5rem 0;
+    font-size: 1rem;
+}
+
+.about-subtitle {
+    color: #1e293b;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+}
+
+.contact-social-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.contact-social-title {
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 2rem 0;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.social-btn i {
+    font-size: 1.5rem;
+}
+
+.social-btn.instagram-btn {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.social-btn.instagram-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.4);
+}
+
+.social-btn.whatsapp-btn {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+}
+
+.social-btn.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+[data-theme="dark"] .about-section,
+[data-theme="dark"] .contact-social-section {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .about-title,
+[data-theme="dark"] .about-subtitle,
+[data-theme="dark"] .contact-social-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .about-content {
+    color: #cbd5e1;
+}
+
+/* Remove o sino do h2::before que vem do CSS de notificações */
+#contato .module-header h2::before,
+.module-header h2::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Estilização do module-header do Contato */
+#contato .module-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+#contato .module-header h2 {
+    margin: 0;
+    color: white;
+    font-weight: 700;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+#contato .module-header h2 i {
+    font-size: 1.75rem;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #contato .module-header {
+        padding: 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    #contato .module-header h2 {
+        font-size: 1.25rem !important;
+        gap: 0.5rem !important;
+    }
+    
+    #contato .module-header h2 i {
+        font-size: 1.25rem !important;
+    }
+}
+</style>
+
+

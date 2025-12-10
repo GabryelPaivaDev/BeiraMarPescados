@@ -1,0 +1,29 @@
+<div class="cliente-dashboard-container">
+    <div class="dashboard-header">
+        <h1>Peixes Disponíveis</h1>
+        <p class="subtitle">Confira nossos produtos frescos em estoque</p>
+    </div>
+    
+    <!-- Filtro de Categorias e Barra de Pesquisa -->
+    <div class="categoria-filtro-container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar produto..." />
+            <button class="search-clear" id="searchClear" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="categoriaFiltro" class="filtro-buttons-container">
+            <!-- Botões de filtro serão inseridos aqui dinamicamente -->
+        </div>
+    </div>
+    
+    <div class="produtos-grid" id="produtosGrid">
+        <!-- Cards serão inseridos aqui dinamicamente -->
+        <div class="loading-products">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando produtos...</p>
+        </div>
+    </div>
+</div>
+

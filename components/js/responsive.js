@@ -29,23 +29,35 @@ function initializeResponsive() {
 
         } else if (window.innerWidth <= 1024) {
             // Tablet: sidebar colapsada por padrão
-            sidebar.classList.add('collapsed');
+            // IMPORTANTE: Remove TODAS as classes relacionadas ao mobile-menu quando não está em mobile
+            document.body.classList.remove('mobile-menu-open');
             sidebar.classList.remove('open');
+            sidebar.classList.add('collapsed');
+            sidebarContainer?.classList.remove('open');
             sidebarContainer?.classList.add('collapsed');
-            appContainer?.classList.add('sidebar-collapsed');
             appContainer?.classList.remove('sidebar-open');
+            appContainer?.classList.add('sidebar-collapsed');
             document.body.style.overflow = '';
+            // Limpa qualquer estilo inline que possa estar interferindo
+            sidebar.style.width = '';
+            sidebar.style.transform = '';
             // Atualiza variável CSS
             appContainer?.style.setProperty('--sidebar-current', '80px');
 
         } else {
             // Desktop: sidebar expandida por padrão
-            sidebar.classList.remove('collapsed');
+            // IMPORTANTE: Remove TODAS as classes relacionadas ao mobile-menu quando não está em mobile
+            document.body.classList.remove('mobile-menu-open');
             sidebar.classList.remove('open');
+            sidebar.classList.remove('collapsed');
+            sidebarContainer?.classList.remove('open');
             sidebarContainer?.classList.remove('collapsed');
-            appContainer?.classList.remove('sidebar-collapsed');
             appContainer?.classList.remove('sidebar-open');
+            appContainer?.classList.remove('sidebar-collapsed');
             document.body.style.overflow = '';
+            // Limpa qualquer estilo inline que possa estar interferindo
+            sidebar.style.width = '';
+            sidebar.style.transform = '';
             // Atualiza variável CSS
             appContainer?.style.setProperty('--sidebar-current', '280px');
         }
@@ -154,10 +166,27 @@ function initializeResponsive() {
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
+            // IMPORTANTE: Se mudou de mobile para tablet/desktop, remove TODAS as classes mobile
+            if (window.innerWidth > 768) {
+                const sidebar = document.querySelector('.sidebar');
+                const sidebarContainer = document.getElementById('sidebar-container');
+                const appContainer = document.querySelector('.app-container');
+                
+                // Remove todas as classes relacionadas ao mobile-menu
+                document.body.classList.remove('mobile-menu-open');
+                sidebar?.classList.remove('open');
+                sidebarContainer?.classList.remove('open');
+                appContainer?.classList.remove('sidebar-open');
+                
+                // Limpa estilos inline que podem estar presos
+                sidebar?.style.setProperty('width', '');
+                sidebar?.style.setProperty('transform', '');
+                document.body.style.overflow = '';
+            }
             adjustSidebar();
             adjustTables();
             adjustHeaderActions();
-        }, 250);
+        }, 100); // Reduzido para resposta mais rápida
     });
 }
 

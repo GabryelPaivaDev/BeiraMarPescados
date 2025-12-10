@@ -810,12 +810,25 @@ function renderOrderOnVendas(order) {
                     <p class="mb-2"><strong>Valor:</strong> ${formatBRL(order.total)}</p>
                     <p class="mb-3"><strong>Entrega:</strong> ${order.deliveryDate || '-'}</p>
                     <div class="d-flex gap-2 justify-content-end">
-                        <button class="btn btn-sm btn-outline-primary btn-edit-order" data-order='${orderData.replace(/'/g, "&apos;")}' title="Editar pedido">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger btn-delete-order" title="Excluir pedido">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        ${(() => {
+                            const userType = sessionStorage.getItem('userType');
+                            const podeEditar = (userType === 'adm' || userType === 'admin') || 
+                                              (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeEditar('vendas'));
+                            const podeExcluir = (userType === 'adm' || userType === 'admin') || 
+                                               (window.BeiraMarPermissoes && window.BeiraMarPermissoes.podeExcluir('vendas'));
+                            let html = '';
+                            if (podeEditar) {
+                                html += `<button class="btn btn-sm btn-outline-primary btn-edit-order" data-order='${orderData.replace(/'/g, "&apos;")}' title="Editar pedido">
+                                    <i class="fas fa-edit"></i>
+                                </button>`;
+                            }
+                            if (podeExcluir) {
+                                html += `<button class="btn btn-sm btn-outline-danger btn-delete-order" title="Excluir pedido">
+                                    <i class="fas fa-trash"></i>
+                                </button>`;
+                            }
+                            return html;
+                        })()}
                     </div>
                 </div>
             </div>`;

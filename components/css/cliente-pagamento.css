@@ -1,0 +1,516 @@
+/* =========================================
+   MODAL DE PAGAMENTO - ESTILO MODERNO
+   ========================================= */
+
+#modalPagamento {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+}
+
+#modalPagamento.active {
+    display: flex !important;
+}
+
+.modal-pagamento-content {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="dark"] .modal-pagamento-content {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pagamento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-bottom: none;
+}
+
+.pagamento-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.pagamento-header .modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.pagamento-header .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.pagamento-body {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+[data-theme="dark"] .pagamento-body {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+/* Container de Métodos de Pagamento */
+.payment-methods-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.payment-method-title {
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .payment-method-title {
+    color: #f1f5f9;
+}
+
+.payment-method-note {
+    font-size: 0.625rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+[data-theme="dark"] .payment-method-note {
+    color: #94a3b8;
+}
+
+/* Labels de Método de Pagamento */
+.payment-method-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 10;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 2px solid transparent;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    position: relative;
+    gap: 0.5rem;
+}
+
+.payment-method-label:hover {
+    background: #e2e8f0;
+}
+
+.payment-method-input:checked ~ *,
+.payment-method-label:has(:checked) {
+    border-color: #6366f1;
+    color: #312e81;
+    background: #eef2ff;
+    font-weight: 700;
+}
+
+/* Fallback para navegadores sem suporte a :has() */
+.payment-method-label.active {
+    border-color: #6366f1;
+    color: #312e81;
+    background: #eef2ff;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .payment-method-label {
+    background: #334155;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .payment-method-label:hover {
+    background: #475569;
+}
+
+[data-theme="dark"] .payment-method-label:has(:checked),
+[data-theme="dark"] .payment-method-label.active {
+    border-color: #818cf8;
+    color: #c7d2fe;
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.payment-method-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 10;
+    flex: 1;
+}
+
+.payment-method-icon {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    flex-shrink: 0;
+    transition: all 0.5s ease;
+}
+
+.payment-method-label:has(:checked) .payment-method-icon,
+.payment-method-label.active .payment-method-icon {
+    margin-right: 0;
+}
+
+.payment-method-label-name {
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.5s ease;
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    font-size: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.payment-method-label:has(:checked) .payment-method-label-name,
+.payment-method-label.active .payment-method-label-name {
+    opacity: 1;
+    max-width: 300px;
+    font-size: 1rem;
+    margin-left: 0.75rem;
+}
+
+.payment-method-input {
+    color: #6366f1;
+    accent-color: #6366f1;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+/* Formulários de Pagamento */
+.payment-form {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    animation: fadeIn 0.3s ease;
+}
+
+[data-theme="dark"] .payment-form {
+    background: #334155;
+}
+
+.payment-form.active {
+    display: block;
+}
+
+.payment-form-group {
+    margin-bottom: 1.25rem;
+}
+
+.payment-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+[data-theme="dark"] .payment-form-label {
+    color: #f1f5f9;
+}
+
+.payment-form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: #1e293b;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.payment-form-input:focus,
+.payment-form-input select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.payment-form-input select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: #1e293b;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .payment-form-input select {
+    background: #475569;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .payment-form-input {
+    background: #475569;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .payment-form-input:focus {
+    border-color: #818cf8;
+}
+
+.payment-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Botão PIX */
+.btn-pix {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #32bcad 0%, #2ba89a 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-pix:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(50, 188, 173, 0.4);
+}
+
+/* QR Code Container */
+.qr-code-container {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+}
+
+[data-theme="dark"] .qr-code-container {
+    background: #334155;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.qr-code-container.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.qr-code-image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1rem;
+    border: 4px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    background: white;
+}
+
+[data-theme="dark"] .qr-code-image {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: white;
+}
+
+.qr-code-text {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    word-break: break-all;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-family: monospace;
+}
+
+[data-theme="dark"] .qr-code-text {
+    color: #94a3b8;
+    background: #475569;
+}
+
+/* Botão Continuar */
+.btn-continuar-pagamento {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-continuar-pagamento.active {
+    display: flex;
+}
+
+.btn-continuar-pagamento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Resumo do Pedido */
+.payment-summary {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+}
+
+[data-theme="dark"] .payment-summary {
+    background: #334155;
+    border-left-color: #60a5fa;
+}
+
+.payment-summary-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .payment-summary-title {
+    color: #f1f5f9;
+}
+
+.payment-summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+[data-theme="dark"] .payment-summary-item {
+    color: #94a3b8;
+}
+
+.payment-summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e2e8f0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+[data-theme="dark"] .payment-summary-total {
+    border-top-color: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+.payment-summary-total span:last-child {
+    color: #10b981;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .modal-pagamento-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .pagamento-body {
+        padding: 1.5rem;
+    }
+    
+    .payment-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+

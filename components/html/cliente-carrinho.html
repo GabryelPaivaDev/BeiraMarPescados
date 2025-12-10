@@ -1,0 +1,52 @@
+<div class="carrinho-container">
+    <div class="carrinho-header">
+        <h1>🛒 Meu Carrinho</h1>
+        <p class="subtitle">Revise seus produtos antes de finalizar a compra</p>
+    </div>
+
+    <!-- Container principal -->
+    <div class="carrinho-content">
+        <!-- Lista de itens -->
+        <div class="carrinho-itens-container" id="carrinhoItensContainer">
+            <!-- Itens serão inseridos aqui dinamicamente -->
+            <div class="carrinho-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Seu carrinho está vazio</h3>
+                <p>Adicione produtos do catálogo para começar</p>
+                <button class="btn-voltar-catalogo" onclick="if(window.BeiraMarNavigation) window.BeiraMarNavigation.navigateToPage('dashboard');">
+                    <i class="fas fa-arrow-left"></i> Ver Produtos
+                </button>
+            </div>
+        </div>
+
+        <!-- Resumo do pedido -->
+        <div class="carrinho-resumo" id="carrinhoResumo">
+            <h3 class="resumo-titulo">Resumo do Pedido</h3>
+            
+            <div class="resumo-linhas">
+                <div class="resumo-linha">
+                    <span>Subtotal</span>
+                    <span id="resumoSubtotal">R$ 0,00</span>
+                </div>
+                <div class="resumo-linha">
+                    <span>Frete</span>
+                    <span>Calculado no checkout</span>
+                </div>
+                <hr class="resumo-divider">
+                <div class="resumo-total">
+                    <span>Total</span>
+                    <span id="resumoTotal">R$ 0,00</span>
+                </div>
+            </div>
+
+            <button class="btn-finalizar" id="btnFinalizarPedido" onclick="ClienteCarrinho.finalizarPedido()">
+                <i class="fas fa-check"></i> Finalizar Pedido
+            </button>
+
+            <button class="btn-limpar-carrinho" onclick="ClienteCarrinho.limparCarrinhoConfirmado()">
+                <i class="fas fa-trash"></i> Limpar Carrinho
+            </button>
+        </div>
+    </div>
+</div>
+

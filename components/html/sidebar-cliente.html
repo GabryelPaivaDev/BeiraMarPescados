@@ -1,0 +1,80 @@
+<aside class="sidebar" id="sidebar-container">
+    <div class="sidebar-header">
+        <div class="logo" id="brandLogo">
+            <i class="fas fa-fish"></i>
+            <h2>Beira Mar</h2>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <nav class="nav-menu">
+        <li class="nav-item active">
+            <a href="#" class="nav-link" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="estoque">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Minhas compras</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="notificacoes">
+                <i class="fas fa-bell"></i>
+                <span>Notificações</span>
+                <span class="notification-badge" style="display: none;">0</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="carrinho">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Carrinho</span>
+                <span class="carrinho-badge" id="carrinhoBadge" style="display: none;">0</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="contato">
+                <i class="fas fa-phone-alt"></i>
+                <span>Contato</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="sedelocal">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Sede Local</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>Chat Bot</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" id="fornecedorLink" data-page="fornecedor" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); margin-top: 0.5rem; border-radius: 8px;">
+                <i class="fas fa-handshake"></i>
+                <span>Se torne nosso fornecedor</span>
+            </a>
+        </li>
+    </nav>
+
+    <div class="sidebar-footer" onclick="if(window.BeiraMarUser) window.BeiraMarUser.openProfile()">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span id="sidebarUserName">Carregando...</span>
+        </div>
+        <i class="fas fa-sign-out-alt logout-icon" title="Sair" onclick="event.stopPropagation(); window.BeiraMarUser.logout()"></i>
+    </div>
+</aside>
+

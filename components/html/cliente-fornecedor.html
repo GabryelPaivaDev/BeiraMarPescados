@@ -1,0 +1,130 @@
+<!-- PAGE FORNECEDOR -->
+    <div class="fornecedor-container">
+        <div class="fornecedor-header">
+            <h2 class="fornecedor-title">
+                <i class="fas fa-handshake"></i>
+                Seja Nosso Fornecedor
+            </h2>
+            <p class="fornecedor-subtitle">Preencha o formulário abaixo e entre para nossa rede de fornecedores</p>
+        </div>
+
+        <div class="fornecedor-form-wrapper">
+            <!-- Formulário -->
+            <form id="fornecedorForm" class="fornecedor-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nomeEmpresa" class="form-label">
+                            <i class="fas fa-building"></i> Nome da Empresa *
+                        </label>
+                        <input type="text" id="nomeEmpresa" name="nomeEmpresa" class="form-input" placeholder="Digite o nome da sua empresa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cnpj" class="form-label">
+                            <i class="fas fa-id-card"></i> CNPJ *
+                        </label>
+                        <input type="text" id="cnpj" name="cnpj" class="form-input" placeholder="00.000.000/0000-00" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nomeResponsavel" class="form-label">
+                            <i class="fas fa-user"></i> Nome do Responsável *
+                        </label>
+                        <input type="text" id="nomeResponsavel" name="nomeResponsavel" class="form-input" placeholder="Digite o nome completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cargo" class="form-label">
+                            <i class="fas fa-briefcase"></i> Cargo *
+                        </label>
+                        <input type="text" id="cargo" name="cargo" class="form-input" placeholder="Ex: Gerente, Diretor, etc." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> E-mail *
+                        </label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone" class="form-label">
+                            <i class="fas fa-phone"></i> Telefone *
+                        </label>
+                        <input type="tel" id="telefone" name="telefone" class="form-input" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="endereco" class="form-label">
+                            <i class="fas fa-map-marker-alt"></i> Endereço Completo *
+                        </label>
+                        <input type="text" id="endereco" name="endereco" class="form-input" placeholder="Rua, número, bairro, cidade - UF" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="produtos" class="form-label">
+                            <i class="fas fa-fish"></i> Produtos que Fornece *
+                        </label>
+                        <textarea id="produtos" name="produtos" class="form-textarea" rows="4" placeholder="Descreva os produtos que sua empresa fornece (ex: Peixes frescos, Camarões, Frutos do mar, etc.)" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experiencia" class="form-label">
+                            <i class="fas fa-chart-line"></i> Experiência no Mercado
+                        </label>
+                        <input type="text" id="experiencia" name="experiencia" class="form-input" placeholder="Ex: 5 anos no mercado de pescados">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacidade" class="form-label">
+                            <i class="fas fa-weight"></i> Capacidade de Fornecimento
+                        </label>
+                        <input type="text" id="capacidade" name="capacidade" class="form-input" placeholder="Ex: 500kg/semana">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="observacoes" class="form-label">
+                            <i class="fas fa-comment-alt"></i> Observações Adicionais
+                        </label>
+                        <textarea id="observacoes" name="observacoes" class="form-textarea" rows="3" placeholder="Informações adicionais que considere relevantes"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Formulário
+                    </button>
+                </div>
+            </form>
+
+            <!-- Mensagem de Sucesso -->
+            <div id="fornecedorSuccess" class="fornecedor-success" style="display: none;">
+                <div class="success-icon">
+                    <svg class="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="success-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="success-checkmark-check" fill="none" d="m14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <h3 class="success-title">Formulário Enviado com Sucesso!</h3>
+                <p class="success-message">Seu formulário foi encaminhado por email para nossa empresa, entraremos em contato com você, obrigado por se registrar.</p>
+                <button type="button" class="btn-back" onclick="window.BeiraMarNavigation && window.BeiraMarNavigation.navigateToPage('dashboard')">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar ao Início
+                </button>
+            </div>
+        </div>
+    </div>
+

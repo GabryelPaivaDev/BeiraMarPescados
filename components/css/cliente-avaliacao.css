@@ -1,0 +1,339 @@
+/* =========================================
+   AVALIAÇÃO DE PEDIDOS - ESTRELAS E FORMULÁRIO
+   ========================================= */
+
+.modal-avaliar-content {
+    max-width: 700px;
+}
+
+.modal-compras .modal-header.avaliar-header {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.pedido-avaliar-card {
+    background: var(--bg-secondary, #f8fafc);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--border-color, #e2e8f0);
+    margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .pedido-avaliar-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.avaliacao-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-primary, #ffffff);
+    border-radius: 12px;
+}
+
+[data-theme="dark"] .avaliacao-section {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.avaliacao-section h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    margin-bottom: 0.5rem;
+}
+
+.avaliacao-subtitle {
+    color: var(--text-secondary, #64748b);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sistema de Estrelas */
+.radio {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 1.5rem 0;
+}
+
+.radio > input {
+    position: absolute;
+    appearance: none;
+}
+
+.radio > label {
+    cursor: pointer;
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    user-select: none;
+}
+
+.radio > label > svg {
+    fill: #666;
+    transition: fill 0.3s ease;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .radio > label > svg {
+    fill: #94a3b8;
+}
+
+.radio > label::before,
+.radio > label::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff9e0b;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+    animation: particle-explosion 1s ease-out;
+}
+
+.radio > label::before {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+}
+
+.radio > label::after {
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+}
+
+.radio > label:hover::before,
+.radio > label:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.5);
+}
+
+.radio > label:hover {
+    transform: scale(1.2);
+    animation: pulse 0.6s infinite alternate;
+}
+
+/* Star glow and animation on hover */
+.radio > label:hover > svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: shimmer 1s ease infinite alternate;
+}
+
+.radio > input:checked + label > svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: pulse 0.8s infinite alternate;
+}
+
+.radio > input:checked + label ~ label > svg,
+.radio > input:checked + label > svg {
+    fill: #ff9e0b;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes particle-explosion {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1));
+    }
+}
+
+.radio > input:checked + label:hover,
+.radio > input:checked + label:hover ~ label {
+    fill: #e58e09;
+}
+
+.radio > label:hover,
+.radio > label:hover ~ label {
+    fill: #ff9e0b;
+}
+
+.radio input:checked ~ label svg {
+    fill: #ffa723;
+}
+
+/* Comentário */
+.comentario-section {
+    margin-top: 2rem;
+}
+
+.comentario-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary, #1e293b);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.comentario-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    background: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #1e293b);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .comentario-textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.comentario-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.comentario-textarea::placeholder {
+    color: var(--text-secondary, #94a3b8);
+}
+
+/* Botão enviar avaliação */
+.btn-enviar-avaliacao {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.btn-enviar-avaliacao:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-enviar-avaliacao:active {
+    transform: translateY(0);
+}
+
+/* Ações do pedido */
+.pedido-acoes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+[data-theme="dark"] .pedido-acoes {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-acao-secundaria,
+.btn-acao-primaria {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-acao-secundaria {
+    background: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #1e293b);
+    border: 1px solid var(--border-color, #e2e8f0);
+}
+
+[data-theme="dark"] .btn-acao-secundaria {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-acao-secundaria:hover {
+    background: var(--bg-secondary, #f8fafc);
+    transform: translateY(-2px);
+}
+
+.btn-acao-primaria {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #ffffff;
+}
+
+.btn-acao-primaria:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Modal de detalhes */
+.modal-detalhes-content {
+    max-width: 800px;
+}
+
+.modal-compras .modal-header.detalhes-header {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+
+.detalhes-pedido-completo {
+    padding: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .pedido-acoes {
+        flex-direction: column;
+    }
+    
+    .radio {
+        gap: 8px;
+    }
+    
+    .radio > label {
+        font-size: 25px;
+    }
+}
+

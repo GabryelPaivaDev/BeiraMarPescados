@@ -1,0 +1,246 @@
+/* =========================================
+   NOTIFICAÇÕES DO CLIENTE - ESTILOS COMPLETOS
+   ========================================= */
+
+/* Timer de cancelamento */
+.notification-timer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.notification-timer i {
+    font-size: 1rem;
+}
+
+/* Cards de notificação */
+.notification-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    border-left: 4px solid;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.notification-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.notification-card[data-action]:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.notification-card.warning {
+    border-left-color: #f59e0b;
+    background: #fffbf0;
+}
+
+.notification-card.success {
+    border-left-color: #10b981;
+    background: #f0fdf4;
+}
+
+.notification-card.error {
+    border-left-color: #ef4444;
+    background: #fef2f2;
+}
+
+.notification-card.info {
+    border-left-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.notification-read {
+    opacity: 0.7;
+}
+
+/* Header do card */
+.notification-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.notification-card-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notification-card-icon.warning {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.notification-card-icon.success {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+.notification-card-icon.error {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.notification-card-icon.info {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.notification-card-info {
+    flex: 1;
+}
+
+.notification-card-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.notification-card-time {
+    margin: 0.3rem 0 0 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.notification-card-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    transition: color 0.2s;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-card-close:hover {
+    color: #ef4444;
+}
+
+/* Body do card */
+.notification-card-body {
+    margin-bottom: 1rem;
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.notification-card-body p {
+    margin: 0;
+}
+
+/* Actions do card */
+.notification-card-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+.btn-sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Tema escuro */
+[data-theme="dark"] .notification-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .notification-card.warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-left-color: #f59e0b;
+}
+
+[data-theme="dark"] .notification-card.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+}
+
+[data-theme="dark"] .notification-card.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+}
+
+[data-theme="dark"] .notification-card.info {
+    background: rgba(59, 130, 246, 0.1);
+    border-left-color: #3b82f6;
+}
+
+[data-theme="dark"] .notification-card-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .notification-card-time {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .notification-card-body {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .notification-card-close {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .notification-card-close:hover {
+    color: #ef4444;
+}
+
+[data-theme="dark"] .btn {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .btn:hover {
+    background: #475569;
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+

@@ -1,0 +1,240 @@
+/* =========================
+   SISTEMA DE TEMA CLARO/ESCURO
+   ========================= */
+
+:root {
+    /* Tema Claro (Padrão) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #e2e8f0;
+    --text-primary: #334155;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --accent-color: #3b82f6;
+}
+
+[data-theme="dark"] {
+    /* Tema Escuro */
+    --bg-primary: #0C1A2D;
+    --bg-secondary: #0f172a;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #475569;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --accent-color: #60a5fa;
+    --header-dark-bg: #0C1A2D;
+}
+
+/* Aplicar tema ao body */
+body {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Toggle de Tema - Estilo Customizado */
+.theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    /* Estilos gerais para theme-toggle no mobile */
+    .theme-toggle-wrapper {
+        position: relative !important;
+        z-index: 1002 !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .theme-toggle-label {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .theme-toggle-track {
+        width: 90px !important;
+        height: 42px !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .theme-toggle-track::after {
+        width: 34px !important;
+        height: 34px !important;
+        top: 4px !important;
+        left: 4px !important;
+    }
+    
+    .theme-toggle-input:checked ~ .theme-toggle-track::after {
+        left: 52px !important; /* 90px - 34px - 4px = 52px */
+    }
+    
+    .theme-sun-icon {
+        width: 20px !important;
+        height: 20px !important;
+        left: 10px !important;
+    }
+    
+    .theme-moon-icon {
+        width: 20px !important;
+        height: 20px !important;
+        right: 10px !important;
+    }
+}
+
+/* Label container - estrutura do exemplo */
+.theme-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.theme-toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* O Trilho (Fundo do botão) - replicando exatamente */
+.theme-toggle-track {
+    position: relative;
+    width: 110px;
+    height: 50px;
+    background-color: white;
+    border-radius: 9999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Estado escuro do trilho */
+.theme-toggle-input:checked ~ .theme-toggle-track {
+    background-color: #404040;
+}
+
+/* A Bolinha (Slider) - começa à esquerda (atrás do sol) */
+.theme-toggle-track::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, #007ACC, #0078D4); /* Azul ao invés de laranja/amarelo */
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estado checked - bolinha vai para a direita */
+.theme-toggle-input:checked ~ .theme-toggle-track::after {
+    background: linear-gradient(to right, #007ACC, #0078D4); /* Azul no tema escuro também */
+    left: 65px; /* 110px - 40px - 5px = 65px */
+    transform: translateX(0);
+}
+
+/* Efeito de clique */
+.theme-toggle-input:active ~ .theme-toggle-track::after {
+    width: 50px;
+}
+
+/* Ícone do Sol - à esquerda (dentro da bolinha quando não checked) */
+.theme-sun-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    fill: white;
+    opacity: 1;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.theme-toggle-input:checked ~ .theme-sun-icon {
+    opacity: 0.6;
+}
+
+/* Ícone da Lua - à direita (não deve sobrepor o sol) */
+.theme-moon-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    fill: black;
+    opacity: 0.6;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease, fill 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.theme-toggle-input:checked ~ .theme-moon-icon {
+    opacity: 1 !important;
+    fill: white !important;
+}
+
+/* Aplicar cores do tema em elementos principais */
+.app-container {
+    background-color: var(--bg-secondary);
+}
+
+.page {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Cards e containers */
+.card, .card-body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Inputs */
+input, textarea, select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Botões */
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    opacity: 0.9;
+}
+
+/* Scrollbar com tema */
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+    opacity: 0.8;
+}

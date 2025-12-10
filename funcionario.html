@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐟</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beira Mar Pescados - Área do Funcionário</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="components/css/base.css">
+    <link rel="stylesheet" href="components/css/theme.css">
+    <link rel="stylesheet" href="components/css/loader.css">
+    <link rel="stylesheet" href="components/css/sidebar.css">
+    <link rel="stylesheet" href="components/css/header.css">
+    <link rel="stylesheet" href="components/css/dashboard.css">
+    <link rel="stylesheet" href="components/css/estoque.css">
+    <link rel="stylesheet" href="components/css/producao.css">
+    <link rel="stylesheet" href="components/css/vendas.css">
+    <link rel="stylesheet" href="components/css/fluxo.css">
+    <link rel="stylesheet" href="components/css/notificacoes.css">
+    <link rel="stylesheet" href="components/css/modais.css">
+    <link rel="stylesheet" href="components/css/responsive.css">
+
+    <style>
+        /* CSS ESSENCIAL PARA O LOADER E PÁGINAS */
+        
+        /* 1. Lógica de Troca de Páginas (SPA) */
+        .page { 
+            display: none; 
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
+            width: 100%; 
+        }
+        .page.active { 
+            display: block; 
+            opacity: 1; 
+        }
+
+        /* 2. Loader Overlay */
+        .loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: var(--bg-primary, #ffffff); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; transition: opacity 0.3s ease;
+            overflow: visible;
+        }
+        .loader-overlay.d-none { display: none !important; }
+        
+        .loader-content {
+            overflow: visible;
+        }
+        
+        /* 3. Aviso de Erro Técnico */
+        #server-error {
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+            background:rgba(0,0,0,0.95); color:white; z-index:10000; 
+            flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        if (window.location.protocol === 'file:') {
+            document.write('<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#222;color:#fff;display:flex;justify-content:center;align-items:center;font-size:20px;padding:20px;text-align:center;z-index:99999;">⚠️ Erro: Use o "Live Server" para abrir este projeto.</div>');
+            window.stop();
+        }
+    </script>
+
+    <div id="server-error">
+        <h1 style="color:#ff6b6b; font-size:3rem;">Erro de Carregamento</h1>
+        <p>Use o Live Server no VS Code.</p>
+        <button onclick="window.location.reload()" class="btn btn-primary mt-3">Recarregar</button>
+    </div>
+
+    <div id="global-loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="loader">
+                <div class="truckWrapper">
+                  <div class="truckBody">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 198 93" class="trucksvg">
+                      <path stroke-width="3" stroke="#282828" fill="#3b82f6" d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"></path>
+                      <path stroke-width="3" stroke="#282828" fill="#7D7C7C" d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"></path>
+                      <path stroke-width="2" stroke="#282828" fill="#282828" d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"></path>
+                      <rect stroke-width="2" stroke="#282828" fill="#FFFCAB" rx="1" height="7" width="5" y="63" x="187"></rect>
+                      <rect stroke-width="2" stroke="#282828" fill="#282828" rx="1" height="11" width="4" y="81" x="193"></rect>
+                      <rect stroke-width="3" stroke="#282828" fill="#DFDFDF" rx="2.5" height="90" width="121" y="1.5" x="6.5"></rect>
+                      <rect stroke-width="2" stroke="#282828" fill="#DFDFDF" rx="2" height="4" width="6" y="84" x="1"></rect>
+                    </svg>
+                  </div>
+                  <div class="truckTires">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tiresvg">
+                      <circle stroke-width="3" stroke="#282828" fill="#282828" r="13.5" cy="15" cx="15"></circle>
+                      <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="tiresvg">
+                      <circle stroke-width="3" stroke="#282828" fill="#282828" r="13.5" cy="15" cx="15"></circle>
+                      <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                    </svg>
+                  </div>
+                  <div class="road"></div>
+                  <svg xml:space="preserve" viewBox="0 0 453.459 453.459" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Capa_1" version="1.1" class="lampPost">
+                    <path class="lampPost-path" d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0zM232.77,111.694c0,23.442-19.071,42.514-42.514,42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"></path>
+                  </svg>
+                </div>
+            </div>
+            <h4 style="margin-top: 20px; font-weight: bold; letter-spacing: 2px; color: #333; text-align: center; width: 100%; transition: color 0.3s ease;">CARREGANDO...</h4>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div id="sidebar-root"></div>
+        
+        <div class="main-content">
+            <div id="header-container"></div>
+            
+            <!-- Área de conteúdo do funcionário será adicionada aqui -->
+            <div id="dashboard" class="page active"></div>
+            <div id="estoque" class="page"></div>
+            <div id="producao" class="page"></div>
+            <div id="vendas" class="page"></div>
+            <div id="fluxo" class="page"></div>
+            <div id="ajuda" class="page"></div>
+        </div>
+    </div>
+
+    <div id="modals-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="components/js/utils.js"></script>
+    <script src="components/js/theme.js"></script>
+    <script src="components/js/auth.js"></script>
+    <script src="components/js/permissoes.js"></script>
+    <script src="components/js/sidebar.js"></script>
+    <script src="components/js/estoque.js"></script>
+    <script src="components/js/producao.js"></script>
+    <script src="components/js/vendas.js"></script>
+    <script src="components/js/fluxo.js"></script>
+    <script src="components/js/notificacoes.js"></script>
+    <script src="components/js/header.js"></script>
+    <script src="components/js/dashboard.js"></script>
+    <script src="components/js/modais.js"></script>
+    <script src="components/js/responsive.js"></script>
+    <script src="components/js/navigation.js"></script>
+
+    <script>
+        // Carrega arquivos HTML externos
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (response.ok) {
+                    let html = await response.text();
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.innerHTML = html;
+                        console.log(`✅ ${file} carregado.`);
+                    }
+                    return true;
+                }
+                throw new Error(`Status ${response.status}`);
+            } catch (error) {
+                console.error(`❌ Erro ao carregar ${file}:`, error);
+                document.getElementById('server-error').style.display = 'flex';
+                document.getElementById('global-loader').classList.add('d-none');
+                return false;
+            }
+        }
+
+        // Verifica Login
+        function checkAuthentication() {
+            try {
+                if (sessionStorage.getItem('userAuthenticated') !== 'true') {
+                    window.location.href = 'components/html/login.html';
+                    return false;
+                }
+                return true;
+            } catch (e) { return false; }
+        }
+
+        // Início
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!checkAuthentication()) return;
+
+            console.log("🚀 Iniciando Beira Mar - Área do Funcionário...");
+            
+            try {
+                // 1. CARREGA ESTRUTURA (Header e Sidebar específica para funcionário)
+                await Promise.all([
+                    loadComponent('sidebar-root', 'components/html/sidebar-funcionario.html'),
+                    loadComponent('header-container', 'components/html/header.html'),
+                    loadComponent('modals-container', 'components/html/modais.html')
+                ]);
+                
+                // 2. CARREGA PÁGINAS
+                await Promise.all([
+                    loadComponent('dashboard', 'components/html/dashboard.html'),
+                    loadComponent('estoque', 'components/html/estoque.html'),
+                    loadComponent('producao', 'components/html/producao.html'),
+                    loadComponent('vendas', 'components/html/vendas.html'),
+                    loadComponent('fluxo', 'components/html/fluxo.html'),
+                    loadComponent('ajuda', 'components/html/ajuda.html')
+                ]);
+
+                // 3. EXIBE APP
+                setTimeout(() => {
+                    const loader = document.getElementById('global-loader');
+                    const app = document.querySelector('.app-container');
+                    
+                    if(loader) loader.classList.add('d-none');
+                    if(app) app.style.display = 'block';
+                    
+                    // Inicializa Sidebar (garante que os cliques funcionem)
+                    if(typeof BeiraMarSidebar !== 'undefined' && BeiraMarSidebar.initializeSidebar) {
+                        BeiraMarSidebar.initializeSidebar();
+                    }
+                    
+                    // Atualiza badge de nível de acesso no header (com delay para garantir que o header foi carregado)
+                    setTimeout(() => {
+                        atualizarBadgeNivelAcesso();
+                    }, 100);
+                    
+                    // Inicializa módulos específicos das páginas
+                    if (window.BeiraMarEstoque && window.BeiraMarEstoque.loadEstoqueContent) {
+                        // Estoque será carregado quando a página for acessada
+                    }
+                    if (window.BeiraMarProducao && window.BeiraMarProducao.loadProducaoContent) {
+                        // Produção será carregado quando a página for acessada
+                    }
+                    if (window.BeiraMarVendas && window.BeiraMarVendas.loadVendasContent) {
+                        // Vendas será carregado quando a página for acessada
+                    }
+                    if (window.loadFluxoContent) {
+                        // Fluxo será carregado quando a página for acessada
+                    }
+                    if (window.BeiraMarDashboard && window.BeiraMarDashboard.updateDashboardData) {
+                        // Atualiza dashboard inicial
+                        setTimeout(() => {
+                            window.BeiraMarDashboard.updateDashboardData();
+                        }, 500);
+                    }
+                }, 800);
+                
+                // Função para atualizar badge de nível de acesso no header
+                function atualizarBadgeNivelAcesso() {
+                    const email = sessionStorage.getItem('userEmail');
+                    if (!email) return;
+                    
+                    // SEMPRE tenta carregar do localStorage primeiro (garante dados atualizados)
+                    const funcionariosSalvos = localStorage.getItem('funcionariosListaCompleta');
+                    if (funcionariosSalvos) {
+                        try {
+                            const funcionariosCarregados = JSON.parse(funcionariosSalvos);
+                            if (Array.isArray(funcionariosCarregados) && funcionariosCarregados.length > 0) {
+                                window.funcionariosLista = funcionariosCarregados;
+                                console.log('✅ [Funcionário] Lista carregada do localStorage:', funcionariosCarregados.length);
+                            }
+                        } catch (e) {
+                            console.error('❌ [Funcionário] Erro ao parsear funcionários do localStorage:', e);
+                        }
+                    }
+                    
+                    // Se ainda não tiver, inicializa a lista padrão (mas sem sobrescrever se já existir)
+                    if (!window.funcionariosLista || window.funcionariosLista.length === 0) {
+                        console.warn('⚠️ [Funcionário] Nenhum funcionário encontrado, inicializando lista padrão');
+                        window.funcionariosLista = [
+                            { id: 1, nome: 'Maria Silva', email: 'maria.silva@beiramar.com', cargo: 'gerente', departamento: 'vendas', nivelAcesso: 'gerente', permissoes: { estoque: [], producao: [], vendas: [], logistica: [], fluxo: [] } },
+                            { id: 2, nome: 'João Santos', email: 'joao.santos@beiramar.com', cargo: 'entregador', departamento: 'logistica', nivelAcesso: 'operador', permissoes: { estoque: [], producao: [], vendas: [], logistica: [], fluxo: [] } },
+                            { id: 3, nome: 'Ana Costa', email: 'ana.costa@beiramar.com', cargo: 'carregador', departamento: 'producao', nivelAcesso: 'operador', permissoes: { estoque: [], producao: [], vendas: [], logistica: [], fluxo: [] } },
+                            { id: 4, nome: 'Carlos Oliveira', email: 'carlos.oliveira@beiramar.com', cargo: 'logistica', departamento: 'logistica', nivelAcesso: 'supervisor', permissoes: { estoque: [], producao: [], vendas: [], logistica: [], fluxo: [] } },
+                            { id: 5, nome: 'Fernanda Lima', email: 'fernanda.lima@beiramar.com', cargo: 'gerente-vendas', departamento: 'vendas', nivelAcesso: 'gerente', permissoes: { estoque: [], producao: [], vendas: [], logistica: [], fluxo: [] } }
+                        ];
+                    }
+                    
+                    // Busca o funcionário pelo email
+                    const funcionario = window.funcionariosLista.find(f => f.email && f.email.toLowerCase() === email.toLowerCase());
+                    if (!funcionario) return;
+                    
+                    // Sistema de cores por nível de acesso
+                    const nivelAcesso = funcionario.nivelAcesso || 'visualizador';
+                    const nivelCores = {
+                        'gerente': {
+                            cor: '#3b82f6',
+                            corClara: '#dbeafe',
+                            corEscura: '#1e40af',
+                            nome: 'Gerente',
+                            icone: 'fa-crown'
+                        },
+                        'supervisor': {
+                            cor: '#8b5cf6',
+                            corClara: '#ede9fe',
+                            corEscura: '#6d28d9',
+                            nome: 'Supervisor',
+                            icone: 'fa-user-shield'
+                        },
+                        'operador': {
+                            cor: '#10b981',
+                            corClara: '#d1fae5',
+                            corEscura: '#059669',
+                            nome: 'Operador',
+                            icone: 'fa-user-cog'
+                        },
+                        'visualizador': {
+                            cor: '#6b7280',
+                            corClara: '#f3f4f6',
+                            corEscura: '#4b5563',
+                            nome: 'Visualizador',
+                            icone: 'fa-eye'
+                        }
+                    };
+                    
+                    const nivelInfo = nivelCores[nivelAcesso] || nivelCores['visualizador'];
+                    
+                    // Atualiza o badge no header
+                    const badge = document.getElementById('nivelAcessoBadge');
+                    if (badge) {
+                        badge.style.display = 'inline-flex';
+                        badge.style.cursor = 'pointer';
+                        badge.innerHTML = `
+                            <i class="fas ${nivelInfo.icone}" style="color: ${nivelInfo.cor}; font-size: 0.9rem;"></i>
+                            <span style="color: ${nivelInfo.corEscura}; font-size: 0.85rem; font-weight: 600;">${nivelInfo.nome}</span>
+                        `;
+                        badge.style.cssText += `
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            padding: 0.4rem 0.9rem;
+                            background: ${nivelInfo.corClara};
+                            border-radius: 8px;
+                            border: 1px solid ${nivelInfo.cor};
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        `;
+                        
+                        // Adiciona evento de clique para mostrar informações do nível
+                        badge.onclick = () => mostrarInfoNivelAcesso(nivelAcesso, nivelInfo, funcionario);
+                    } else {
+                        // Se o badge ainda não existe, tenta novamente após um delay
+                        setTimeout(() => {
+                            atualizarBadgeNivelAcesso();
+                        }, 200);
+                    }
+                }
+                
+                // Função para mostrar informações do nível de acesso
+                function mostrarInfoNivelAcesso(nivelAcesso, nivelInfo, funcionario) {
+                    // Remove modal anterior se existir
+                    const modalAnterior = document.getElementById('modalInfoNivelAcesso');
+                    if (modalAnterior) {
+                        modalAnterior.remove();
+                    }
+                    
+                    // Descrições dos níveis
+                    const descricoes = {
+                        'gerente': 'Acesso completo ao sistema. Pode visualizar todos os dados, criar e editar registros em todas as áreas, além de ter controle total sobre as operações da empresa. Não pode gerenciar funcionários (apenas o Administrador tem essa permissão).',
+                        'supervisor': 'Tem controle total sobre algumas áreas específicas do sistema. Pode supervisionar equipes, visualizar relatórios detalhados, criar e editar registros em suas áreas de responsabilidade, e gerenciar tarefas do fluxo de trabalho. Não tem acesso a todas as áreas como o Gerente.',
+                        'operador': 'Pode realizar operações no sistema, criar e editar registros básicos, atualizar status de tarefas e visualizar informações relacionadas às suas atividades.',
+                        'visualizador': 'Acesso somente leitura. Pode visualizar informações e relatórios, mas não pode criar, editar ou excluir registros no sistema.'
+                    };
+                    
+                    const nivelLabels = {
+                        'gerente': 'Nível Máximo',
+                        'supervisor': 'Nível Alto',
+                        'operador': 'Nível Médio',
+                        'visualizador': 'Nível Básico'
+                    };
+                    
+                    // Cria o modal
+                    const modal = document.createElement('div');
+                    modal.id = 'modalInfoNivelAcesso';
+                    modal.style.cssText = `
+                        position: fixed;
+                        inset: 0;
+                        z-index: 10000;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(0, 0, 0, 0.5);
+                        backdrop-filter: blur(4px);
+                        animation: fadeIn 0.3s ease;
+                    `;
+                    
+                    modal.innerHTML = `
+                        <div style="
+                            background: var(--bg-primary, white);
+                            border-radius: 24px;
+                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                            max-width: 500px;
+                            width: 90%;
+                            padding: 2.5rem;
+                            position: relative;
+                            border: 1px solid var(--border-color, #e2e8f0);
+                            animation: slideUp 0.3s ease;
+                        ">
+                            <button onclick="this.closest('#modalInfoNivelAcesso').remove(); document.body.style.overflow = '';" style="
+                                position: absolute;
+                                top: 1rem;
+                                right: 1rem;
+                                background: none;
+                                border: none;
+                                font-size: 1.5rem;
+                                color: var(--text-secondary, #64748b);
+                                cursor: pointer;
+                                width: 36px;
+                                height: 36px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 8px;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='var(--bg-secondary, #f1f5f9)'; this.style.color='var(--text-primary, #1e293b)'" onmouseout="this.style.background='none'; this.style.color='var(--text-secondary, #64748b)'">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <div style="
+                                    width: 80px;
+                                    height: 80px;
+                                    margin: 0 auto 1.5rem;
+                                    border-radius: 20px;
+                                    background: linear-gradient(135deg, ${nivelInfo.cor}, ${nivelInfo.corEscura});
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    box-shadow: 0 8px 20px ${nivelInfo.cor}40;
+                                ">
+                                    <i class="fas ${nivelInfo.icone}" style="font-size: 2.5rem; color: white;"></i>
+                                </div>
+                                <h2 style="
+                                    color: var(--text-primary, #1e293b);
+                                    margin: 0 0 0.5rem 0;
+                                    font-size: 1.75rem;
+                                    font-weight: 700;
+                                ">${nivelInfo.nome}</h2>
+                                <span style="
+                                    color: ${nivelInfo.cor};
+                                    font-size: 0.875rem;
+                                    font-weight: 600;
+                                    background: ${nivelInfo.corClara};
+                                    padding: 0.375rem 1rem;
+                                    border-radius: 8px;
+                                    display: inline-block;
+                                ">${nivelLabels[nivelAcesso] || 'Nível de Acesso'}</span>
+                            </div>
+                            
+                            <div style="
+                                background: ${nivelInfo.corClara};
+                                border: 1px solid ${nivelInfo.cor}40;
+                                border-radius: 16px;
+                                padding: 1.5rem;
+                                margin-bottom: 1.5rem;
+                            ">
+                                <p style="
+                                    color: var(--text-secondary, #64748b);
+                                    font-size: 0.95rem;
+                                    line-height: 1.7;
+                                    margin: 0;
+                                ">${descricoes[nivelAcesso] || 'Informações sobre o nível de acesso.'}</p>
+                            </div>
+                            
+                            ${funcionario ? `
+                            <div style="
+                                padding-top: 1.5rem;
+                                border-top: 1px solid var(--border-color, #e2e8f0);
+                                display: flex;
+                                align-items: center;
+                                gap: 1rem;
+                            ">
+                                <div style="
+                                    width: 48px;
+                                    height: 48px;
+                                    border-radius: 50%;
+                                    background: linear-gradient(135deg, ${nivelInfo.cor}, ${nivelInfo.corEscura});
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-shrink: 0;
+                                ">
+                                    <i class="fas fa-user" style="color: white; font-size: 1.25rem;"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <p style="
+                                        color: var(--text-primary, #1e293b);
+                                        margin: 0 0 0.25rem 0;
+                                        font-size: 0.95rem;
+                                        font-weight: 600;
+                                    ">${funcionario.nome || 'Funcionário'}</p>
+                                    <p style="
+                                        color: var(--text-secondary, #64748b);
+                                        margin: 0;
+                                        font-size: 0.85rem;
+                                    ">${funcionario.email || ''}</p>
+                                </div>
+                            </div>
+                            ` : ''}
+                            
+                            <button onclick="this.closest('#modalInfoNivelAcesso').remove(); document.body.style.overflow = '';" style="
+                                width: 100%;
+                                margin-top: 1.5rem;
+                                padding: 0.875rem 1.5rem;
+                                background: linear-gradient(135deg, ${nivelInfo.cor}, ${nivelInfo.corEscura});
+                                color: white;
+                                border: none;
+                                border-radius: 12px;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 4px 12px ${nivelInfo.cor}40;
+                            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px ${nivelInfo.cor}60'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px ${nivelInfo.cor}40'">
+                                <i class="fas fa-check me-2"></i> Entendi
+                            </button>
+                        </div>
+                        
+                        <style>
+                            @keyframes fadeIn {
+                                from { opacity: 0; }
+                                to { opacity: 1; }
+                            }
+                            @keyframes slideUp {
+                                from { transform: translateY(20px); opacity: 0; }
+                                to { transform: translateY(0); opacity: 1; }
+                            }
+                            [data-theme="dark"] #modalInfoNivelAcesso > div {
+                                background: var(--bg-primary, #0f172a) !important;
+                                border-color: rgba(255, 255, 255, 0.1) !important;
+                            }
+                            [data-theme="dark"] #modalInfoNivelAcesso h2 {
+                                color: var(--text-primary, #f1f5f9) !important;
+                            }
+                            [data-theme="dark"] #modalInfoNivelAcesso p {
+                                color: var(--text-secondary, #94a3b8) !important;
+                            }
+                        </style>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Fecha ao clicar fora
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.remove();
+                            document.body.style.overflow = '';
+                        }
+                    });
+                }
+
+            } catch (err) {
+                console.error("Erro crítico:", err);
+            }
+        });
+    </script>
+</body>
+</html>
+

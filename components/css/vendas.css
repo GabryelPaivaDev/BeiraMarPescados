@@ -26,9 +26,18 @@
     border: 1px solid #e5e7eb;
 }
 
+[data-theme="dark"] .summary-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .summary-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .summary-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .summary-card .card-content {
@@ -42,6 +51,11 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .summary-card h3 {
+    color: #cbd5e1;
 }
 
 .summary-number {
@@ -51,19 +65,34 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .summary-number {
+    color: #f1f5f9;
 }
 
 .summary-card span {
     display: block;
     font-size: 0.85rem;
     color: #6b7280;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .summary-card span {
+    color: #94a3b8;
 }
 
 .summary-card .card-icon {
     font-size: 2.2rem;
     opacity: 0.6;
     margin-left: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+[data-theme="dark"] .summary-card .card-icon {
+    opacity: 0.3;
+    color: #475569;
 }
 
 .summary-card:hover .card-icon {
@@ -131,11 +160,22 @@
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .pedidos-recentes {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pedidos-recentes h3 {
     margin: 0 0 1.5rem 0;
     color: #1f2937;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .pedidos-recentes h3 {
+    color: #f1f5f9;
 }
 
 .pedido-card {
@@ -144,6 +184,12 @@
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .pedido-card {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pedido-card:last-child {
@@ -161,6 +207,11 @@
     margin: 0;
     color: #1f2937;
     font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .pedido-header h4 {
+    color: #f1f5f9;
 }
 
 .pedido-status {
@@ -184,6 +235,11 @@
     margin: 0.5rem 0;
     color: #6b7280;
     font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .pedido-card p {
+    color: #cbd5e1;
 }
 
 /* Ajustes para lista simples de pedidos (.pedido-item) */
@@ -196,6 +252,12 @@
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     background: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .pedido-item {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pedido-item .pedido-info {

@@ -1,42 +1,118 @@
-<!-- Modal de Login -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
-            <h2 class="h5 mb-0">Login - Beira Mar Pescados</h2>
-            <button class="modal-close" data-modal="loginModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+<!-- Modal Esqueceu a Senha -->
+<div id="forgotPasswordModal" class="modal">
+    <div class="modal-content forgot-password-modal-content" style="max-width: 420px;">
+        <div class="modal-header">
+            <h5 class="modal-title">Recuperar Senha</h5>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('forgotPasswordModal')" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="modal-body p-4">
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required placeholder="seu@email.com">
+        <div class="modal-body forgot-password-body">
+            <!-- Formulário de email -->
+            <div id="forgotPasswordFormContainer">
+                <p class="forgot-password-text">Digite seu email para receber instruções de redefinição de senha:</p>
+                <form id="forgotPasswordForm">
+                    <label class="form-label">EMAIL:</label>
+                    <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="seu@email.com" required>
+                    <div class="form-actions" style="margin-top: 1.5rem;">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-paper-plane me-2"></i> Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Animação de sucesso -->
+            <div id="forgotPasswordSuccess" class="forgot-password-success" style="display: none;">
+                <div class="success-checkmark">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="m14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" name="password" required placeholder="Digite sua senha">
-                </div>
-                <div class="form-actions mb-3">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-sign-in-alt me-2"></i>
-                        Entrar
-                    </button>
-                </div>
-                <div class="form-footer text-center">
-                    <a href="#" class="forgot-password text-decoration-none">Esqueceu sua senha?</a>
-                </div>
-            </form>
+                <p class="success-message">Pedido de redefinição de senha foi enviado para seu email</p>
+            </div>
         </div>
     </div>
 </div>
 
+<div id="profileModal" class="modal">
+    <div class="modal-content" style="max-width: 380px;">
+        <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold ps-3">Perfil</h5>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('profileModal')" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body text-center p-4">
+            <div class="mb-3">
+                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center border" style="width: 100px; height: 100px;">
+                    <i class="fas fa-user-circle text-secondary" style="font-size: 5rem;"></i>
+                </div>
+            </div>
+            
+            <h3 class="fw-bold mb-1" id="modalProfileName">Carregando...</h3>
+            <p class="text-muted small mb-2" id="modalProfileRole">...</p>
+            
+            <!-- Informações detalhadas -->
+            <div class="profile-info-container mt-4">
+                <div class="profile-info-item">
+                    <i class="fas fa-envelope profile-info-icon"></i>
+                    <div class="profile-info-content">
+                        <span class="profile-info-label">Email</span>
+                        <span class="profile-info-value" id="modalProfileEmail">-</span>
+                    </div>
+                </div>
+                
+                <div class="profile-info-item">
+                    <i class="fas fa-calendar-alt profile-info-icon"></i>
+                    <div class="profile-info-content">
+                        <span class="profile-info-label">Conta criada em</span>
+                        <span class="profile-info-value" id="modalProfileDate">-</span>
+                    </div>
+                </div>
+                
+                <div class="profile-info-item">
+                    <i class="fas fa-id-card profile-info-icon"></i>
+                    <div class="profile-info-content">
+                        <span class="profile-info-label">Nome completo</span>
+                        <span class="profile-info-value" id="modalProfileFullName">-</span>
+                    </div>
+                </div>
+                
+                <div class="profile-info-item" id="modalProfileCargoContainer" style="display: none;">
+                    <i class="fas fa-briefcase profile-info-icon"></i>
+                    <div class="profile-info-content">
+                        <span class="profile-info-label">Cargo</span>
+                        <span class="profile-info-value" id="modalProfileCargo">-</span>
+                    </div>
+                </div>
+                
+                <div class="profile-info-item" id="modalProfileDepartamentoContainer" style="display: none;">
+                    <i class="fas fa-building profile-info-icon"></i>
+                    <div class="profile-info-content">
+                        <span class="profile-info-label">Departamento</span>
+                        <span class="profile-info-value" id="modalProfileDepartamento">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
 
-<!-- Modal Adicionar Item Estoque -->
+            <button onclick="window.BeiraMarUser.logout()" class="btn btn-outline-danger w-100 py-2 rounded-pill fw-bold">
+                <i class="fas fa-sign-out-alt me-2"></i> Sair da Conta
+            </button>
+        </div>
+    </div>
+</div>
+
 <div id="addItemModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Adicionar Item ao Estoque</h2>
+            <button class="modal-close" data-modal="addItemModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="modal-body p-4">
             <form id="addItemForm">
@@ -107,7 +183,7 @@
                     <textarea class="form-control" id="itemNotes" name="itemNotes" rows="3" placeholder="Informações adicionais sobre o produto..."></textarea>
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-modal="addItemModal">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('addItemModal')">
                         Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary">
@@ -120,11 +196,13 @@
     </div>
 </div>
 
-
 <div id="newBatchModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Criar Novo Lote de Produção</h2>
+            <button class="modal-close" data-modal="newBatchModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="modal-body p-4">
             <form id="newBatchForm">
@@ -169,7 +247,7 @@
                     <textarea class="form-control" id="batchNotes" name="batchNotes" rows="3" placeholder="Instruções especiais para o lote..."></textarea>
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-modal="newBatchModal">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('newBatchModal')">
                         Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary">
@@ -182,11 +260,13 @@
     </div>
 </div>
 
-
 <div id="newOrderModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Novo Pedido de Venda</h2>
+            <button class="modal-close" data-modal="newOrderModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="modal-body p-4">
             <form id="newOrderForm">
@@ -195,33 +275,16 @@
                         <label for="clientSelect" class="form-label">Selecione o Cliente</label>
                         <select class="form-select" id="clientSelect" name="clientSelect" required>
                             <option value="">Selecione um cliente...</option>
-                            <option value="1" data-client='{"id":1,"name":"Restaurante Mar Azul","type":"restaurante","email":"contato@marazul.com.br","phone":"(48) 3214-5678","address":"Rua das Praias, 123 - Centro"}'>Restaurante Mar Azul</option>
-                            <option value="2" data-client='{"id":2,"name":"Distribuidora Oceano","type":"distribuidora","email":"vendas@oceano.com.br","phone":"(48) 3221-9876","address":"Av. Beira Mar, 456 - Zona Portuária"}'>Distribuidora Oceano</option>
-                            <option value="3" data-client='{"id":3,"name":"Feira do Peixe","type":"feira","email":"feiradopeixe@email.com","phone":"(48) 3233-4444","address":"Mercado Central - Box 12"}'>Feira do Peixe</option>
+                            <option value="1">Restaurante Mar Azul</option>
+                            <option value="2">Distribuidora Oceano</option>
+                            <option value="3">Feira do Peixe</option>
                         </select>
                     </div>
                     <div class="col-md-4 d-flex align-items-end">
-                        <button type="button" class="btn btn-outline-primary w-100" id="newClientBtn">
+                        <button type="button" class="btn btn-outline-primary w-100" id="newClientBtn" onclick="window.BeiraMarModais.openModal('newClientModal')">
                             <i class="fas fa-plus me-2"></i>
                             Novo Cliente
                         </button>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="clientName" class="form-label">Nome do Cliente</label>
-                        <input type="text" class="form-control" id="clientName" name="clientName" required placeholder="Nome do cliente ou empresa" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="clientType" class="form-label">Tipo de Cliente</label>
-                        <select class="form-select" id="clientType" name="clientType" required>
-                            <option value="">Selecione...</option>
-                            <option value="restaurante">Restaurante</option>
-                            <option value="distribuidora">Distribuidora</option>
-                            <option value="feira">Feira Livre</option>
-                            <option value="varejo">Varejo</option>
-                            <option value="atacado">Atacado</option>
-                        </select>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -247,7 +310,7 @@
                                     <option value="file-tilapia">Filé de Tilápia</option>
                                 </select>
                                 <div class="qty-group d-flex flex-column align-items-center">
-                                    <h2 class="kg-h2">(Kg)</h2>
+                                    <h2 class="kg-h2" style="font-size: 0.8rem; margin:0; color:#666;">(Kg)</h2>
                                     <input type="number" class="form-control" style="width: 120px;" name="quantity[]" placeholder="(Kg)" min="1" step="0.1" value="1" required>
                                 </div>
                                 <input type="text" class="form-control product-price-input" style="width: 140px; background-color: #f8f9fa;" name="price[]" placeholder="Preço" readonly>
@@ -267,7 +330,7 @@
                     <textarea class="form-control" id="orderNotes" name="orderNotes" rows="3" placeholder="Informações adicionais sobre o pedido..."></textarea>
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-modal="newOrderModal">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('newOrderModal')">
                         Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary">
@@ -280,12 +343,13 @@
     </div>
 </div>
 
-
-<!-- Modal Novo Cliente -->
 <div id="newClientModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Cadastrar Novo Cliente</h2>
+            <button class="modal-close" data-modal="newClientModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="modal-body p-4">
             <form id="newClientForm">
@@ -321,7 +385,7 @@
                     <input type="text" class="form-control" id="newClientAddress" name="newClientAddress" placeholder="Rua, número - Bairro">
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" id="cancelNewClientBtn">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('newClientModal')">
                         Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary">
@@ -334,13 +398,69 @@
     </div>
 </div>
 
+<!-- Modal de Confirmação Genérico -->
+<div id="genericConfirmModal" class="modal">
+    <div class="modal-content generic-confirm-modal-content" style="max-width: 420px;">
+        <div class="modal-header">
+            <h5 class="modal-title confirm-modal-title">
+                <i class="fas fa-question-circle"></i>
+                Confirmar Ação
+            </h5>
+            <button class="modal-close" onclick="window.BeiraMarModais && window.BeiraMarModais.closeModal('genericConfirmModal')" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body generic-confirm-body">
+            <div class="confirm-modal-icon" style="--icon-color: #3b82f6;">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <p class="confirm-modal-message">Tem certeza que deseja continuar?</p>
+            <div class="confirm-modal-actions">
+                <button class="btn-cancel-action" onclick="window.BeiraMarModais && window.BeiraMarModais.closeModal('genericConfirmModal')">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn-confirm-action">
+                    <i class="fas fa-check"></i> Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Modal Visualizar Detalhes do Produto -->
+<!-- Modal de Confirmação de Logout -->
+<div id="logoutConfirmModal" class="modal">
+    <div class="modal-content logout-confirm-modal-content" style="max-width: 420px;">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <i class="fas fa-sign-out-alt"></i>
+                Confirmar Saída
+            </h5>
+            <button class="modal-close" onclick="window.BeiraMarModais && window.BeiraMarModais.closeModal('logoutConfirmModal')" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body logout-confirm-body">
+            <div class="logout-confirm-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <p class="logout-confirm-message">Tem certeza que deseja sair da conta?</p>
+            <div class="logout-confirm-actions">
+                <button class="btn-cancel" onclick="window.BeiraMarModais && window.BeiraMarModais.closeModal('logoutConfirmModal')">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button class="btn-confirm-logout" onclick="window.BeiraMarUser && window.BeiraMarUser.confirmLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="viewItemModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Detalhes do Produto</h2>
-            <button class="modal-close" data-modal="viewItemModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+            <button class="modal-close" data-modal="viewItemModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -372,19 +492,17 @@
                 </div>
             </div>
             <div class="form-actions mt-3 d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary" data-modal="viewItemModal">Fechar</button>
+                <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('viewItemModal')">Fechar</button>
             </div>
         </div>
     </div>
 </div>
 
-
-<!-- Modal Editar Produto -->
 <div id="editItemModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Editar Produto</h2>
-            <button class="modal-close" data-modal="editItemModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+            <button class="modal-close" data-modal="editItemModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -396,10 +514,10 @@
                         <label for="editItemName" class="form-label">Nome do Produto</label>
                         <select class="form-select" id="editItemName" name="editItemName" required>
                             <option value="">Selecione o produto...</option>
-                            <option value="salmao-fresco" data-category="peixe-fresco" data-price="45.00">Salmão Fresco</option>
-                            <option value="tilapia-inteira" data-category="peixe-inteiro" data-price="18.00">Tilápia Inteira</option>
-                            <option value="camarao-medio" data-category="crustaceo" data-price="85.00">Camarão Médio</option>
-                            <option value="file-tilapia" data-category="peixe-fresco" data-price="25.00">Filé de Tilápia</option>
+                            <option value="salmao-fresco">Salmão Fresco</option>
+                            <option value="tilapia-inteira">Tilápia Inteira</option>
+                            <option value="camarao-medio">Camarão Médio</option>
+                            <option value="file-tilapia">Filé de Tilápia</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -454,24 +572,19 @@
                     </div>
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-modal="editItemModal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>
-                        Salvar Alterações
-                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('editItemModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
-<!-- Modal Editar Pedido -->
 <div id="editOrderModal" class="modal">
     <div class="modal-content">
         <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
             <h2 class="h5 mb-0">Editar Pedido</h2>
-            <button class="modal-close" data-modal="editOrderModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
+            <button class="modal-close" data-modal="editOrderModal" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -483,9 +596,9 @@
                         <label for="editClientSelect" class="form-label">Selecione o Cliente</label>
                         <select class="form-select" id="editClientSelect" name="editClientSelect" required>
                             <option value="">Selecione um cliente...</option>
-                            <option value="1" data-client='{"id":1,"name":"Restaurante Mar Azul","type":"restaurante","email":"contato@marazul.com.br","phone":"(48) 3214-5678","address":"Rua das Praias, 123 - Centro"}'>Restaurante Mar Azul</option>
-                            <option value="2" data-client='{"id":2,"name":"Distribuidora Oceano","type":"distribuidora","email":"vendas@oceano.com.br","phone":"(48) 3221-9876","address":"Av. Beira Mar, 456 - Zona Portuária"}'>Distribuidora Oceano</option>
-                            <option value="3" data-client='{"id":3,"name":"Feira do Peixe","type":"feira","email":"feiradopeixe@email.com","phone":"(48) 3233-4444","address":"Mercado Central - Box 12"}'>Feira do Peixe</option>
+                            <option value="1">Restaurante Mar Azul</option>
+                            <option value="2">Distribuidora Oceano</option>
+                            <option value="3">Feira do Peixe</option>
                         </select>
                     </div>
                     <div class="col-md-4 d-flex align-items-end">
@@ -525,8 +638,7 @@
                 <div class="mb-3">
                     <label class="form-label">Produtos do Pedido</label>
                     <div class="product-list mb-2" id="editProductList">
-                        <!-- Produtos serão adicionados aqui dinamicamente -->
-                    </div>
+                        </div>
                     <button type="button" class="btn btn-secondary btn-sm btn-add-product-edit">
                         <i class="fas fa-plus me-2"></i>
                         Adicionar Produto
@@ -534,162 +646,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="editOrderNotes" class="form-label">Observações</label>
-                    <textarea class="form-control" id="editOrderNotes" name="editOrderNotes" rows="3" placeholder="Informações adicionais sobre o pedido..."></textarea>
+                    <textarea class="form-control" id="editOrderNotes" name="editOrderNotes" rows="3" placeholder="Informações adicionais..."></textarea>
                 </div>
                 <div class="form-actions d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary" data-modal="editOrderModal">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>
-                        Salvar Alterações
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Visualizar Detalhes da Notificação -->
-<div id="viewNotificationModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center p-4 border-bottom">
-            <h2 class="h5 mb-0 text-white">
-                <i class="fas fa-bell me-2"></i>Detalhes da Notificação
-            </h2>
-            <button class="modal-close" data-modal="viewNotificationModal" aria-label="Fechar" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; border-radius: 6px;">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-body p-4">
-            <div class="text-center mb-4">
-                <div class="notification-detail-icon d-inline-flex align-items-center justify-content-center rounded-circle mb-3" id="viewNotificationIcon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #3b82f6, #60a5fa);">
-                    <i class="fas fa-bell text-white fs-2"></i>
-                </div>
-                <h3 class="h5 fw-bold mb-2" id="viewNotificationTitle">-</h3>
-                <span class="badge bg-primary mb-3" id="viewNotificationType">-</span>
-            </div>
-            
-            <div class="card border-0 bg-light mb-4">
-                <div class="card-body p-4">
-                    <div class="mb-3">
-                        <label class="text-muted small text-uppercase fw-semibold mb-2 d-block">Mensagem</label>
-                        <p class="mb-0" id="viewNotificationMessage" style="line-height: 1.6;">-</p>
-                    </div>
-                    <div class="border-top pt-3">
-                        <label class="text-muted small text-uppercase fw-semibold mb-2 d-block">Horário</label>
-                        <p class="mb-0">
-                            <i class="far fa-clock me-2 text-primary"></i>
-                            <span id="viewNotificationTime">-</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-actions mt-3 d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-primary" data-modal="viewNotificationModal">
-                    <i class="fas fa-check me-2"></i>Entendido
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="loginModal" class="modal">
-    <div class="modal-content" style="max-width: 380px;">
-        <div class="modal-header border-0 pb-0">
-            <button class="modal-close ms-auto" onclick="window.BeiraMarModais.closeModal('loginModal')">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-body text-center p-4">
-            <div class="mb-4">
-                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
-                    <i class="fas fa-user text-primary" style="font-size: 2rem;"></i>
-                </div>
-            </div>
-            <h3 class="fw-bold mb-1">Bem-vindo!</h3>
-            <p class="text-muted mb-4">Faça login para acessar.</p>
-            
-            <form onsubmit="window.BeiraMarUser.login(event)">
-                <div class="clean-form-group mb-3 text-start">
-                    <label>Usuário</label>
-                    <input type="text" class="clean-input" value="Altemir" required>
-                </div>
-                <div class="clean-form-group mb-4 text-start">
-                    <label>Senha</label>
-                    <input type="password" class="clean-input" value="123" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill fw-bold">
-                    Entrar
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div id="profileModal" class="modal">
-    <div class="modal-content" style="max-width: 380px;">
-        <div class="modal-header border-0 pb-0">
-            <h5 class="modal-title fw-bold ps-3">Perfil</h5>
-            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('profileModal')">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-body text-center p-4">
-            <div class="mb-3">
-                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center border" style="width: 90px; height: 90px;">
-                    <i class="fas fa-user-circle text-secondary" style="font-size: 4rem;"></i>
-                </div>
-            </div>
-            
-            <h3 class="fw-bold mb-0" id="modalProfileName">Altemir</h3>
-            <p class="text-muted small">Administrador</p>
-            
-            <hr class="my-4">
-
-            <button onclick="window.BeiraMarUser.logout()" class="btn btn-outline-danger w-100 py-2 rounded-pill fw-bold">
-                <i class="fas fa-sign-out-alt me-2"></i> Sair da Conta
-            </button>
-        </div>
-    </div>
-</div>
-
-<div id="addItemModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Adicionar Novo Item</h2>
-            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('addItemModal')"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="modal-body">
-            <form id="addItemForm">
-                <div class="clean-form-group">
-                    <label>Nome do Produto</label>
-                    <input type="text" id="itemName" class="clean-input" required>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 clean-form-group">
-                        <label>Categoria</label>
-                        <select id="itemCategory" class="clean-input"><option>Peixe Fresco</option><option>Peixe Inteiro</option><option>Crustáceo</option></select>
-                    </div>
-                    <div class="col-md-6 clean-form-group">
-                        <label>Localização</label>
-                        <select id="itemLocation" class="clean-input"><option>Câmara Fria A</option><option>Freezer 1</option></select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 clean-form-group">
-                        <label>Quantidade</label>
-                        <input type="number" id="itemQuantity" class="clean-input" required>
-                    </div>
-                    <div class="col-md-6 clean-form-group">
-                        <label>Preço</label>
-                        <input type="text" id="itemValue" class="clean-input" placeholder="0,00">
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('addItemModal')">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('editOrderModal')">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </form>
@@ -697,4 +657,590 @@
     </div>
 </div>
 
+<!-- Modal Adicionar Funcionário -->
+<div id="addFuncionarioModal" class="modal">
+    <script>
+        // FUNÇÃO DE FORMATAÇÃO DE SALÁRIO
+        function formatarSalarioNovo(input) {
+            if (!input) return;
+            
+            // Remove tudo que não é dígito
+            let valor = input.value.replace(/\D/g, '');
+            
+            // Se estiver vazio
+            if (!valor) {
+                input.value = '';
+                return;
+            }
+            
+            // Converte para número (sem dividir por 100)
+            const numero = Number(valor);
+            
+            // Formata: ponto para milhares, vírgula para decimais
+            // 1 → 1,00 | 12 → 12,00 | 125 → 125,00 | 1250 → 1.250,00
+            input.value = numero.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+        
+        // Função global
+        window.formatarSalarioNovo = formatarSalarioNovo;
+        
+        // Função SIMPLES para adicionar funcionário - SEM DEPENDÊNCIAS
+        // DEFINIDA DIRETAMENTE NO WINDOW PARA GARANTIR ACESSO GLOBAL
+        window.adicionarFuncionario = function() {
+            console.log("🔘 Botão Adicionar Funcionário clicado!");
+            
+            const form = document.getElementById('addFuncionarioForm');
+            if (!form) {
+                console.error("❌ Formulário não encontrado!");
+                alert("Erro: Formulário não encontrado.");
+                return;
+            }
+            
+            // Validação básica
+            const nome = document.getElementById('funcionarioNome')?.value;
+            const cpf = document.getElementById('funcionarioCPF')?.value;
+            const email = document.getElementById('funcionarioEmail')?.value;
+            
+            if (!nome || !cpf || !email) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+            
+            // Coleta dados do formulário
+            const formData = new FormData(form);
+            
+            // Pega turnos selecionados
+            const turnos = [];
+            form.querySelectorAll('input[name="turnos"]:checked').forEach(cb => {
+                turnos.push(cb.value);
+            });
+            
+            // Pega departamentos com acesso
+            const acessos = [];
+            form.querySelectorAll('input[name="acessoDepartamentos"]:checked').forEach(cb => {
+                acessos.push(cb.value);
+            });
+            
+            const funcionario = {
+                nome: formData.get('funcionarioNome'),
+                cpf: formData.get('funcionarioCPF'),
+                email: formData.get('funcionarioEmail'),
+                telefone: formData.get('funcionarioTelefone'),
+                cargo: formData.get('funcionarioCargo'),
+                departamento: formData.get('funcionarioDepartamento'),
+                dataAdmissao: formData.get('funcionarioDataAdmissao'),
+                salario: formData.get('funcionarioSalario'),
+                turnos: turnos,
+                acessos: acessos,
+                status: formData.get('funcionarioStatus'),
+                endereco: formData.get('funcionarioEndereco'),
+                observacoes: formData.get('funcionarioObservacoes')
+            };
+            
+            console.log("✅ Funcionário coletado:", funcionario);
+            
+            // Mostra mensagem de sucesso
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                font-weight: 600;
+            `;
+            successMsg.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
+                <span>Funcionário adicionado com sucesso!</span>
+            `;
+            document.body.appendChild(successMsg);
+            
+            // Fecha o modal após 1.5s
+            setTimeout(() => {
+                if (window.BeiraMarModais && window.BeiraMarModais.closeModal) {
+                    window.BeiraMarModais.closeModal('addFuncionarioModal');
+                }
+                form.reset();
+                successMsg.remove();
+            }, 1500);
+        };
+        
+        // Função para adicionar listener ao botão
+        function adicionarListenerBotao() {
+            const btn = document.getElementById('btnSubmitFuncionario');
+            if (btn) {
+                // Remove listener anterior se existir
+                btn.removeEventListener('click', adicionarFuncionario);
+                // Adiciona novo listener
+                btn.addEventListener('click', adicionarFuncionario);
+                console.log("✅ Listener adicionado ao botão de submit");
+            } else {
+                console.warn("⚠️ Botão btnSubmitFuncionario não encontrado");
+            }
+        }
+        
+        // Tenta adicionar listener imediatamente e quando o modal abrir
+        adicionarListenerBotao();
+        setTimeout(adicionarListenerBotao, 500);
+        setTimeout(adicionarListenerBotao, 1000);
+        
+        // Observa quando o modal é aberto
+        const modal = document.getElementById('addFuncionarioModal');
+        if (modal) {
+            const modalObserver = new MutationObserver(() => {
+                if (modal.style.display !== 'none' && modal.classList.contains('active')) {
+                    adicionarListenerBotao();
+                }
+            });
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class', 'style'] });
+        }
+        
+        // Garante que a função está disponível globalmente
+        console.log("✅ Função adicionarFuncionario definida globalmente:", typeof window.adicionarFuncionario);
+    </script>
+    <style>
+        /* Força checkboxes azuis quando marcadas e cinzas quando não marcadas - sobrescreve Bootstrap */
+        #addFuncionarioModal .container input[type="checkbox"] {
+            position: absolute !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            pointer-events: none !important;
+        }
+        /* Estado não marcado - SEMPRE CINZA - REMOVE VERDE EM TODOS OS ESTADOS */
+        #addFuncionarioModal .container input[type="checkbox"]:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container input[type="checkbox"]:hover:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container input[type="checkbox"]:focus:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container input[type="checkbox"]:active:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container:hover input[type="checkbox"]:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container:focus input[type="checkbox"]:not(:checked) ~ .checkmark,
+        #addFuncionarioModal .container:active input[type="checkbox"]:not(:checked) ~ .checkmark {
+            background: #606062 !important;
+            background-color: #606062 !important;
+            background-image: none !important;
+        }
+        /* Estado marcado - AZUL */
+        #addFuncionarioModal .container input[type="checkbox"]:checked ~ .checkmark {
+            background: linear-gradient(#255CD2, #1D52C1) !important;
+            background-image: linear-gradient(#255CD2, #1D52C1) !important;
+            background-color: #255CD2 !important;
+        }
+        /* Remove QUALQUER estilo verde do input - TODOS OS ESTADOS */
+        #addFuncionarioModal .container input[type="checkbox"]:checked,
+        #addFuncionarioModal .container input[type="checkbox"]:not(:checked),
+        #addFuncionarioModal .container input[type="checkbox"]:hover,
+        #addFuncionarioModal .container input[type="checkbox"]:focus,
+        #addFuncionarioModal .container input[type="checkbox"]:active {
+            background-color: transparent !important;
+            background-image: none !important;
+            border: none !important;
+            /* Remove verde do Bootstrap */
+            accent-color: transparent !important;
+        }
+        
+        /* Remove verde de QUALQUER elemento relacionado */
+        #addFuncionarioModal .container * {
+            --bs-success: transparent !important;
+            --bs-success-rgb: transparent !important;
+        }
+    </style>
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom">
+            <h2 class="h5 mb-0">
+                <i class="fas fa-user-plus me-2"></i>
+                Adicionar Funcionário
+            </h2>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('addFuncionarioModal')" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white !important;">
+                <i class="fas fa-times" style="color: white !important;"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4">
+            <form id="addFuncionarioForm" onsubmit="event.preventDefault(); event.stopPropagation(); if(window.BeiraMarFuncionarios && window.BeiraMarFuncionarios.handleAddFuncionario) { window.BeiraMarFuncionarios.handleAddFuncionario(this); } return false;">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioNome" class="form-label">
+                            <i class="fas fa-user me-1"></i> Nome Completo
+                        </label>
+                        <input type="text" class="form-control" id="funcionarioNome" name="funcionarioNome" required placeholder="Ex: João Silva">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioCPF" class="form-label">
+                            <i class="fas fa-id-card me-1"></i> CPF
+                        </label>
+                        <input type="text" class="form-control" id="funcionarioCPF" name="funcionarioCPF" required placeholder="000.000.000-00" maxlength="14" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioEmail" class="form-label">
+                            <i class="fas fa-envelope me-1"></i> Email
+                        </label>
+                        <input type="email" class="form-control" id="funcionarioEmail" name="funcionarioEmail" required placeholder="funcionario@beiramar.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioTelefone" class="form-label">
+                            <i class="fas fa-phone me-1"></i> Telefone
+                        </label>
+                        <input type="tel" class="form-control" id="funcionarioTelefone" name="funcionarioTelefone" required placeholder="(00) 00000-0000" maxlength="15" oninput="let v = this.value.replace(/\D/g, ''); if (v.length <= 10) { this.value = v.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2'); } else { this.value = v.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2'); }">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioSenha" class="form-label">
+                            <i class="fas fa-lock me-1"></i> Senha
+                        </label>
+                        <input type="password" class="form-control" id="funcionarioSenha" name="funcionarioSenha" required placeholder="Digite uma senha segura" minlength="6">
+                        <small class="form-text text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            <i class="fas fa-info-circle"></i> Mínimo de 6 caracteres
+                        </small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioSenhaConfirmar" class="form-label">
+                            <i class="fas fa-lock me-1"></i> Confirmar Senha
+                        </label>
+                        <input type="password" class="form-control" id="funcionarioSenhaConfirmar" name="funcionarioSenhaConfirmar" required placeholder="Digite a senha novamente" minlength="6">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioCargo" class="form-label">
+                            <i class="fas fa-briefcase me-1"></i> Cargo
+                        </label>
+                        <select class="form-select" id="funcionarioCargo" name="funcionarioCargo" required>
+                            <option value="">Selecione o cargo...</option>
+                            <option value="carregador">Carregador</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="gerente-vendas">Gerente de Vendas</option>
+                            <option value="gerente-producao">Gerente de Produção</option>
+                            <option value="entregador">Entregador</option>
+                            <option value="logistica">Logística</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioDepartamento" class="form-label">
+                            <i class="fas fa-building me-1"></i> Departamento
+                        </label>
+                        <select class="form-select" id="funcionarioDepartamento" name="funcionarioDepartamento" required>
+                            <option value="">Selecione o departamento...</option>
+                            <option value="producao">Produção</option>
+                            <option value="vendas">Vendas</option>
+                            <option value="estoque">Estoque</option>
+                            <option value="logistica">Logística</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioNivelAcesso" class="form-label">
+                            <i class="fas fa-shield-alt me-1"></i> Nível de Acesso
+                        </label>
+                        <select class="form-select" id="funcionarioNivelAcesso" name="funcionarioNivelAcesso" required>
+                            <option value="">Selecione o nível...</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="supervisor">Supervisor</option>
+                            <option value="operador">Operador</option>
+                            <option value="visualizador">Visualizador</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioStatus" class="form-label">
+                            <i class="fas fa-info-circle me-1"></i> Status
+                        </label>
+                        <select class="form-select" id="funcionarioStatus" name="funcionarioStatus" required>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                            <option value="ferias">Férias</option>
+                            <option value="licenca">Licença</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" style="font-weight: 600; margin-bottom: 1rem; display: block;">
+                        <i class="fas fa-key me-1"></i> Permissões por Página
+                    </label>
+                    
+                    <!-- Estoque -->
+                    <div style="background: var(--bg-secondary, #f8fafc); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border-color, #e2e8f0);">
+                        <h6 style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-primary, #1e293b); display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-boxes" style="color: #3b82f6;"></i>
+                                Tela de Estoque
+                            </div>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="acessoTotalEstoque" onchange="const checkboxes = document.querySelectorAll('input[name=\'permissoes[estoque][]\']'); checkboxes.forEach(cb => cb.checked = this.checked);">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: #3b82f6;">Acesso Total</span>
+                            </label>
+                        </h6>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[estoque][]" value="adicionar" onchange="const total = document.getElementById('acessoTotalEstoque'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[estoque][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Adicionar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[estoque][]" value="editar" onchange="const total = document.getElementById('acessoTotalEstoque'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[estoque][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Editar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[estoque][]" value="visualizar" onchange="const total = document.getElementById('acessoTotalEstoque'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[estoque][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Visualizar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[estoque][]" value="excluir" onchange="const total = document.getElementById('acessoTotalEstoque'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[estoque][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Excluir</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Produção -->
+                    <div style="background: var(--bg-secondary, #f8fafc); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border-color, #e2e8f0);">
+                        <h6 style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-primary, #1e293b); display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-industry" style="color: #10b981;"></i>
+                                Tela de Produção
+                            </div>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="acessoTotalProducao" onchange="const checkboxes = document.querySelectorAll('input[name=\'permissoes[producao][]\']'); checkboxes.forEach(cb => cb.checked = this.checked);">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: #10b981;">Acesso Total</span>
+                            </label>
+                        </h6>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[producao][]" value="adicionar" onchange="const total = document.getElementById('acessoTotalProducao'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[producao][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Adicionar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[producao][]" value="editar" onchange="const total = document.getElementById('acessoTotalProducao'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[producao][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Editar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[producao][]" value="visualizar" onchange="const total = document.getElementById('acessoTotalProducao'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[producao][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Visualizar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[producao][]" value="excluir" onchange="const total = document.getElementById('acessoTotalProducao'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[producao][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Excluir</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Vendas -->
+                    <div style="background: var(--bg-secondary, #f8fafc); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border-color, #e2e8f0);">
+                        <h6 style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-primary, #1e293b); display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-shopping-cart" style="color: #f59e0b;"></i>
+                                Tela de Vendas
+                            </div>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="acessoTotalVendas" onchange="const checkboxes = document.querySelectorAll('input[name=\'permissoes[vendas][]\']'); checkboxes.forEach(cb => cb.checked = this.checked);">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: #f59e0b;">Acesso Total</span>
+                            </label>
+                        </h6>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[vendas][]" value="adicionar" onchange="const total = document.getElementById('acessoTotalVendas'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[vendas][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Adicionar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[vendas][]" value="editar" onchange="const total = document.getElementById('acessoTotalVendas'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[vendas][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Editar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[vendas][]" value="visualizar" onchange="const total = document.getElementById('acessoTotalVendas'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[vendas][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Visualizar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[vendas][]" value="excluir" onchange="const total = document.getElementById('acessoTotalVendas'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[vendas][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Excluir</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Logística -->
+                    <div style="background: var(--bg-secondary, #f8fafc); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border-color, #e2e8f0);">
+                        <h6 style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-primary, #1e293b); display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-truck" style="color: #8b5cf6;"></i>
+                                Tela de Logística
+                            </div>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="acessoTotalLogistica" onchange="const checkboxes = document.querySelectorAll('input[name=\'permissoes[logistica][]\']'); checkboxes.forEach(cb => cb.checked = this.checked);">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: #8b5cf6;">Acesso Total</span>
+                            </label>
+                        </h6>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[logistica][]" value="adicionar" onchange="const total = document.getElementById('acessoTotalLogistica'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[logistica][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Adicionar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[logistica][]" value="editar" onchange="const total = document.getElementById('acessoTotalLogistica'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[logistica][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Editar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[logistica][]" value="visualizar" onchange="const total = document.getElementById('acessoTotalLogistica'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[logistica][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Visualizar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[logistica][]" value="excluir" onchange="const total = document.getElementById('acessoTotalLogistica'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[logistica][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Excluir</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Fluxo -->
+                    <div style="background: var(--bg-secondary, #f8fafc); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border-color, #e2e8f0);">
+                        <h6 style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-primary, #1e293b); display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-project-diagram" style="color: #6366f1;"></i>
+                                Tela de Fluxo
+                            </div>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="checkbox" id="acessoTotalFluxo" onchange="const checkboxes = document.querySelectorAll('input[name=\'permissoes[fluxo][]\']'); checkboxes.forEach(cb => cb.checked = this.checked);">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: #6366f1;">Acesso Total</span>
+                            </label>
+                        </h6>
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[fluxo][]" value="adicionar" onchange="const total = document.getElementById('acessoTotalFluxo'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[fluxo][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Adicionar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[fluxo][]" value="editar" onchange="const total = document.getElementById('acessoTotalFluxo'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[fluxo][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Editar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[fluxo][]" value="visualizar" onchange="const total = document.getElementById('acessoTotalFluxo'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[fluxo][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Visualizar</span>
+                            </label>
+                            <label class="container mb-0" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" name="permissoes[fluxo][]" value="excluir" onchange="const total = document.getElementById('acessoTotalFluxo'); if(total) { const all = document.querySelectorAll('input[name=\'permissoes[fluxo][]\']'); total.checked = Array.from(all).every(cb => cb.checked); }">
+                                <div class="checkmark"></div>
+                                <span style="font-size: 0.9rem;">Excluir</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="funcionarioDataAdmissao" class="form-label">
+                            <i class="fas fa-calendar-alt me-1"></i> Data de Admissão
+                        </label>
+                        <input type="text" class="form-control" id="funcionarioDataAdmissao" name="funcionarioDataAdmissao" required placeholder="DD/MM/AAAA" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3').slice(0, 10)">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="funcionarioSalario" class="form-label">
+                            <i class="fas fa-dollar-sign me-1"></i> Salário
+                        </label>
+                        <div style="position: relative;">
+                            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary, #64748b); font-weight: 600; z-index: 1;">R$</span>
+                            <input type="text" class="form-control" id="funcionarioSalario" name="funcionarioSalario" required placeholder="0,00" style="padding-left: 40px;" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="fas fa-clock me-1"></i> Turno(s)
+                        </label>
+                        <div style="margin-top: 0.5rem;">
+                            <label class="container mb-2" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="turnoManha" name="turnos" value="manha">
+                                <div class="checkmark"></div>
+                                <span style="margin-left: 0.5rem; font-size: 0.9rem;">Manhã (06:00 - 14:00)</span>
+                            </label>
+                            <label class="container mb-2" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="turnoTarde" name="turnos" value="tarde">
+                                <div class="checkmark"></div>
+                                <span style="margin-left: 0.5rem; font-size: 0.9rem;">Tarde (14:00 - 22:00)</span>
+                            </label>
+                            <label class="container mb-2" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="turnoNoite" name="turnos" value="noite">
+                                <div class="checkmark"></div>
+                                <span style="margin-left: 0.5rem; font-size: 0.9rem;">Noite (22:00 - 06:00)</span>
+                            </label>
+                            <label class="container mb-2" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="turnoIntegral" name="turnos" value="integral">
+                                <div class="checkmark"></div>
+                                <span style="margin-left: 0.5rem; font-size: 0.9rem;">Integral (08:00 - 18:00)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="funcionarioEndereco" class="form-label">
+                        <i class="fas fa-map-marker-alt me-1"></i> Endereço Completo
+                    </label>
+                    <input type="text" class="form-control" id="funcionarioEndereco" name="funcionarioEndereco" placeholder="Rua, número, bairro, cidade">
+                </div>
+                <div class="mb-3">
+                    <label for="funcionarioObservacoes" class="form-label">
+                        <i class="fas fa-sticky-note me-1"></i> Observações
+                    </label>
+                    <textarea class="form-control" id="funcionarioObservacoes" name="funcionarioObservacoes" rows="3" placeholder="Informações adicionais sobre o funcionário..."></textarea>
+                </div>
+                <div class="form-actions d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary" onclick="window.BeiraMarModais.closeModal('addFuncionarioModal')">
+                        <i class="fas fa-times me-2"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="btnSubmitFuncionario">
+                        <i class="fas fa-user-plus me-2"></i>Adicionar Funcionário
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<!-- MODAL DE DETALHES DO FUNCIONÁRIO -->
+<div id="detalhesFuncionarioModal" class="modal">
+    <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header d-flex justify-content-between align-items-center p-3 border-bottom" style="background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 12px 12px 0 0;">
+            <h2 class="h5 mb-0" style="color: white;">
+                <i class="fas fa-user-circle me-2" style="color: white !important;"></i>
+                Detalhes do Funcionário
+            </h2>
+            <button class="modal-close" onclick="window.BeiraMarModais.closeModal('detalhesFuncionarioModal')" aria-label="Fechar" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white !important;">
+                <i class="fas fa-times" style="color: white !important;"></i>
+            </button>
+        </div>
+        <div class="modal-body p-4" id="detalhesFuncionarioContent" style="max-height: 80vh; overflow-y: auto;">
+            <!-- Conteúdo será preenchido via JavaScript -->
+        </div>
+    </div>
+</div>

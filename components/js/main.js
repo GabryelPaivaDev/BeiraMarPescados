@@ -41,8 +41,8 @@ window.BeiraMarDashboard.loadDashboardContent();
 }
 
 // Inicializa bandeja de notificações do header
-
-initNotificationDropdown();
+// REMOVIDO: Agora é controlado pelo header.js para evitar conflitos
+// initNotificationDropdown();
 
 // Atualiza badges inicialmente
 
@@ -142,34 +142,36 @@ e.preventDefault();
 
 e.stopPropagation();
 
-if (window.BeiraMarNotificacoes) {
+// Verifica se está na página do cliente
+const isCliente = window.location.pathname.includes('cliente.html') || 
+                 sessionStorage.getItem('userType') === 'cliente';
 
-window.BeiraMarNotificacoes.markAllAsRead();
-
+if (isCliente && window.ClienteNotificacoes && window.ClienteNotificacoes.marcarTodasComoLidas) {
+    window.ClienteNotificacoes.marcarTodasComoLidas();
+} else if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.markAllAsRead) {
+    window.BeiraMarNotificacoes.markAllAsRead();
 }
 
 });
 
 }
 
-// Marcar individual como lida ao clicar
-
-const notificationItems = notificationDropdown.querySelectorAll('.notification-item-dropdown');
-
-notificationItems.forEach(item => {
-
-item.addEventListener('click', function(e) {
-
-e.preventDefault();
-
-if (window.BeiraMarNotificacoes) {
-
-window.BeiraMarNotificacoes.renderDropdownNotifications();
-
-}
-
-});
-
+// Marcar individual como lida ao clicar (evento delegado, pois os itens são dinâmicos)
+document.addEventListener('click', function(e) {
+    const notificationItem = e.target.closest('.notification-item-dropdown');
+    if (notificationItem) {
+        e.preventDefault();
+        // A ação já está no onclick do item renderizado
+        // Apenas atualiza a lista
+        const isCliente = window.location.pathname.includes('cliente.html') || 
+                         sessionStorage.getItem('userType') === 'cliente';
+        
+        if (isCliente && window.ClienteNotificacoes && window.ClienteNotificacoes.renderDropdownNotifications) {
+            setTimeout(() => window.ClienteNotificacoes.renderDropdownNotifications(), 100);
+        } else if (window.BeiraMarNotificacoes && window.BeiraMarNotificacoes.renderDropdownNotifications) {
+            window.BeiraMarNotificacoes.renderDropdownNotifications();
+        }
+    }
 });
 
 // Link "Ver todas as notificações"

@@ -1,879 +1,2117 @@
 /* =========================================
-
-MODAL DE LOGIN - ESTILIZAÇÃO AZUL E BRANCO
-
-========================================= */
+   MODAL DE LOGIN - ESTILIZAÇÃO AZUL E BRANCO
+   ========================================= */
 
 /* Overlay - Fundo escuro com blur */
 
 #loginModal {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
 }
 
 #loginModal.active {
-  display: flex !important;
+    display: flex !important;
 }
 
 /* Container do Modal */
 
 #loginModal .modal-content {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
-  overflow: hidden;
-  animation: slideUp 0.3s ease;
-  width: 90%;
-  max-width: 420px;
-  border: 1px solid rgba(59, 130, 246, 0.1);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    width: 90%;
+    max-width: 420px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Header do Modal de Login - AZUL VIBRANTE */
 
 #loginModal .modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 1.5rem;
-  position: relative;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-  border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1.5rem;
+    position: relative;
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    border-bottom: none;
 }
 
 #loginModal .modal-header h2 {
-  margin: 0;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.5px;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
 }
 
 /* Botão fechar (X) */
 
 #loginModal .modal-close {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  width: 36px;
-  height: 36px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
 }
 
 #loginModal .modal-close:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  color: white;
-  transform: rotate(90deg);
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: white;
+    transform: rotate(90deg);
 }
 
 #loginModal .modal-close i {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 /* Body do Modal de Login */
 
 #loginModal .modal-body {
-  padding: 2.5rem 2rem;
-  background: white;
+    padding: 2.5rem 2rem;
+    background: white;
 }
 
 /* Formulário de Login */
 
 #loginForm {
-  width: 100%;
+    width: 100%;
 }
 
 #loginForm .mb-3 {
-  margin-bottom: 1.8rem;
+    margin-bottom: 1.8rem;
 }
 
 #loginForm .mb-3:last-of-type {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 /* Labels do Formulário - PRETO */
 
 .form-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
 }
 
 /* Inputs do Formulário - BRANCO COM BORDAS AZUIS */
 
 .form-control {
-  width: 100%;
-  padding: 0.85rem 1.1rem;
-  border: 2px solid #e0e7ff;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  background: #f8fbff;
-  color: #000000;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  font-family: inherit;
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: 2px solid #e0e7ff;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #f8fbff;
+    color: #000000;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
 }
 
 .form-control:hover {
-  border-color: #bfdbfe;
-  background: #f0f9ff;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+    border-color: #bfdbfe;
+    background: #f0f9ff;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
 }
 
 .form-control:focus {
-  outline: none;
-  border-color: #0066cc;
-  background: white;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-  color: #000000;
+    outline: none;
+    border-color: #0066cc;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    color: #000000;
 }
 
 .form-control::placeholder {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 /* Grupo de Ações do Formulário */
 
 .form-actions {
-  margin-bottom: 1.5rem;
-  margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
 }
 
 /* =========================================
+   BOTÕES - ARREDONDADOS E CENTRALIZADOS
+   ========================================= */
 
-BOTÃO ENTRAR - SOBRESCRITA TOTAL
-
-========================================= */
-
-#loginForm .btn.btn-primary.w-100 {
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
-  padding: 0.95rem 1.5rem !important;
-  font-size: 0.95rem !important;
-  font-weight: 700 !important;
-  border-radius: 25px !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  width: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0.6rem !important;
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.25) !important;
+.btn {
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: inherit;
+    letter-spacing: 0.3px;
 }
 
-#loginForm .btn.btn-primary.w-100:hover {
-  background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.35) !important;
+.btn.w-100 {
+    width: 100%;
 }
 
-#loginForm .btn.btn-primary.w-100:active {
-  transform: translateY(0) !important;
-  box-shadow: 0 2px 10px rgba(0, 102, 204, 0.2) !important;
+.btn-primary {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.25);
 }
 
-#loginForm .btn.btn-primary.w-100 i {
-  font-size: 0.95rem !important;
-  color: #ffffff !important;
-  margin-right: 0.5rem !important;
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.35);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 102, 204, 0.2);
+}
+
+.btn-primary i {
+    font-size: 0.95rem;
+    color: white;
+}
+
+.btn-primary .me-2 {
+    margin-right: 0.5rem;
+}
+
+/* Botão Sair - OUTLINE COM VERMELHO */
+
+.btn-outline-danger {
+    background: transparent;
+    color: #ef4444;
+    border: 2px solid #ef4444;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    padding: 0.85rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 25px;
+}
+
+[data-theme="dark"] .btn-outline-danger {
+    background: transparent;
+    color: #ef4444 !important;
+    border: 2px solid #ef4444 !important;
+}
+
+.btn-outline-danger:hover {
+    background: #ef4444;
+    color: white !important;
+    border-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .btn-outline-danger:hover {
+    background: #ef4444;
+    color: white !important;
+    border-color: #dc2626;
+}
+
+.btn-outline-danger:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+}
+
+.btn-outline-danger i {
+    font-size: 1rem;
+    color: inherit;
+}
+
+.btn-outline-danger .me-2 {
+    margin-right: 0.5rem;
+}
+
+.btn-outline-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn.py-2 {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
 }
 
 /* Footer do Formulário */
 
 .form-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e0e7ff;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e7ff;
 }
 
 .forgot-password {
-  color: #0066cc;
-  font-size: 0.9rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  cursor: pointer;
+    color: #0066cc;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .forgot-password:hover {
-  color: #0052a3;
-  text-decoration: underline;
+    color: #0052a3;
+    text-decoration: underline;
 }
 
 .text-decoration-none {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 /* =========================================
+   MODAL ESQUECEU A SENHA
+   ========================================= */
 
-MODAL DE PERFIL - ESTILIZAÇÃO AZUL E BRANCO
+#forgotPasswordModal {
+    display: none;
+    position: fixed;
+    z-index: 3100;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+}
 
-========================================= */
+#forgotPasswordModal.active {
+    display: flex !important;
+}
+
+.forgot-password-modal-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .forgot-password-modal-content {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+#forgotPasswordModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    border-bottom: none;
+}
+
+#forgotPasswordModal .modal-header h5 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+}
+
+#forgotPasswordModal .modal-close {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+}
+
+#forgotPasswordModal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: rotate(90deg);
+}
+
+.forgot-password-body {
+    padding: 2rem;
+    text-align: center;
+}
+
+.forgot-password-text {
+    color: #475569;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+[data-theme="dark"] .forgot-password-text {
+    color: #cbd5e1;
+}
+
+/* Animação de Sucesso */
+.forgot-password-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.checkmark {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 3;
+    stroke: #10b981;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #10b981;
+    animation: fill-checkmark 0.4s ease-in-out 0.4s forwards, scale-checkmark 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 3;
+    stroke-miterlimit: 10;
+    stroke: #10b981;
+    fill: none;
+    animation: stroke-checkmark-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke-checkmark-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke-checkmark-circle {
+    0% {
+        stroke-dashoffset: 166;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes stroke-checkmark-check {
+    0% {
+        stroke-dashoffset: 48;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill-checkmark {
+    0% {
+        box-shadow: inset 0px 0px 0px #10b981;
+    }
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #10b981;
+    }
+}
+
+@keyframes scale-checkmark {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+.success-message {
+    color: #1e293b;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+}
+
+[data-theme="dark"] .success-message {
+    color: #f1f5f9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   MODAL DE PERFIL - ESTILIZAÇÃO AZUL E BRANCO
+   ========================================= */
 
 /* Overlay - Fundo escuro */
 
 #profileModal {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
 }
 
 #profileModal.active {
-  display: flex !important;
+    display: flex !important;
 }
 
 /* Container do Modal de Perfil */
 
 #profileModal .modal-content {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
-  overflow: hidden;
-  animation: slideUp 0.3s ease;
-  max-width: 380px;
-  width: 90%;
-  border: 1px solid rgba(59, 130, 246, 0.1);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    max-width: 380px;
+    width: 90%;
+    max-height: 90vh;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="dark"] #profileModal .modal-content {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Header do Modal de Perfil - AZUL COM BRANCO E LAYOUT CENTRALIZADO */
 
 #profileModal .modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  position: relative;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-  border-bottom: none;
-  height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    border-bottom: none;
+    height: 70px;
 }
 
 #profileModal .modal-header h5 {
-  margin: 0;
-  padding: 0;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.3px;
-  text-align: center;
-  flex: 1;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+    text-align: center;
+    flex: 1;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #profileModal .modal-title {
-  margin: 0;
-  padding: 0;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.3px;
-  text-align: center;
-  flex: 1;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+    text-align: center;
+    flex: 1;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 /* Botão fechar (X) do Modal de Perfil - BRANCO DIREITA MAIOR */
 
 #profileModal .modal-close {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: none;
-  font-size: 2rem;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none;
+    font-size: 2rem;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #profileModal .modal-close:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  color: #ffffff;
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff;
 }
 
 #profileModal .modal-close:hover i {
-  transform: rotate(90deg);
-  transition: transform 0.2s ease;
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
 }
 
 #profileModal .modal-close i {
-  pointer-events: none;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+    pointer-events: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
 /* Body do Modal de Perfil */
 
 #profileModal .modal-body {
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  background: white;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    text-align: center;
+    background: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    max-height: calc(90vh - 70px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
+[data-theme="dark"] #profileModal .modal-body {
+    background: #1e293b;
+    color: #f1f5f9;
 }
 
 /* Avatar Circle - AZUL CLARO */
 
 .bg-light {
-  background: #e0f2fe;
+    background: #e0f2fe;
 }
 
 .rounded-circle {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .d-inline-flex {
-  display: inline-flex;
+    display: inline-flex;
 }
 
 .align-items-center {
-  align-items: center;
+    align-items: center;
 }
 
 .justify-content-center {
-  justify-content: center;
+    justify-content: center;
 }
 
 .border {
-  border: 2px solid #bfdbfe;
+    border: 2px solid #bfdbfe;
 }
 
-.mb-3 {
-  margin-bottom: 1.2rem;
+#profileModal .mb-3 {
+    margin-bottom: 0.8rem;
 }
 
 /* Avatar Container */
 
 #profileModal .bg-light.rounded-circle {
-  width: 100px;
-  height: 100px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-  border: 3px solid #0066cc;
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.15);
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+    border: 3px solid #0066cc;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.15);
 }
 
 /* Ícone do usuário - MAIOR */
 
 .fa-user-circle {
-  color: #0066cc;
-  font-size: 5.5rem;
+    color: #0066cc;
+    font-size: 4rem;
 }
 
 .text-secondary {
-  color: #64748b;
+    color: #64748b;
 }
 
 /* Nome do usuário */
 
 #modalProfileName {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #000000;
-  margin: 1.2rem 0 0.3rem 0;
-  letter-spacing: -0.3px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #000000;
+    margin: 0.8rem 0 0.3rem 0;
+    letter-spacing: -0.3px;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] #modalProfileName {
+    color: #ffffff;
 }
 
 .fw-bold {
-  font-weight: 800;
+    font-weight: 800;
 }
 
 /* Subtítulo (cargo/role) */
 
 .text-muted {
-  color: #6b7280;
-  font-weight: 500;
+    color: #6b7280;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .text-muted {
+    color: #cbd5e1;
+}
+
+/* Role específico do modal de perfil - branco no tema escuro */
+#modalProfileRole {
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] #modalProfileRole {
+    color: #ffffff !important;
+}
+
+/* Informações detalhadas do perfil */
+.profile-info-container {
+    text-align: left;
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+}
+
+.profile-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 3px solid #3b82f6;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .profile-info-item {
+    background: #334155;
+    border-left-color: #60a5fa;
+}
+
+.profile-info-item:hover {
+    background: #f1f5f9;
+    transform: translateX(5px);
+}
+
+[data-theme="dark"] .profile-info-item:hover {
+    background: #475569;
+}
+
+.profile-info-icon {
+    color: #3b82f6;
+    font-size: 1.25rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+[data-theme="dark"] .profile-info-icon {
+    color: #60a5fa;
+}
+
+.profile-info-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-info-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .profile-info-label {
+    color: #94a3b8;
+}
+
+.profile-info-value {
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .profile-info-value {
+    color: #f1f5f9;
 }
 
 .small {
-  font-size: 0.85rem;
+    font-size: 0.85rem;
 }
 
 .mb-0 {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 /* Linha separadora */
 
 hr {
-  border: none;
-  border-top: 2px solid #e0e7ff;
-  margin: 2rem 0;
-  color: #e0e7ff;
+    border: none;
+    border-top: 2px solid #e0e7ff;
+    margin: 2rem 0;
+    color: #e0e7ff;
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] hr {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .my-4 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#profileModal .my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* =========================================
-
-BOTÕES - GERAIS
-
-========================================= */
-
-.btn {
-  padding: 0.9rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  font-family: inherit;
-  letter-spacing: 0.3px;
-}
-
-.btn.w-100 {
-  width: 100%;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.25);
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.35);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(0, 102, 204, 0.2);
-}
-
-.btn-primary i {
-  font-size: 0.95rem;
-  color: white;
-}
-
-.btn-primary .me-2 {
-  margin-right: 0.5rem;
-}
-
-/* =========================================
-
-BOTÃO SAIR DA CONTA - ESTILIZAÇÃO COMPLETA ✅
-
-========================================= */
-
-#profileModal .btn.btn-outline-danger.w-100 {
-  background: transparent !important;
-  color: #ef4444 !important;
-  border: 2px solid #ef4444 !important;
-  font-weight: 700 !important;
-  transition: all 0.3s ease !important;
-  padding: 0.85rem 1.5rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0.6rem !important;
-  border-radius: 25px !important;
-  font-size: 0.95rem !important;
-  cursor: pointer !important;
-  width: 100% !important;
-}
-
-#profileModal .btn.btn-outline-danger.w-100:hover {
-  background: #ef4444 !important;
-  color: #ffffff !important;
-  border-color: #dc2626 !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3) !important;
-}
-
-#profileModal .btn.btn-outline-danger.w-100:active {
-  transform: translateY(0) !important;
-  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2) !important;
-}
-
-#profileModal .btn.btn-outline-danger.w-100 i {
-  font-size: 1rem !important;
-  color: inherit !important;
-  margin-right: 0.5rem !important;
-}
-
-#profileModal .btn.btn-outline-danger.w-100:disabled {
-  opacity: 0.6 !important;
-  cursor: not-allowed !important;
-  transform: none !important;
-}
-
-#profileModal .btn.btn-outline-danger.py-2 {
-  padding-top: 0.6rem !important;
-  padding-bottom: 0.6rem !important;
-}
-
-/* =========================================
-
-BOTÃO DO USUÁRIO NO HEADER - CINZA ESCURO
-
-========================================= */
+   BOTÃO DO USUÁRIO NO HEADER - CINZA ESCURO
+   ========================================= */
 
 .user-menu-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .user-menu-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .user-menu-btn i {
-  font-size: 1.8rem;
-  color: #4b5563;
+    font-size: 1.8rem;
+    color: #4b5563;
 }
 
 .user-menu-btn i.fa-user-circle {
-  color: #4b5563;
+    color: #4b5563;
 }
 
 /* =========================================
-
-SIDEBAR FOOTER - ESTILIZAÇÃO MELHORADA
-
-========================================= */
+   SIDEBAR FOOTER - ESTILIZAÇÃO MELHORADA
+   ========================================= */
 
 .sidebar-footer {
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 1.2rem 1rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 1.2rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
 }
 
 .sidebar-footer:hover {
-  background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .user-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  width: 100%;
-  max-width: 200px;
-  overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 200px;
+    overflow: visible;
 }
 
 .user-info i {
-  font-size: 1.8rem;
-  color: #3b82f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  min-width: 1.8rem;
-  min-height: 1.8rem;
-  overflow: visible;
+    font-size: 1.8rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 1.8rem;
+    min-height: 1.8rem;
+    overflow: visible;
 }
 
 .user-info i.fa-user-circle {
-  color: #3b82f6;
+    color: #ffffff;
 }
 
 #sidebarUserName {
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  white-space: nowrap;
-  overflow: visible;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible;
 }
 
 /* =========================================
-
-UTILITIES GERAIS
-
-========================================= */
+   UTILITIES GERAIS
+   ========================================= */
 
 .mb-1 {
-  margin-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .mb-2 {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .mt-1 {
-  margin-top: 0.25rem;
+    margin-top: 0.25rem;
 }
 
 .mt-2 {
-  margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .mt-3 {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
-.mt-4 {
-  margin-top: 1.5rem;
+#profileModal .mt-4 {
+    margin-top: 1rem;
 }
 
 .ps-3 {
-  padding-left: 1rem;
+    padding-left: 1rem;
 }
 
 .pb-0 {
-  padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 .p-3 {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 .p-4 {
-  padding: 1.5rem;
+    padding: 1.5rem;
 }
 
 .h5 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: inherit;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: inherit;
 }
 
 /* =========================================
-
-RESPONSIVO
-
-========================================= */
+   RESPONSIVO
+   ========================================= */
 
 @media (max-width: 480px) {
-  #loginModal .modal-content,
-  #profileModal .modal-content {
-    width: 95%;
-    max-width: calc(100% - 20px);
-  }
+    #loginModal .modal-content,
+    #profileModal .modal-content {
+        width: 95%;
+        max-width: calc(100% - 20px);
+    }
 
-  #loginModal .modal-header {
-    padding: 1.5rem 1.2rem;
-  }
+    #loginModal .modal-header {
+        padding: 1.5rem 1.2rem;
+    }
 
-  #profileModal .modal-header {
-    padding: 1.2rem;
-    height: 60px;
-  }
+    #profileModal .modal-header {
+        padding: 1.2rem;
+        height: 60px;
+    }
 
-  #loginModal .modal-body,
-  #profileModal .modal-body {
-    padding: 2rem 1.2rem;
-  }
+    #loginModal .modal-body,
+    #profileModal .modal-body {
+        padding: 2rem 1.2rem;
+    }
 
-  #loginModal .modal-header h2 {
-    font-size: 1.2rem;
-  }
+    #loginModal .modal-header h2 {
+        font-size: 1.2rem;
+    }
 
-  #profileModal .modal-header h5,
-  #profileModal .modal-title {
-    font-size: 1.1rem;
-  }
+    #profileModal .modal-header h5,
+    #profileModal .modal-title {
+        font-size: 1.1rem;
+    }
 
-  #profileModal .bg-light.rounded-circle {
-    width: 90px;
-    height: 90px;
-  }
+    #profileModal .bg-light.rounded-circle {
+        width: 90px;
+        height: 90px;
+    }
 
-  .fa-user-circle {
-    font-size: 5rem;
-  }
+    .fa-user-circle {
+        font-size: 5rem;
+    }
 
-  #modalProfileName {
-    font-size: 1.4rem;
-  }
+    #modalProfileName {
+        font-size: 1.4rem;
+    }
 
-  .btn {
-    padding: 0.75rem 1.2rem;
-    font-size: 0.9rem;
-  }
+    .btn {
+        padding: 0.75rem 1.2rem;
+        font-size: 0.9rem;
+    }
 
-  .form-control {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-  }
+    .form-control {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
 
-  .form-label {
-    font-size: 0.8rem;
-  }
+    .form-label {
+        font-size: 0.8rem;
+    }
 
-  hr {
-    margin: 1.5rem 0;
-  }
+    hr {
+        margin: 1.5rem 0;
+    }
 
-  #profileModal .modal-close {
-    font-size: 1.8rem;
-    width: 40px;
-    height: 40px;
-    right: 0.8rem;
-  }
+    #profileModal .modal-close {
+        font-size: 1.8rem;
+        width: 40px;
+        height: 40px;
+        right: 0.8rem;
+    }
 
-  #profileModal .modal-close i {
-    font-size: 1.8rem;
-  }
+    #profileModal .modal-close i {
+        font-size: 1.8rem;
+    }
 
-  .sidebar-footer {
-    padding: 1rem 0.8rem;
-  }
+    .sidebar-footer {
+        padding: 1rem 0.8rem;
+    }
 
-  .user-info {
-    gap: 0.8rem;
-    max-width: 180px;
-  }
+    .user-info {
+        gap: 0.8rem;
+        max-width: 180px;
+    }
 
-  .user-info i {
-    font-size: 1.6rem;
-    min-width: 1.6rem;
-    min-height: 1.6rem;
-  }
+    .user-info i {
+        font-size: 1.6rem;
+        min-width: 1.6rem;
+        min-height: 1.6rem;
+    }
 
-  #sidebarUserName {
-    font-size: 0.9rem;
-  }
+    #sidebarUserName {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 360px) {
-  #loginModal .modal-header h2,
-  #profileModal .modal-header h5,
-  #profileModal .modal-title {
-    font-size: 1rem;
-  }
+    #loginModal .modal-header h2,
+    #profileModal .modal-header h5,
+    #profileModal .modal-title {
+        font-size: 1rem;
+    }
 
-  #modalProfileName {
+    #modalProfileName {
+        font-size: 1.2rem;
+    }
+
+    .btn,
+    .form-control {
+        font-size: 0.85rem;
+    }
+
+    #profileModal .modal-close {
+        right: 0.5rem;
+        font-size: 1.6rem;
+        width: 36px;
+        height: 36px;
+    }
+
+    #profileModal .modal-close i {
+        font-size: 1.6rem;
+    }
+
+    .fa-user-circle {
+        font-size: 4.5rem;
+    }
+
+    .sidebar-footer {
+        padding: 0.8rem;
+    }
+
+    .user-info {
+        gap: 0.6rem;
+        max-width: 160px;
+    }
+
+    .user-info i {
+        font-size: 1.4rem;
+        min-width: 1.4rem;
+        min-height: 1.4rem;
+    }
+
+    #sidebarUserName {
+        font-size: 0.8rem;
+    }
+}
+
+/* =========================================
+   MODAL DE CONFIRMAÇÃO GENÉRICO
+   ========================================= */
+
+#genericConfirmModal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#genericConfirmModal.active {
+    opacity: 1;
+    display: flex !important;
+}
+
+.generic-confirm-modal-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 420px;
+    overflow: hidden;
+    animation: slideUpModal 0.3s ease;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .generic-confirm-modal-content {
+    background: #1e293b;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+#genericConfirmModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-bottom: none;
+}
+
+#genericConfirmModal .modal-header h5 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#genericConfirmModal .modal-header h5 i {
     font-size: 1.2rem;
-  }
+}
 
-  .btn,
-  .form-control {
-    font-size: 0.85rem;
-  }
-
-  #profileModal .modal-close {
-    right: 0.5rem;
-    font-size: 1.6rem;
+#genericConfirmModal .modal-close {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     width: 36px;
     height: 36px;
-  }
+}
 
-  #profileModal .modal-close i {
-    font-size: 1.6rem;
-  }
+#genericConfirmModal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: rotate(90deg);
+}
 
-  .fa-user-circle {
-    font-size: 4.5rem;
-  }
+.generic-confirm-body {
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
 
-  .sidebar-footer {
-    padding: 0.8rem;
-  }
+[data-theme="dark"] .generic-confirm-body {
+    background: #1e293b;
+}
 
-  .user-info {
-    gap: 0.6rem;
-    max-width: 160px;
-  }
+.confirm-modal-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: 50%;
+    animation: pulseIcon 2s ease-in-out infinite;
+}
 
-  .user-info i {
-    font-size: 1.4rem;
-    min-width: 1.4rem;
-    min-height: 1.4rem;
-  }
+[data-theme="dark"] .confirm-modal-icon {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
 
-  #sidebarUserName {
-    font-size: 0.8rem;
-  }
+.confirm-modal-icon i {
+    font-size: 2.5rem;
+    color: var(--icon-color, #3b82f6);
+    animation: rotateIcon 3s ease-in-out infinite;
+}
+
+.confirm-modal-message {
+    font-size: 1.1rem;
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+[data-theme="dark"] .confirm-modal-message {
+    color: #f1f5f9;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-cancel-action,
+.btn-confirm-action {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    justify-content: center;
+    max-width: 150px;
+}
+
+.btn-cancel-action {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+[data-theme="dark"] .btn-cancel-action {
+    background: #334155;
+    color: #cbd5e1;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel-action:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .btn-cancel-action:hover {
+    background: #475569;
+}
+
+.btn-confirm-action {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-confirm-action:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-confirm-action:active,
+.btn-cancel-action:active {
+    transform: translateY(0);
+}
+
+/* Responsividade Modal Genérico */
+@media (max-width: 480px) {
+    .generic-confirm-modal-content {
+        width: 95%;
+        max-width: calc(100% - 20px);
+    }
+
+    #genericConfirmModal .modal-header {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .generic-confirm-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .confirm-modal-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .confirm-modal-icon i {
+        font-size: 2rem;
+    }
+
+    .confirm-modal-message {
+        font-size: 1rem;
+    }
+
+    .confirm-modal-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancel-action,
+    .btn-confirm-action {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* =========================================
+   MODAL DE CONFIRMAÇÃO DE LOGOUT
+   ========================================= */
+
+#logoutConfirmModal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#logoutConfirmModal.active {
+    opacity: 1;
+    display: flex !important;
+}
+
+.logout-confirm-modal-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 420px;
+    overflow: hidden;
+    animation: slideUpModal 0.3s ease;
+    border: 1px solid rgba(239, 68, 68, 0.1);
+}
+
+[data-theme="dark"] .logout-confirm-modal-content {
+    background: #1e293b;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+@keyframes slideUpModal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#logoutConfirmModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border-bottom: none;
+}
+
+#logoutConfirmModal .modal-header h5 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#logoutConfirmModal .modal-header h5 i {
+    font-size: 1.2rem;
+}
+
+#logoutConfirmModal .modal-close {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+}
+
+#logoutConfirmModal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: rotate(90deg);
+}
+
+.logout-confirm-body {
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+[data-theme="dark"] .logout-confirm-body {
+    background: #1e293b;
+}
+
+.logout-confirm-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-radius: 50%;
+    animation: pulseIcon 2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .logout-confirm-icon {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+}
+
+@keyframes pulseIcon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.logout-confirm-icon i {
+    font-size: 2.5rem;
+    color: #ef4444;
+    animation: rotateIcon 3s ease-in-out infinite;
+}
+
+[data-theme="dark"] .logout-confirm-icon i {
+    color: #f87171;
+}
+
+@keyframes rotateIcon {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.logout-confirm-message {
+    font-size: 1.1rem;
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+[data-theme="dark"] .logout-confirm-message {
+    color: #f1f5f9;
+}
+
+.logout-confirm-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-cancel,
+.btn-confirm-logout {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    justify-content: center;
+    max-width: 150px;
+}
+
+.btn-cancel {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+[data-theme="dark"] .btn-cancel {
+    background: #334155;
+    color: #cbd5e1;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .btn-cancel:hover {
+    background: #475569;
+}
+
+.btn-confirm-logout {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.btn-confirm-logout:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(239, 68, 68, 0.4);
+}
+
+.btn-confirm-logout:active,
+.btn-cancel:active {
+    transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .logout-confirm-modal-content {
+        width: 95%;
+        max-width: calc(100% - 20px);
+    }
+
+    #logoutConfirmModal .modal-header {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .logout-confirm-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .logout-confirm-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logout-confirm-icon i {
+        font-size: 2rem;
+    }
+
+    .logout-confirm-message {
+        font-size: 1rem;
+    }
+
+    .logout-confirm-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancel,
+    .btn-confirm-logout {
+        max-width: 100%;
+        width: 100%;
+    }
 }
 
 /* Fix geral */
 
 body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   MODAL ADICIONAR FUNCIONÁRIO
+   ========================================= */
+
+#addFuncionarioModal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#addFuncionarioModal.active {
+    display: flex !important;
+}
+
+#addFuncionarioModal .modal-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] #addFuncionarioModal .modal-content {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+#addFuncionarioModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-bottom: none;
+}
+
+#addFuncionarioModal .modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#addFuncionarioModal .modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white !important;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#addFuncionarioModal .modal-close i {
+    color: white !important;
+}
+
+#addFuncionarioModal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+#addFuncionarioModal .modal-close:hover i {
+    color: white !important;
+}
+
+/* =========================================
+   MODAL DE DETALHES DO FUNCIONÁRIO
+   ========================================= */
+
+#detalhesFuncionarioModal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#detalhesFuncionarioModal.active {
+    display: flex !important;
+}
+
+#detalhesFuncionarioModal .modal-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] #detalhesFuncionarioModal .modal-content {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+#detalhesFuncionarioModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-bottom: none;
+}
+
+#detalhesFuncionarioModal .modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#detalhesFuncionarioModal .modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white !important;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#detalhesFuncionarioModal .modal-close i {
+    color: white !important;
+}
+
+#detalhesFuncionarioModal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+#detalhesFuncionarioModal .modal-close:hover i {
+    color: white !important;
+}
+
+#detalhesFuncionarioModal .modal-body {
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+[data-theme="dark"] #detalhesFuncionarioModal .modal-body {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+#addFuncionarioModal .modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+[data-theme="dark"] #addFuncionarioModal .modal-body {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+#addFuncionarioModal .form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary, #1e293b);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+[data-theme="dark"] #addFuncionarioModal .form-label {
+    color: #f1f5f9;
+}
+
+#addFuncionarioModal .form-control,
+#addFuncionarioModal .form-select {
+    border: 2px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+#addFuncionarioModal .form-control:focus,
+#addFuncionarioModal .form-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] #addFuncionarioModal .form-control,
+[data-theme="dark"] #addFuncionarioModal .form-select {
+    background: #334155;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+#addFuncionarioModal .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+#addFuncionarioModal .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#addFuncionarioModal .btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+#addFuncionarioModal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+#addFuncionarioModal .btn-secondary {
+    background: var(--bg-tertiary, #f1f5f9);
+    color: var(--text-primary, #1e293b);
+}
+
+[data-theme="dark"] #addFuncionarioModal .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+}
+
+/* =========================================
+   CHECKBOXES CUSTOMIZADAS - MODAL FUNCIONÁRIOS
+   ========================================= */
+
+/* Hide the default checkbox COMPLETAMENTE */
+#addFuncionarioModal .container input[type="checkbox"],
+#addFuncionarioModal .container input {
+    position: absolute !important;
+    opacity: 0 !important;
+    cursor: pointer;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+/* Remove qualquer estilo do Bootstrap */
+#addFuncionarioModal .container input[type="checkbox"]:checked {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent !important;
+}
+
+#addFuncionarioModal .container {
+    display: flex !important;
+    align-items: center !important;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    gap: 0.5rem;
+}
+
+/* Create a custom checkbox - SEMPRE CINZA quando não marcado - ZERO VERDE */
+#addFuncionarioModal .checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+    min-width: 1.3em;
+    min-height: 1.3em;
+    background: #606062 !important;
+    background-color: #606062 !important;
+    background-image: none !important;
+    border-radius: 7px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    display: block;
+    border: none !important;
+    /* Remove qualquer cor verde */
+    color: transparent !important;
+}
+
+/* Garante que checkboxes não marcadas sejam SEMPRE CINZAS - TODOS OS ESTADOS */
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked) ~ .checkmark,
+#addFuncionarioModal .container input:not(:checked) ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked):hover ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked):focus ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked):active ~ .checkmark,
+#addFuncionarioModal .container:hover input[type="checkbox"]:not(:checked) ~ .checkmark,
+#addFuncionarioModal .container:focus-within input[type="checkbox"]:not(:checked) ~ .checkmark {
+    background: #606062 !important;
+    background-color: #606062 !important;
+    background-image: none !important;
+    border: none !important;
+    /* Remove qualquer verde */
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* When the checkbox is checked, add a blue background */
+#addFuncionarioModal .container input:checked ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:checked ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:checked + .checkmark {
+    background: linear-gradient(#255CD2, #1D52C1) !important;
+    background-image: linear-gradient(#255CD2, #1D52C1) !important;
+    background-color: #255CD2 !important;
+    border: none !important;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+#addFuncionarioModal .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+#addFuncionarioModal .container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+#addFuncionarioModal .container .checkmark:after {
+    left: 0.45em;
+    top: 0.20em;
+    width: 0.24em;
+    height: 0.6em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+}
+
+/* Override QUALQUER estilo verde do Bootstrap ou outros */
+#addFuncionarioModal .form-check-input:checked,
+#addFuncionarioModal .form-check-input:not(:checked),
+#addFuncionarioModal input[type="checkbox"]:checked,
+#addFuncionarioModal input[type="checkbox"]:not(:checked),
+#addFuncionarioModal .container input[type="checkbox"]:checked,
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked) {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove qualquer cor verde que possa estar sendo aplicada */
+#addFuncionarioModal .container input[type="checkbox"]:checked,
+#addFuncionarioModal .container input:checked,
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked),
+#addFuncionarioModal .container input:not(:checked) {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Garante que checkboxes NÃO marcadas sejam SEMPRE CINZAS - REMOVE QUALQUER VERDE */
+#addFuncionarioModal .container input[type="checkbox"]:not(:checked) ~ .checkmark,
+#addFuncionarioModal .container input:not(:checked) ~ .checkmark,
+#addFuncionarioModal .container .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:hover ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:focus ~ .checkmark,
+#addFuncionarioModal .container input[type="checkbox"]:active ~ .checkmark,
+#addFuncionarioModal .container:hover .checkmark:not(:has(+ input:checked)),
+#addFuncionarioModal .container:focus .checkmark,
+#addFuncionarioModal .container:active .checkmark {
+    background: #606062 !important;
+    background-color: #606062 !important;
+    background-image: none !important;
+    border-color: transparent !important;
+}
+
+/* Garante que o checkmark customizado seja sempre visível e azul quando marcado */
+#addFuncionarioModal .container:has(input:checked) .checkmark,
+#addFuncionarioModal .container input:checked ~ .checkmark {
+    background: linear-gradient(#255CD2, #1D52C1) !important;
+    background-image: linear-gradient(#255CD2, #1D52C1) !important;
+    background-color: #255CD2 !important;
+}
+
+/* REGRA FINAL - REMOVE QUALQUER VERDE DO MODAL DE FUNCIONÁRIOS */
+#addFuncionarioModal .container .checkmark,
+#addFuncionarioModal .container input[type="checkbox"] ~ .checkmark {
+    /* Força cinza em TODOS os casos quando não marcado */
+    background: #606062 !important;
+    background-color: #606062 !important;
+}
+
+#addFuncionarioModal .container input[type="checkbox"]:checked ~ .checkmark {
+    /* Força azul quando marcado */
+    background: linear-gradient(#255CD2, #1D52C1) !important;
+    background-image: linear-gradient(#255CD2, #1D52C1) !important;
+    background-color: #255CD2 !important;
+}
+
+/* Remove qualquer cor verde do Bootstrap */
+#addFuncionarioModal * {
+    --bs-success: #606062 !important;
+}
+
+#addFuncionarioModal .form-check-input,
+#addFuncionarioModal input[type="checkbox"] {
+    accent-color: #606062 !important;
+}
+
+#addFuncionarioModal .form-check-input:checked,
+#addFuncionarioModal input[type="checkbox"]:checked {
+    accent-color: #255CD2 !important;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }

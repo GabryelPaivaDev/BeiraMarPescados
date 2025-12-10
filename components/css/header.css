@@ -1,480 +1,1069 @@
 /* =========================
+   HEADER (TOPO) - VISUAL FINAL
+   ========================= */
 
-HEADER (TOPO) - VISUAL FINAL
-
-========================= */
 
 .top-header {
-  background: #ffffff;
-  padding: 0 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  left: var(--sidebar-width);
-  right: 0;
-  z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-primary, #ffffff);
+    padding: 0 1.5rem;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px var(--shadow, rgba(0,0,0,0.02));
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease;
+    overflow: visible; /* Permite que o dropdown apareça */
+    margin-left: 0 !important; /* Remove qualquer margem */
+    margin-top: 0 !important; /* Remove qualquer margem */
+    border-left: none !important; /* Remove borda esquerda que pode criar gap visual */
 }
+
+[data-theme="dark"] .top-header {
+    background: #0C1A2D;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
 
 /* LADO ESQUERDO */
-
 .header-left {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  z-index: 20;
-  position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    z-index: 20;
+    position: relative;
 }
+
 
 .brand-logo-btn {
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  outline: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    outline: none;
 }
+
 
 .header-logo-img {
-  height: 55px;
-  width: auto;
-  max-width: 180px;
-  object-fit: contain;
-  border-radius: 8px;
-  display: block;
+    height: 55px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
 }
+
 
 .header-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0;
-  white-space: nowrap;
-  text-align: center;
-  pointer-events: none;
-  z-index: 10;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    margin: 0;
+    white-space: nowrap;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+    transition: color 0.3s ease;
 }
+
+/* Badge de nível de acesso */
+#nivelAcessoBadge {
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#nivelAcessoBadge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Em telas menores que 1400px (tablet e mobile), mostra apenas o ícone */
+@media (max-width: 1400px) {
+    #nivelAcessoBadge {
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: auto !important;
+        gap: 0 !important;
+        cursor: pointer !important;
+    }
+    
+    #nivelAcessoBadge i {
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+    }
+    
+    #nivelAcessoBadge span {
+        display: none !important;
+    }
+    
+    #nivelAcessoBadge:hover i {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+}
+
+[data-theme="dark"] #nivelAcessoBadge {
+    /* Mantém as cores mesmo no tema escuro */
+}
+
 
 /* LADO DIREITO */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        height: 100%;
+        z-index: 20;
+        position: relative;
+        overflow: visible; /* Permite que o dropdown apareça */
+    }
+    
+    /* Desktop e Tablet: header-buttons-group não deve afetar o layout */
+    /* Os botões devem aparecer normalmente sem agrupamento especial */
+    .header-actions .header-buttons-group {
+        display: contents; /* Faz com que os filhos diretos se comportem como se não houvesse wrapper */
+    }
+    
+    /* Desktop e Tablet: Reset de estilos dos botões para comportamento normal */
+    .header-actions .header-buttons-group .theme-toggle-wrapper,
+    .header-actions .header-buttons-group .notification-wrapper,
+    .header-actions .header-buttons-group .user-menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: auto !important;
+        min-height: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  height: 100%;
-  z-index: 20;
-  position: relative;
-}
 
 .notification-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1100;
 }
+
 
 /* BOTÕES - NOTIFICAÇÃO E USUÁRIO */
-
 .notification-btn {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 25%;
-  background: #ffffff;
-  border: none;
-  color: #4B5563;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-  position: relative;
-  z-index: 101;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 25%;
+    background: var(--bg-primary, #ffffff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-secondary, #4B5563);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    position: relative;
+    z-index: 1101 !important; /* Acima do dropdown */
 }
+
+[data-theme="dark"] .notification-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .notification-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
 
 .user-menu-btn {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-  position: relative;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    background: var(--bg-primary, #fff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-secondary, #64748b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 5px var(--shadow, rgba(0,0,0,0.02));
+    position: relative;
 }
+
+[data-theme="dark"] .user-menu-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .user-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
 
 .notification-btn i,
 .user-menu-btn i {
-  font-size: 1.4rem !important;
-  pointer-events: none;
+    font-size: 1.4rem !important;
+    pointer-events: none;
+    transition: color 0.3s ease;
 }
+
+[data-theme="dark"] .notification-btn i,
+[data-theme="dark"] .user-menu-btn i {
+    color: #cbd5e1 !important;
+}
+
 
 .notification-btn:hover {
-  background: #f1f5f9;
-  color: #4B5563;
-  border-color: #cbd5e1;
+    background: var(--bg-tertiary, #f1f5f9);
+    color: var(--text-primary, #4B5563);
+    border-color: var(--border-color, #cbd5e1);
 }
 
+
 .user-menu-btn:hover {
-  background: #f1f5f9;
-  color: #3b82f6;
-  border-color: #cbd5e1;
+    background: var(--bg-tertiary, #f1f5f9);
+    color: var(--accent-color, #3b82f6);
+    border-color: var(--border-color, #cbd5e1);
 }
+
 
 .notification-btn:active,
 .user-menu-btn:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
+
 
 /* BADGE DE NOTIFICAÇÃO */
-
 .notification-count {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #ef4444;
-  color: #ffffff !important;
-  font-size: 0.7rem;
-  font-weight: 700;
-  min-width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
-  z-index: 2;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: #ffffff !important;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
+    z-index: 2;
 }
 
-/* BANDEJA DROPDOWN - DESKTOP E GERAL */
 
+/* BANDEJA DROPDOWN */
 .notifications-dropdown {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 340px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px -5px rgba(0,0,0,0.15);
-  border: 1px solid #f1f5f9;
-  z-index: 1000;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.2s ease;
+    position: fixed !important; /* Fixed para garantir que apareça acima de tudo */
+    top: 80px !important; /* Logo abaixo do header */
+    right: 20px !important; /* Margem da direita */
+    width: 340px;
+    max-width: calc(100vw - 40px); /* Responsivo no mobile */
+    background: var(--bg-primary, white);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px -5px var(--shadow, rgba(0,0,0,0.15));
+    border: 1px solid var(--border-color, #f1f5f9);
+    z-index: 9999 !important; /* Muito acima de tudo */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    display: block !important; /* Força display */
 }
 
 .notifications-dropdown.show {
-  max-height: 500px;
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    max-height: 500px !important;
+    pointer-events: auto !important;
+    display: block !important;
 }
+
+
+
 
 .notifications-dropdown-header {
-  padding: 1.2rem;
-  border-bottom: 1px solid #f1f5f9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  border-radius: 16px 16px 0 0;
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--border-color, #f1f5f9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-primary, #fff);
+    border-radius: 16px 16px 0 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
 
 .notifications-dropdown-header h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1e293b;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    transition: color 0.3s ease;
 }
+
 
 .mark-all-read {
-  font-size: 0.8rem;
-  color: #3b82f6;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: color 0.2s;
+    font-size: 0.8rem;
+    color: #3b82f6;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
 }
+
 
 .mark-all-read:hover {
-  color: #2563eb;
+    color: #2563eb;
 }
+
 
 .notifications-list {
-  max-height: 350px;
-  overflow-y: auto;
+    max-height: 350px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave no mobile */
+    background: var(--bg-primary, #ffffff);
+    border-radius: 0 0 16px 16px;
 }
 
+.notifications-list:empty::before {
+    content: "Nenhuma notificação";
+    display: block;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary, #94a3b8);
+    font-size: 0.9rem;
+}
+
+[data-theme="dark"] .notifications-list {
+    background: var(--bg-primary, #1e293b);
+}
+
+/* Mobile: ajusta altura máxima da lista */
+@media (max-width: 768px) {
+    .notifications-list {
+        max-height: calc(100vh - 200px) !important;
+    }
+}
+
+
 .notification-item {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid #f8fafc;
-  cursor: pointer;
-  border-left: 4px solid transparent;
-  transition: background 0.2s;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border-color, #f8fafc);
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: background 0.2s, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .notification-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .notification-item:hover {
-  background: #f8fafc;
+    background: var(--bg-tertiary, #f8fafc);
 }
+
+[data-theme="dark"] .notification-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 
 .notification-item.warning {
-  border-left-color: #f59e0b;
+    border-left-color: #f59e0b;
 }
+
 
 .notification-item.success {
-  border-left-color: #10b981;
+    border-left-color: #10b981;
 }
+
 
 .notification-item.error {
-  border-left-color: #ef4444;
+    border-left-color: #ef4444;
 }
+
 
 .notification-item.info {
-  border-left-color: #3b82f6;
+    border-left-color: #3b82f6;
 }
+
 
 .notification-item-icon {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
 }
+
 
 .notification-item-icon.warning {
-  background: #fff7ed;
-  color: #ea580c;
+    background: #fff7ed;
+    color: #ea580c;
 }
+
 
 .notification-item-icon.success {
-  background: #ecfdf5;
-  color: #10b981;
+    background: #ecfdf5;
+    color: #10b981;
 }
+
 
 .notification-item-icon.error {
-  background: #fef2f2;
-  color: #ef4444;
+    background: #fef2f2;
+    color: #ef4444;
 }
+
 
 .notification-item-icon.info {
-  background: #eff6ff;
-  color: #3b82f6;
+    background: #eff6ff;
+    color: #3b82f6;
 }
+
 
 .notification-item-content {
-  flex: 1;
+    flex: 1;
 }
 
+
 .notification-item-title {
-  margin: 0 0 0.2rem 0;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #334155;
+    margin: 0 0 0.2rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary, #334155);
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .notification-item-title {
+    color: #ffffff !important;
 }
 
 .notification-item-text {
-  margin: 0;
-  font-size: 0.85rem;
-  color: #64748b;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary, #64748b);
+    transition: color 0.3s ease;
 }
 
+[data-theme="dark"] .notification-item-text {
+    color: #ffffff !important;
+}
+
+.notification-item-dropdown {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border-color, #f8fafc);
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: background 0.2s ease, border-color 0.3s ease;
+    background: var(--bg-primary, #ffffff);
+}
+
+.notification-item-dropdown:hover {
+    background: var(--bg-tertiary, #f8fafc) !important;
+}
+
+.notification-item-dropdown.warning {
+    border-left-color: #f59e0b;
+}
+
+.notification-item-dropdown.success {
+    border-left-color: #10b981;
+}
+
+.notification-item-dropdown.error {
+    border-left-color: #ef4444;
+}
+
+.notification-item-dropdown.info {
+    border-left-color: #3b82f6;
+}
+
+.notification-item-dropdown.notification-read {
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .notification-item-dropdown {
+    background: var(--bg-primary, #1e293b);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .notification-item-dropdown:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+
 .notification-item-time {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  display: block;
-  margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary, #94a3b8);
+    display: block;
+    margin-top: 0.4rem;
+    transition: color 0.3s ease;
+}
+
+
+/* =========================================
+   DESKTOP (min-width: 1025px)
+   ========================================= */
+
+@media (min-width: 1025px) {
+    /* Garante que header-buttons-group não afete o layout no desktop */
+    .header-actions .header-buttons-group {
+        display: contents !important;
+    }
+    
+    /* Reset todos os estilos mobile dos botões */
+    .header-actions .header-buttons-group .theme-toggle-wrapper {
+        display: flex !important;
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .theme-toggle {
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .theme-toggle-slider {
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-wrapper {
+        display: flex !important;
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-btn i {
+        font-size: 1.4rem !important;
+    }
+    
+    .header-actions .header-buttons-group .user-menu-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+    
+    .header-actions .header-buttons-group .user-menu-btn i {
+        font-size: 1.4rem !important;
+    }
 }
 
 /* =========================================
+   TABLET (769px - 1024px)
+   ========================================= */
 
-MOBILE (LOGO NÃO REDONDA + CLICÁVEL)
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Garante que header-buttons-group não afete o layout no tablet */
+    .header-actions .header-buttons-group {
+        display: contents !important;
+    }
+    
+    /* Reset todos os estilos mobile dos botões */
+    .header-actions .header-buttons-group .theme-toggle-wrapper {
+        display: flex !important;
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .theme-toggle {
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .theme-toggle-slider {
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-wrapper {
+        display: flex !important;
+        width: auto !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-btn i {
+        font-size: 1.4rem !important;
+    }
+    
+    .header-actions .header-buttons-group .user-menu-btn {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+    
+    .header-actions .header-buttons-group .user-menu-btn i {
+        font-size: 1.4rem !important;
+    }
+}
 
-========================================= */
+/* =========================================
+   MOBILE (LOGO NÃO REDONDA + CLICÁVEL)
+   ========================================= */
+
 
 @media (max-width: 768px) {
-  .top-header {
-    padding: 0 0.75rem !important;
-    height: 65px !important;
-    left: 0 !important;
-  }
-
-  .header-title {
-    display: none !important;
-  }
-
-  .header-left {
-    flex: 0 0 auto !important;
-    width: 60px !important;
-    min-width: 60px !important;
-    z-index: 9999 !important;
-  }
-
-  #brandLogo.brand-logo-btn {
-    width: 100% !important;
-    height: 100% !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    pointer-events: auto !important;
-  }
-
-  #brandLogo img.header-logo-img {
-    width: 45px !important;
-    height: 45px !important;
-    min-width: 45px !important;
-    max-width: 45px !important;
-    object-fit: cover !important;
-    border-radius: 6px !important;
-    display: block !important;
-    pointer-events: none !important;
-  }
-
-  .header-actions {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    position: relative !important;
-    gap: 0.2rem !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 20 !important;
-    flex-shrink: 0 !important;
-  }
-
-  .notification-wrapper {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-
-  .notification-btn {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    flex-shrink: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .notification-btn i {
-    font-size: 1.2rem !important;
-  }
-
-<<<<<<< HEAD
-  .user-menu-btn {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    flex-shrink: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-=======
-    .header-actions {
+    body {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    .top-header {
+        padding: 0 0.5rem 0 0 !important; /* Sem padding esquerdo para grudar na sidebar */
+        height: 65px;
+        /* Gruda na sidebar sem vão - remove qualquer espaço */
+        left: 64px !important;
+        top: 0 !important; /* Gruda no topo da tela */
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+        padding-left: 0 !important;
+        padding-top: 0 !important;
         position: fixed !important;
-        right: 1rem !important;
-        top: 12.5px !important;
+        z-index: 1000;
+        border-left: none !important;
+        border-top: none !important;
+        right: 0 !important; /* Garante que ocupe toda a largura disponível */
+        width: calc(100% - 64px) !important; /* Largura total menos a sidebar */
+        box-sizing: border-box !important; /* Inclui padding no cálculo da largura */
+        /* Remove qualquer gap ou espaço */
+        gap: 0 !important;
+        transform: none !important;
+        /* Garante que não haja espaçamento entre sidebar e header */
+        margin: 0 !important;
+        border-collapse: collapse !important;
+    }
+    
+    /* Em telas muito estreitas, garante que o header fique grudado */
+    @media (max-width: 400px) {
+        .top-header {
+            left: 64px !important;
+            right: 0 !important;
+            width: calc(100% - 64px) !important;
+            min-width: calc(100% - 64px) !important;
+            max-width: calc(100% - 64px) !important;
+            position: fixed !important;
+            top: 0 !important;
+            margin: 0 !important;
+            padding: 0 0.3rem 0 0 !important;
+        }
+    }
+    
+    [data-theme="dark"] .top-header {
+        background: #0C1A2D;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+
+    .header-title {
+        display: flex !important;
+        align-items: center !important; /* Centraliza verticalmente */
+        position: static !important;
+        left: auto !important;
+        transform: none !important;
+        right: auto !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index: 5;
+        text-align: left !important;
+        max-width: none !important;
+        margin-left: 0.5rem !important;
+        flex: 1;
+        height: 100% !important; /* Ocupa toda altura do header */
+    }
+
+
+    .header-left {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: auto !important;
+        z-index: 1001 !important;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
         gap: 0.5rem !important;
-        background: transparent !important;
-        z-index: 101 !important;
+        height: 100% !important; /* Ocupa toda altura do header */
+    }
+    
+    #brandLogo.brand-logo-btn {
+        padding-left: 1rem !important;
+        margin-left: 0 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Remove qualquer gap entre header e sidebar no mobile */
+    .top-header {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        border-left: none !important;
+        /* Garante que não haja nenhum espaço entre sidebar e header */
+        left: 64px !important;
+        width: calc(100% - 64px) !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Garante que a sidebar também não tenha borda ou espaçamento que crie gap */
+    .sidebar {
+        border-right: none !important;
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .header-actions {
+        position: relative !important;
+        z-index: 1001 !important;
+        flex-shrink: 0 !important;
+        margin-left: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        padding-right: 0 !important;
+        margin-right: 0 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+        height: 100% !important; /* Ocupa toda altura do header */
+    }
+    
+    /* Div que agrupa os 3 botões */
+    .header-actions .header-buttons-group {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 0.6rem !important; /* Espaço entre os botões */
+        flex-shrink: 0 !important;
+        flex-wrap: nowrap !important;
+        width: auto !important;
+        margin-left: auto !important;
+        height: 100% !important; /* Ocupa toda altura do header-actions */
+        align-self: center !important; /* Centraliza verticalmente */
+        margin-top: -3px !important; /* Sobe um pouquinho para alinhar melhor com o h1 */
+    }
+    
+    /* Garante que os elementos filhos sejam sempre visíveis e não quebrem */
+    .header-actions > *:not(.header-buttons-group) {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        flex-basis: auto !important;
+    }
+    
+    /* Estilos para os botões dentro do header-buttons-group - MOBILE APENAS */
+    .header-actions .header-buttons-group {
+        margin-left: -0.5rem !important; /* Puxa mais para a esquerda */
+        align-self: center !important; /* Alinha no centro vertical do header (mesma altura do h1) */
+    }
+    
+    /* Badge de nível de acesso no mobile - apenas ícone */
+    .header-actions .header-buttons-group #nivelAcessoBadge {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important; /* Remove padding */
+        background: transparent !important; /* Remove fundo */
+        border: none !important; /* Remove borda */
+        border-radius: 0 !important;
+        width: auto !important;
         height: auto !important;
+        min-width: auto !important;
+        gap: 0 !important;
+    }
+    
+    .header-actions .header-buttons-group #nivelAcessoBadge i {
+        font-size: 0.9rem !important;
         margin: 0 !important;
     }
-
-    .notification-btn {
-        width: 40px !important;
-        height: 40px !important;
-        min-width: 40px !important;
-        min-height: 40px !important;
+    
+    .header-actions .header-buttons-group #nivelAcessoBadge span {
+        display: none !important; /* Esconde o texto */
     }
-
-    .notification-btn i {
-        font-size: 1.2rem !important;
+    
+    
+    .header-actions .header-buttons-group .theme-toggle-wrapper {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        margin-right: 0 !important;
     }
-
-    .user-menu-btn {
-        width: 40px !important;
-        height: 40px !important;
-        min-width: 40px !important;
-        min-height: 40px !important;
+    
+    .header-actions .header-buttons-group .notification-wrapper {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        width: auto !important;
     }
-
-    .user-menu-btn i {
-        font-size: 1.2rem !important;
+    
+    .header-actions .header-buttons-group .notification-btn {
+        width: 45px !important;
+        height: 45px !important;
+        min-width: 45px !important;
+        min-height: 45px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
-
-    .notification-count {
-        top: -6px !important;
-        right: -6px !important;
-        min-width: 20px !important;
-        height: 20px !important;
+    
+    .header-actions .header-buttons-group .notification-btn i {
+        font-size: 1.3rem !important;
+    }
+    
+    .header-actions .header-buttons-group .notification-count {
         font-size: 0.65rem !important;
+        min-width: 1.1rem !important;
+        min-height: 1.1rem !important;
+        padding: 2px 4px !important;
+        top: -3px !important;
+        right: -3px !important;
     }
->>>>>>> 9dcef55662332414da48e6c9d3ad321dae964edb
+    
+    .header-actions .header-buttons-group .user-menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        width: 45px !important;
+        min-width: 45px !important;
+        max-width: 45px !important;
+        height: 45px !important;
+        min-height: 45px !important;
+        max-height: 45px !important;
+        padding: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .header-actions .header-buttons-group .user-menu-btn i {
+        font-size: 1.5rem !important;
+    }
 
-  .user-menu-btn i {
-    font-size: 1.2rem !important;
-  }
 
-  .notification-count {
-    top: -6px !important;
-    right: -6px !important;
-    min-width: 20px !important;
-    height: 20px !important;
-    font-size: 0.65rem !important;
-  }
+    #brandLogo.brand-logo-btn {
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0 !important;
+        padding-left: 1rem !important; /* Mantém padding para afastar do sidebar */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        pointer-events: auto !important;
+    }
 
-  .notifications-dropdown {
-    position: fixed !important;
-    top: 65px !important;
-    right: 0.75rem !important;
-    left: auto !important;
-    width: 280px !important;
-    max-width: none !important;
-    z-index: 9999 !important;
-  }
+
+    #brandLogo img.header-logo-img {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        max-width: 38px !important;
+        object-fit: contain !important;
+        border-radius: 6px !important;
+        display: block !important;
+        pointer-events: none !important;
+    }
+
+
+    .notifications-dropdown {
+        position: fixed !important;
+        top: 65px !important;
+        left: 74px !important; /* 64px sidebar + 10px margem */
+        right: 10px !important;
+        width: calc(100vw - 84px) !important; /* 64px sidebar + 20px margens */
+        max-width: calc(100vw - 84px) !important;
+        z-index: 9999 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+    }
+
+    .notifications-dropdown.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        max-height: calc(100vh - 100px) !important; /* Altura máxima respeitando viewport */
+        pointer-events: auto !important;
+        display: block !important;
+    }
+
+    .notifications-dropdown-header {
+        padding: 1rem !important;
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    .notifications-dropdown-header h3 {
+        font-size: 0.95rem !important;
+    }
+
+    .notifications-dropdown-header .mark-all-read {
+        font-size: 0.75rem !important;
+        padding: 0.3rem 0.8rem !important;
+    }
+
+    .notifications-list {
+        max-height: calc(100vh - 180px) !important; /* Altura máxima da lista */
+        overflow-y: auto !important;
+    }
+
+    .notification-item-dropdown {
+        padding: 0.9rem 1rem !important;
+    }
+
+    .notification-item-icon {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 1rem !important;
+    }
+
+    .notification-item-title {
+        font-size: 0.85rem !important;
+    }
+
+    .notification-item-text {
+        font-size: 0.8rem !important;
+    }
+
+    .notification-item-time {
+        font-size: 0.7rem !important;
+    }
+
+    /* Quando a sidebar estiver expandida no mobile */
+    body.mobile-menu-open .notifications-dropdown {
+        left: 250px !important; /* 240px sidebar + 10px margem */
+        width: calc(100vw - 260px) !important; /* 240px sidebar + 20px margens */
+        max-width: calc(100vw - 260px) !important;
+    }
+}
+
+
+/* =========================================
+   TABLET (80px sidebar)
+   ========================================= */
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .top-header {
+        left: 80px !important;
+        right: 0 !important;
+        width: calc(100% - 80px) !important;
+        box-sizing: border-box !important;
+        position: fixed !important;
+    }
+    
+    /* Badge de nível de acesso no tablet - apenas ícone */
+    .header-actions .header-buttons-group #nivelAcessoBadge {
+        display: inline-flex !important;
+        padding: 0 !important; /* Remove padding */
+        background: transparent !important; /* Remove fundo */
+        border: none !important; /* Remove borda */
+        border-radius: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: auto !important;
+        gap: 0 !important;
+    }
+    
+    .header-actions .header-buttons-group #nivelAcessoBadge i {
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+    }
+    
+    .header-actions .header-buttons-group #nivelAcessoBadge span {
+        display: none !important; /* Esconde o texto */
+    }
+}
+
+
+/* =========================================
+   MODO COMPACTO
+   ========================================= */
+
+
+body.compact-mode .top-header {
+    left: 80px !important;
 }

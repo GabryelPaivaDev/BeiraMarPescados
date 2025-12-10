@@ -166,11 +166,21 @@
     overflow: hidden;
 }
 
+[data-theme="dark"] .d-card-new {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Efeito Hover do Card */
 .d-card-new:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
     border-color: transparent;
+}
+
+[data-theme="dark"] .d-card-new:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 /* Cabeçalho do Card */
@@ -187,6 +197,11 @@
     letter-spacing: 0.5px;
     font-weight: 600;
     margin: 0 0 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .d-header-new h3 {
+    color: #cbd5e1;
 }
 
 .d-number-new {
@@ -198,6 +213,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .d-number-new {
+    color: #f1f5f9;
 }
 
 /* Ícone do Card */
@@ -221,6 +241,11 @@
     margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid #f8fafc;
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] .d-footer-new {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .d-badge-new {
@@ -265,6 +290,27 @@
     box-shadow: var(--shadow);
     border: 1px solid #f1f5f9;
     height: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Reduz espaçamento desnecessário apenas no PC */
+@media (min-width: 1025px) {
+    .section-card-new {
+        padding: 1.2rem 1.5rem 1.5rem 1.5rem; /* Menos padding bottom */
+    }
+    
+    .section-header-new {
+        margin-bottom: 1rem; /* Reduz margem entre título e botões */
+    }
+    
+    .shortcuts-list-new {
+        gap: 0.6rem; /* Reduz gap entre botões */
+    }
+}
+
+[data-theme="dark"] .section-card-new {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-header-new {
@@ -282,6 +328,11 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .section-header-new h3 {
+    color: #f1f5f9;
 }
 
 /* --- 5. LISTA DE ATIVIDADES --- */
@@ -297,15 +348,25 @@
     gap: 1rem;
     padding: 1rem;
     border-radius: 12px;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.3s ease;
     border: 1px solid #f8f9fa;
     background: #fff;
+}
+
+[data-theme="dark"] .activity-item-new {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .activity-item-new:hover {
     background: #f8fafc;
     border-color: #e2e8f0;
     transform: translateX(3px);
+}
+
+[data-theme="dark"] .activity-item-new:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .act-icon-new {
@@ -324,6 +385,11 @@
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--dash-text);
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .act-content-new h4 {
+    color: #f1f5f9;
 }
 
 .act-content-new p {
@@ -331,6 +397,24 @@
     font-size: 0.85rem;
     color: var(--dash-muted);
     line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .act-content-new p {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .act-content-new small {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .activity-close-btn {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .activity-close-btn:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* --- 6. BOTÕES DE AÇÃO RÁPIDA --- */
@@ -349,12 +433,18 @@
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     width: 100%;
     text-align: left;
     color: var(--dash-text);
     font-weight: 500;
     font-size: 0.95rem;
+}
+
+[data-theme="dark"] .shortcut-btn-new {
+    background: #334155;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
 }
 
 .shortcut-btn-new:hover {
@@ -365,11 +455,23 @@
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
+[data-theme="dark"] .shortcut-btn-new:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .shortcut-btn-new i {
     font-size: 1.2rem;
     color: #3b82f6;
     width: 24px;
     text-align: center;
+    transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .shortcut-btn-new i {
+    color: #60a5fa;
 }
 
 /* --- 7. RESPONSIVIDADE --- */
