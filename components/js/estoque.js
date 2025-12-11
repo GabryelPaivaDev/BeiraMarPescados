@@ -994,7 +994,7 @@ function addEstoqueStyles() {
             .modal-header { background: linear-gradient(135deg, #0066cc, #004499); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; color: white; }
             .modal-header h3 { margin: 0; font-size: 1.1rem; display: flex; gap: 0.5rem; align-items: center; }
             .btn-close-modal { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0.8; }
-            .btn-close-modal:hover { opacity: 1; color: white !important; background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+            .btn-close-modal:hover { opacity: 1; color: #ffcccc; }
 
             .modal-body { padding: 2rem; overflow-y: auto; transition: background-color 0.3s ease, color 0.3s ease; }
             [data-theme="dark"] .modal-body { background: #1e293b; color: #f1f5f9; }

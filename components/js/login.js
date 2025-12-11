@@ -327,20 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.password-toggle').forEach(btn => {
         btn.addEventListener('click', function() {
             const input = this.previousElementSibling;
-            const icon = this.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                if (icon) {
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                }
-            } else {
-                input.type = 'password';
-                if (icon) {
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            }
+            input.type = input.type === 'password' ? 'text' : 'password';
+            this.textContent = input.type === 'password' ? '👁' : '👁‍🗨';
         });
     });
 
