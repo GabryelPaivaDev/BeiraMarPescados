@@ -826,7 +826,7 @@ function addFluxoStyles() {
             }
             .modal-header h3 { margin: 0; font-size: 1.1rem; color: white; display: flex; gap: 0.5rem; align-items: center; }
             .btn-close-modal { background: none; border: none; color: white; font-size: 1.75rem; cursor: pointer; opacity: 0.8; transition: 0.2s; padding: 0; line-height: 1; }
-            .btn-close-modal:hover { opacity: 1; transform: scale(1.1); color: #ffcccc; }
+            .btn-close-modal:hover { opacity: 1; transform: scale(1.1); color: white !important; background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
             
             .modal-body { padding: 2rem; overflow-y: auto; max-height: 80vh; }
             .modal-footer { padding: 1rem 2rem; background: #f9f9f9; text-align: right; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 1rem; }

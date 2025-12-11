@@ -1108,7 +1108,7 @@ function addProducaoStyles() {
             }
             #producao .modal-header h3 { margin: 0; font-size: 1.1rem; color: white; display: flex; align-items: center; gap: 0.5rem; }
             #producao .btn-close-modal { background: none; border: none; font-size: 1.75rem; color: rgba(255,255,255,0.8); cursor: pointer; padding: 0; line-height: 1; }
-            #producao .btn-close-modal:hover { color: white; }
+            #producao .btn-close-modal:hover { color: white !important; background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
             
             .modal-body { padding: 2rem; overflow-y: auto; background: #fcfcfc; }
             .modal-footer { padding: 1.2rem 2rem; background: white; border-top: 1px solid #edf2f7; display: flex; justify-content: flex-end; gap: 1rem; }

@@ -369,48 +369,6 @@ function loadVendasContent() {
                             </div>
                         </div>
 
-                        <hr class="vendas-separator"/>
-                        
-                        <div class="vendas-row">
-                            <div class="vendas-col" style="flex: 2;">
-                                <div class="form-group">
-                                    <label>Produto</label>
-                                    <select id="npProduto" class="form-control" onchange="atualizarPrecoUnitario()" required>
-                                        <option value="">Selecione o produto...</option>
-                                        <option value="Tilápia Inteira">Tilápia Inteira (R$ 12,00/kg)</option>
-                                        <option value="Filé de Tilápia">Filé de Tilápia (R$ 38,00/kg)</option>
-                                        <option value="Salmão Fresco">Salmão Fresco (R$ 45,00/kg)</option>
-                                        <option value="Camarão Limpo">Camarão Limpo (R$ 65,00/kg)</option>
-                                        <option value="Camarão Inteiro">Camarão Inteiro (R$ 35,00/kg)</option>
-                                        <option value="Lula Anéis">Lula Anéis (R$ 42,00/kg)</option>
-                                        <option value="Sardinha">Sardinha (R$ 9,50/kg)</option>
-                                        <option value="Outros">Outros (Preço Manual)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="vendas-col">
-                                <div class="form-group">
-                                    <label>Preço/Kg</label>
-                                    <input type="number" id="npPrecoUnit" class="form-control readonly-field" step="0.01" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="vendas-row">
-                            <div class="vendas-col">
-                                <div class="form-group">
-                                    <label>Quantidade (kg)</label>
-                                    <input type="number" id="npQtd" class="form-control" step="0.1" placeholder="0.0" oninput="calcularTotalPedido()" required>
-                                </div>
-                            </div>
-                            <div class="vendas-col">
-                                <div class="form-group">
-                                    <label style="color: #0066cc;">Valor Total (R$)</label>
-                                    <input type="number" id="npValorTotal" class="form-control readonly-field" step="0.01" placeholder="0.00" readonly required>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <label>Forma de Pagamento</label>
                             <select id="npPagamento" class="form-control">
@@ -419,6 +377,26 @@ function loadVendasContent() {
                                 <option value="Cartão Crédito">Cartão Crédito</option>
                                 <option value="Boleto">Boleto</option>
                             </select>
+                        </div>
+
+                        <hr class="vendas-separator"/>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4 style="margin: 0; color: #2c3e50; font-size: 1.1rem;">Itens do Pedido</h4>
+                            <button type="button" class="btn btn-primary" onclick="adicionarItemPedido()" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                <i class="fas fa-plus"></i> Adicionar Item
+                            </button>
+                        </div>
+
+                        <div id="listaItensPedido" style="margin-bottom: 1.5rem;">
+                            <!-- Itens serão adicionados aqui dinamicamente -->
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 2px solid #0066cc;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <strong style="font-size: 1.1rem; color: #2c3e50;">Total do Pedido:</strong>
+                                <span id="totalGeralPedido" style="font-size: 1.5rem; font-weight: 700; color: #0066cc;">R$ 0,00</span>
+                            </div>
                         </div>
 
                         <div class="form-actions">
@@ -459,11 +437,94 @@ function loadVendasContent() {
     }
 }
 
-// --- LÓGICA DE CÁLCULO DE PREÇO ---
+// --- LÓGICA DE MÚLTIPLOS ITENS ---
 
-window.atualizarPrecoUnitario = function() {
-    const produtoSelect = document.getElementById('npProduto').value;
-    const precoInput = document.getElementById('npPrecoUnit');
+// Garante que contadorItens seja global
+if(typeof window.contadorItens === 'undefined') {
+    window.contadorItens = 0;
+}
+let contadorItens = window.contadorItens;
+
+window.adicionarItemPedido = function() {
+    const listaItens = document.getElementById('listaItensPedido');
+    if (!listaItens) {
+        console.error('❌ Lista de itens não encontrada ao adicionar item!');
+        return;
+    }
+    
+    // Incrementa contador (garante que seja global)
+    if(typeof window.contadorItens === 'undefined') {
+        window.contadorItens = 0;
+    }
+    window.contadorItens++;
+    contadorItens = window.contadorItens;
+    const itemId = `item_${contadorItens}`;
+    
+    const itemHTML = `
+        <div class="item-pedido" id="${itemId}" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #e0e0e0; position: relative;">
+            <button type="button" onclick="removerItemPedido('${itemId}')" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #dc3545; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;" title="Remover item">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="vendas-row">
+                <div class="vendas-col" style="flex: 2;">
+                    <div class="form-group">
+                        <label>Produto</label>
+                        <select class="form-control item-produto" onchange="atualizarPrecoItem('${itemId}')" required>
+                            <option value="">Selecione o produto...</option>
+                            <option value="Tilápia Inteira">Tilápia Inteira (R$ 12,00/kg)</option>
+                            <option value="Filé de Tilápia">Filé de Tilápia (R$ 38,00/kg)</option>
+                            <option value="Salmão Fresco">Salmão Fresco (R$ 45,00/kg)</option>
+                            <option value="Camarão Limpo">Camarão Limpo (R$ 65,00/kg)</option>
+                            <option value="Camarão Inteiro">Camarão Inteiro (R$ 35,00/kg)</option>
+                            <option value="Lula Anéis">Lula Anéis (R$ 42,00/kg)</option>
+                            <option value="Sardinha">Sardinha (R$ 9,50/kg)</option>
+                            <option value="Outros">Outros (Preço Manual)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="vendas-col">
+                    <div class="form-group">
+                        <label>Preço/Kg</label>
+                        <input type="number" class="form-control item-preco readonly-field" step="0.01" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vendas-row">
+                <div class="vendas-col">
+                    <div class="form-group">
+                        <label>Quantidade (kg)</label>
+                        <input type="number" class="form-control item-qtd" step="0.1" placeholder="0.0" oninput="calcularTotalItem('${itemId}'); calcularTotalGeralPedido();" required>
+                    </div>
+                </div>
+                <div class="vendas-col">
+                    <div class="form-group">
+                        <label style="color: #0066cc;">Subtotal (R$)</label>
+                        <input type="number" class="form-control item-total readonly-field" step="0.01" placeholder="0.00" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    listaItens.insertAdjacentHTML('beforeend', itemHTML);
+}
+
+window.removerItemPedido = function(itemId) {
+    const item = document.getElementById(itemId);
+    if (item) {
+        item.remove();
+        calcularTotalGeralPedido();
+    }
+}
+
+window.atualizarPrecoItem = function(itemId) {
+    const item = document.getElementById(itemId);
+    if (!item) return;
+    
+    const produtoSelect = item.querySelector('.item-produto').value;
+    const precoInput = item.querySelector('.item-preco');
     
     if (tabelaPrecos[produtoSelect] !== undefined) {
         if (produtoSelect === 'Outros') {
@@ -471,22 +532,71 @@ window.atualizarPrecoUnitario = function() {
             precoInput.removeAttribute('readonly');
             precoInput.classList.remove('readonly-field');
             precoInput.focus();
-            precoInput.oninput = calcularTotalPedido;
+            precoInput.oninput = function() {
+                calcularTotalItem(itemId);
+                calcularTotalGeralPedido();
+            };
         } else {
             precoInput.value = tabelaPrecos[produtoSelect].toFixed(2);
             precoInput.setAttribute('readonly', true);
             precoInput.classList.add('readonly-field');
             precoInput.oninput = null;
         }
-        calcularTotalPedido();
+        calcularTotalItem(itemId);
+        calcularTotalGeralPedido();
+    }
+}
+
+window.calcularTotalItem = function(itemId) {
+    const item = document.getElementById(itemId);
+    if (!item) return;
+    
+    const qtd = parseFloat(item.querySelector('.item-qtd').value) || 0;
+    const precoUnit = parseFloat(item.querySelector('.item-preco').value) || 0;
+    const total = qtd * precoUnit;
+    item.querySelector('.item-total').value = total.toFixed(2);
+}
+
+window.calcularTotalGeralPedido = function() {
+    const totalGeral = document.getElementById('totalGeralPedido');
+    if (!totalGeral) return;
+    
+    let soma = 0;
+    const itens = document.querySelectorAll('.item-pedido');
+    
+    itens.forEach(item => {
+        const totalItem = parseFloat(item.querySelector('.item-total').value) || 0;
+        soma += totalItem;
+    });
+    
+    totalGeral.textContent = soma.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+// --- LÓGICA DE CÁLCULO DE PREÇO (mantida para compatibilidade) ---
+
+window.atualizarPrecoUnitario = function() {
+    // Função mantida para compatibilidade, mas não é mais usada no novo formato
+    const produtoSelect = document.getElementById('npProduto');
+    if (produtoSelect) {
+        const produtoValue = produtoSelect.value;
+        const precoInput = document.getElementById('npPrecoUnit');
+        if (precoInput && tabelaPrecos[produtoValue] !== undefined) {
+            if (produtoValue === 'Outros') {
+                precoInput.value = '';
+                precoInput.removeAttribute('readonly');
+                precoInput.classList.remove('readonly-field');
+            } else {
+                precoInput.value = tabelaPrecos[produtoValue].toFixed(2);
+                precoInput.setAttribute('readonly', true);
+                precoInput.classList.add('readonly-field');
+            }
+        }
     }
 }
 
 window.calcularTotalPedido = function() {
-    const qtd = parseFloat(document.getElementById('npQtd').value) || 0;
-    const precoUnit = parseFloat(document.getElementById('npPrecoUnit').value) || 0;
-    const total = qtd * precoUnit;
-    document.getElementById('npValorTotal').value = total.toFixed(2);
+    // Função mantida para compatibilidade
+    calcularTotalGeralPedido();
 }
 
 // --- TABELA E DADOS ---
@@ -583,17 +693,75 @@ window.abrirModalNovoPedido = function() {
     }
     
     const modal = document.getElementById('modalNovoPedido');
-    if(modal) {
-        document.getElementById('formNovoPedido').reset();
-        document.getElementById('editId').value = ''; 
-        document.getElementById('tituloModalPedido').innerHTML = '<i class="fas fa-file-invoice-dollar"></i> Novo Pedido';
-        document.getElementById('btnSalvarPedido').textContent = 'Registrar Venda';
+    if(!modal) {
+        console.error('❌ Modal não encontrado!');
+        if(window.BeiraMarUtils) window.BeiraMarUtils.showToast('Erro ao abrir modal. Recarregue a página.', 'error');
+        return;
+    }
+
+    // Garante que o formulário existe
+    const form = document.getElementById('formNovoPedido');
+    if(!form) {
+        console.error('❌ Formulário não encontrado!');
+        if(window.BeiraMarUtils) window.BeiraMarUtils.showToast('Erro ao abrir formulário. Recarregue a página.', 'error');
+        return;
+    }
+
+    try {
+        form.reset();
+        const editIdInput = document.getElementById('editId');
+        if(editIdInput) editIdInput.value = '';
         
-        document.getElementById('npPrecoUnit').setAttribute('readonly', true);
-        document.getElementById('npPrecoUnit').classList.add('readonly-field');
+        const tituloModal = document.getElementById('tituloModalPedido');
+        if(tituloModal) tituloModal.innerHTML = '<i class="fas fa-file-invoice-dollar"></i> Novo Pedido';
+        
+        const btnSalvar = document.getElementById('btnSalvarPedido');
+        if(btnSalvar) btnSalvar.textContent = 'Registrar Venda';
+        
+        // Limpa a lista de itens
+        const listaItens = document.getElementById('listaItensPedido');
+        if (listaItens) {
+            listaItens.innerHTML = '';
+        } else {
+            console.error('❌ Lista de itens não encontrada!');
+        }
+        
+        // Reseta o contador
+        if(typeof contadorItens !== 'undefined') {
+            contadorItens = 0;
+        } else {
+            window.contadorItens = 0;
+        }
+        
+        // Adiciona o primeiro item automaticamente (com delay para garantir que o DOM está pronto)
+        setTimeout(() => {
+            if(typeof window.adicionarItemPedido === 'function') {
+                window.adicionarItemPedido();
+            } else {
+                console.error('❌ Função adicionarItemPedido não encontrada!');
+            }
+            
+            // Atualiza o total geral
+            if(typeof window.calcularTotalGeralPedido === 'function') {
+                window.calcularTotalGeralPedido();
+            }
+        }, 50);
         
         modal.style.display = 'flex';
-        setTimeout(() => document.getElementById('npCliente').focus(), 100);
+        
+        // Bloqueia scroll do body quando modal está aberto
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        
+        // Foca no campo cliente
+        setTimeout(() => {
+            const clienteInput = document.getElementById('npCliente');
+            if(clienteInput) clienteInput.focus();
+        }, 150);
+    } catch(error) {
+        console.error('❌ Erro ao abrir modal:', error);
+        if(window.BeiraMarUtils) window.BeiraMarUtils.showToast('Erro ao abrir modal. Tente novamente.', 'error');
     }
 }
 
@@ -607,20 +775,50 @@ window.abrirModalEditarPedido = function(id) {
         document.getElementById('editId').value = venda.id;
         document.getElementById('npCliente').value = venda.cliente;
         document.getElementById('npStatus').value = venda.status;
-        
-        const selectProd = document.getElementById('npProduto');
-        if([...selectProd.options].some(o => o.value === venda.produto)) {
-            selectProd.value = venda.produto;
-        } else {
-            selectProd.value = 'Outros';
-        }
-        
-        document.getElementById('npQtd').value = venda.qtd || 0;
-        document.getElementById('npPrecoUnit').value = venda.precoUnit || 0;
-        document.getElementById('npValorTotal').value = venda.valor.toFixed(2);
         document.getElementById('npPagamento').value = venda.pagamento;
 
-        atualizarPrecoUnitario(); 
+        // Limpa a lista de itens
+        const listaItens = document.getElementById('listaItensPedido');
+        if (listaItens) {
+            listaItens.innerHTML = '';
+        }
+        contadorItens = 0;
+
+        // Se tiver itens detalhados (novo formato), carrega todos
+        if (venda.itensDetalhados && Array.isArray(venda.itensDetalhados)) {
+            venda.itensDetalhados.forEach(item => {
+                adicionarItemPedido();
+                const ultimoItem = document.querySelectorAll('.item-pedido');
+                const itemAtual = ultimoItem[ultimoItem.length - 1];
+                
+                if (itemAtual) {
+                    itemAtual.querySelector('.item-produto').value = item.produto;
+                    itemAtual.querySelector('.item-qtd').value = item.qtd;
+                    itemAtual.querySelector('.item-preco').value = item.precoUnit.toFixed(2);
+                    itemAtual.querySelector('.item-total').value = item.subtotal.toFixed(2);
+                    
+                    // Se for "Outros", permite editar o preço
+                    if (item.produto === 'Outros') {
+                        const precoInput = itemAtual.querySelector('.item-preco');
+                        precoInput.removeAttribute('readonly');
+                        precoInput.classList.remove('readonly-field');
+                    }
+                }
+            });
+        } else {
+            // Modo compatibilidade - carrega item único (estrutura antiga)
+            adicionarItemPedido();
+            const itemAtual = document.querySelector('.item-pedido');
+            if (itemAtual && venda.produto) {
+                itemAtual.querySelector('.item-produto').value = venda.produto;
+                itemAtual.querySelector('.item-qtd').value = venda.qtd || 0;
+                itemAtual.querySelector('.item-preco').value = (venda.precoUnit || 0).toFixed(2);
+                const subtotal = (venda.qtd || 0) * (venda.precoUnit || 0);
+                itemAtual.querySelector('.item-total').value = subtotal.toFixed(2);
+            }
+        }
+
+        calcularTotalGeralPedido();
         document.getElementById('tituloModalPedido').innerHTML = `<i class="fas fa-edit"></i> Editar Pedido #${id}`;
         document.getElementById('btnSalvarPedido').textContent = 'Atualizar Pedido';
 
@@ -634,56 +832,139 @@ function salvarPedido() {
     
     const cliente = document.getElementById('npCliente').value;
     const status = document.getElementById('npStatus').value;
-    const produto = document.getElementById('npProduto').value;
-    const qtd = parseFloat(document.getElementById('npQtd').value);
-    const precoUnit = parseFloat(document.getElementById('npPrecoUnit').value);
-    const valorTotal = parseFloat(document.getElementById('npValorTotal').value);
     const pagamento = document.getElementById('npPagamento').value;
 
-    if (!cliente || !produto || isNaN(qtd) || isNaN(valorTotal)) {
-        alert("Preencha todos os campos corretamente.");
+    if (!cliente) {
+        if(window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
+            window.BeiraMarUtils.showToast('Preencha o nome do cliente!', 'error');
+        } else {
+            alert("Preencha o nome do cliente.");
+        }
         return;
     }
 
-    const resumoItens = `${qtd}kg ${produto}`;
+    // Coleta todos os itens do pedido
+    const itens = [];
+    const itensDOM = document.querySelectorAll('.item-pedido');
+    
+    if (itensDOM.length === 0) {
+        if(window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
+            window.BeiraMarUtils.showToast('Adicione pelo menos um item ao pedido!', 'error');
+        } else {
+            alert("Adicione pelo menos um item ao pedido.");
+        }
+        return;
+    }
+
+    let valorTotal = 0;
+    let resumoItens = [];
+    
+    itensDOM.forEach((item, index) => {
+        const produto = item.querySelector('.item-produto').value;
+        const qtd = parseFloat(item.querySelector('.item-qtd').value) || 0;
+        const precoUnit = parseFloat(item.querySelector('.item-preco').value) || 0;
+        const subtotal = parseFloat(item.querySelector('.item-total').value) || 0;
+
+        if (!produto || qtd <= 0 || precoUnit <= 0) {
+            if(window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
+                window.BeiraMarUtils.showToast(`Item ${index + 1}: Preencha todos os campos corretamente!`, 'error');
+            } else {
+                alert(`Item ${index + 1}: Preencha todos os campos corretamente.`);
+            }
+            return;
+        }
+
+        itens.push({
+            produto: produto,
+            qtd: qtd,
+            precoUnit: precoUnit,
+            subtotal: subtotal
+        });
+
+        resumoItens.push(`${qtd}kg ${produto}`);
+        valorTotal += subtotal;
+    });
+
+    if (itens.length === 0) {
+        if(window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
+            window.BeiraMarUtils.showToast('Adicione pelo menos um item válido ao pedido!', 'error');
+        } else {
+            alert("Adicione pelo menos um item válido ao pedido.");
+        }
+        return;
+    }
+
+    const resumoItensTexto = resumoItens.join(', ');
 
     if (editId) {
+        // Modo edição - mantém compatibilidade com estrutura antiga
         const index = vendasData.findIndex(v => v.id == editId);
         if (index !== -1) {
+            const vendaAntiga = vendasData[index];
             vendasData[index] = {
-                ...vendasData[index],
+                ...vendaAntiga,
                 cliente: cliente,
                 status: status,
-                produto: produto,
-                qtd: qtd,
-                precoUnit: precoUnit,
                 valor: valorTotal,
-                itens: resumoItens,
-                pagamento: pagamento
+                itens: resumoItensTexto,
+                pagamento: pagamento,
+                itensDetalhados: itens, // Nova propriedade para múltiplos itens
+                // Mantém compatibilidade com estrutura antiga
+                produto: itens[0].produto,
+                qtd: itens[0].qtd,
+                precoUnit: itens[0].precoUnit
             };
-            salvarVendasNoLocalStorage(); // Salva após editar
+            salvarVendasNoLocalStorage();
             if (window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
                 window.BeiraMarUtils.showToast('Pedido atualizado!', 'success');
             }
         }
     } else {
+        // Novo pedido
         const novoId = 5000 + vendasData.length + 1;
+        
+        // Verifica se é funcionário (não admin) para salvar quem fez a adição
+        const userType = sessionStorage.getItem('userType');
+        let funcionarioAdicionou = null;
+        
+        if (userType === 'funcionario') {
+            // Busca o nome do funcionário
+            const email = sessionStorage.getItem('userEmail');
+            if (email && window.funcionariosLista) {
+                const funcionario = window.funcionariosLista.find(f => 
+                    f.email && f.email.toLowerCase() === email.toLowerCase()
+                );
+                if (funcionario) {
+                    funcionarioAdicionou = funcionario.nome || email.split('@')[0];
+                } else {
+                    // Se não encontrar, usa o email como fallback
+                    funcionarioAdicionou = email.split('@')[0];
+                }
+            } else if (email) {
+                funcionarioAdicionou = email.split('@')[0];
+            }
+        }
+        
         const novaVenda = {
             id: novoId,
             cliente: cliente,
             valor: valorTotal,
             status: status,
             data: 'Hoje, ' + new Date().toLocaleTimeString().slice(0,5),
-            produto: produto,
-            qtd: qtd,
-            precoUnit: precoUnit,
-            itens: resumoItens,
-            pagamento: pagamento
+            itens: resumoItensTexto,
+            pagamento: pagamento,
+            itensDetalhados: itens, // Array com todos os itens
+            // Mantém compatibilidade com estrutura antiga (usa o primeiro item)
+            produto: itens[0].produto,
+            qtd: itens[0].qtd,
+            precoUnit: itens[0].precoUnit,
+            // Adiciona informação do funcionário que fez a venda (se não for admin)
+            funcionarioAdicionou: funcionarioAdicionou
         };
         vendasData.push(novaVenda);
-        salvarVendasNoLocalStorage(); // Salva após adicionar
+        salvarVendasNoLocalStorage();
         if (window.BeiraMarUtils && window.BeiraMarUtils.showToast) {
-            window.BeiraMarUtils.showToast('Venda registrada!', 'success');
+            window.BeiraMarUtils.showToast(`Pedido com ${itens.length} item(ns) registrado com sucesso!`, 'success');
         }
     }
 
@@ -727,7 +1008,34 @@ window.excluirPedido = function(id) {
 // --- OUTROS MODAIS ---
 
 window.fecharModalNovoPedido = function() {
-    document.getElementById('modalNovoPedido').style.display = 'none';
+    const modal = document.getElementById('modalNovoPedido');
+    if (modal) {
+        modal.style.display = 'none';
+        
+        // Restaura scroll do body quando modal fecha
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        
+        // Limpa a lista de itens ao fechar
+        const listaItens = document.getElementById('listaItensPedido');
+        if (listaItens) {
+            listaItens.innerHTML = '';
+        }
+        // Reseta o contador (garante que seja global)
+        window.contadorItens = 0;
+        contadorItens = 0;
+        // Reseta o formulário
+        const form = document.getElementById('formNovoPedido');
+        if (form) {
+            form.reset();
+        }
+        // Reseta o total geral
+        const totalGeral = document.getElementById('totalGeralPedido');
+        if (totalGeral) {
+            totalGeral.textContent = 'R$ 0,00';
+        }
+    }
 }
 
 window.abrirModalDetalhesVenda = function(id) {
@@ -738,32 +1046,93 @@ window.abrirModalDetalhesVenda = function(id) {
     document.getElementById('detalheVendaTitulo').textContent = `Pedido #${venda.id}`;
     const valorF = venda.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
+    let itensHTML = '';
+    
+    // Se tiver itens detalhados (novo formato), mostra todos
+    if (venda.itensDetalhados && Array.isArray(venda.itensDetalhados)) {
+        itensHTML = '<div style="margin: 1rem 0;"><strong style="display: block; margin-bottom: 0.5rem;">Itens do Pedido:</strong>';
+        venda.itensDetalhados.forEach((item, index) => {
+            const subtotal = item.subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            itensHTML += `
+                <div style="background: #f8f9fa; padding: 0.8rem; border-radius: 6px; margin-bottom: 0.5rem; border-left: 3px solid #0066cc;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${index + 1}. ${item.produto}</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">${item.qtd} kg × R$ ${item.precoUnit.toFixed(2)}/kg</span>
+                        </div>
+                        <strong style="color: #0066cc;">${subtotal}</strong>
+                    </div>
+                </div>
+            `;
+        });
+        itensHTML += '</div>';
+    } else {
+        // Modo compatibilidade - mostra item único
+        itensHTML = `
+            <div class="detalhe-row"><strong>Produto:</strong> <span>${venda.produto || '-'}</span></div>
+            <div class="detalhe-row"><strong>Quantidade:</strong> <span>${venda.qtd || '-'} kg</span></div>
+            <div class="detalhe-row"><strong>Preço/Kg:</strong> <span>R$ ${venda.precoUnit ? venda.precoUnit.toFixed(2) : '-'}</span></div>
+        `;
+    }
+
+    // Verifica se é admin para mostrar o funcionário que adicionou
+    const userType = sessionStorage.getItem('userType');
+    let funcionarioInfo = '';
+    
+    if ((userType === 'adm' || userType === 'admin') && venda.funcionarioAdicionou) {
+        funcionarioInfo = `
+            <hr class="vendas-separator"/>
+            <div class="detalhe-row">
+                <strong style="color: #0066cc;">
+                    <i class="fas fa-user-tag" style="margin-right: 0.5rem;"></i>Adicionado por:
+                </strong> 
+                <span style="color: #666;">${venda.funcionarioAdicionou}</span>
+            </div>
+        `;
+    }
+
     document.getElementById('detalheVendaCorpo').innerHTML = `
         <div class="detalhe-grid">
             <div class="detalhe-row"><strong>Cliente:</strong> <span>${venda.cliente}</span></div>
             <div class="detalhe-row"><strong>Data/Hora:</strong> <span>${venda.data}</span></div>
             <div class="detalhe-row"><strong>Status:</strong> <span class="status-badge ${getBadgeClass(venda.status)}">${venda.status}</span></div>
             <hr class="vendas-separator"/>
-            <div class="detalhe-row"><strong>Produto:</strong> <span>${venda.produto || '-'}</span></div>
-            <div class="detalhe-row"><strong>Quantidade:</strong> <span>${venda.qtd || '-'} kg</span></div>
-            <div class="detalhe-row"><strong>Preço/Kg:</strong> <span>R$ ${venda.precoUnit ? venda.precoUnit.toFixed(2) : '-'}</span></div>
+            ${itensHTML}
             <hr class="vendas-separator"/>
             <div class="detalhe-row"><strong>Pagamento:</strong> <span>${venda.pagamento}</span></div>
+            ${funcionarioInfo}
             <div class="detalhe-row big-total"><strong>Total:</strong> <span>${valorF}</span></div>
         </div>
     `;
     modal.style.display = 'flex';
+    
+    // Bloqueia scroll do body quando modal está aberto
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
 }
 
 window.fecharModalDetalhesVenda = function() {
-    document.getElementById('modalDetalhesVenda').style.display = 'none';
+    const modal = document.getElementById('modalDetalhesVenda');
+    if (modal) {
+        modal.style.display = 'none';
+        
+        // Restaura scroll do body quando modal fecha
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+    }
 }
 
 window.onclick = function(event) {
     const m1 = document.getElementById('modalNovoPedido');
     const m2 = document.getElementById('modalDetalhesVenda');
-    if (event.target == m1) m1.style.display = 'none';
-    if (event.target == m2) m2.style.display = 'none';
+    if (event.target == m1) {
+        fecharModalNovoPedido();
+    }
+    if (event.target == m2) {
+        fecharModalDetalhesVenda();
+    }
 }
 
 // --- CSS ATUALIZADO (CARDS COM GLOW E BORDA) ---
@@ -851,16 +1220,57 @@ function addVendasStyles() {
 
             .action-buttons { display: flex; gap: 4px; }
 
-            .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,30,60,0.4); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-            .custom-modal-content { background: white; width: 95%; max-width: 600px; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
+            .custom-modal-overlay { 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                background: rgba(0,30,60,0.4); 
+                z-index: 9999; 
+                display: flex; 
+                align-items: flex-start;
+                justify-content: center; 
+                backdrop-filter: blur(5px);
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 2rem 1rem;
+            }
+            .custom-modal-content { 
+                background: white; 
+                width: 95%; 
+                max-width: 600px; 
+                border-radius: 16px; 
+                overflow: hidden; 
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+                animation: slideUp 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                max-height: calc(100vh - 4rem);
+                margin: 0 auto;
+            }
             @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-            .modal-header { background: linear-gradient(135deg, #0066cc, #004499); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; color: white; }
+            .modal-header { 
+                background: linear-gradient(135deg, #0066cc, #004499); 
+                padding: 1.2rem; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                color: white;
+                flex-shrink: 0;
+            }
             .modal-header h3 { margin: 0; font-size: 1.1rem; display: flex; gap: 0.5rem; align-items: center; }
-            .btn-close-modal { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0.8; }
-            .btn-close-modal:hover { opacity: 1; color: #ffcccc; }
+            .btn-close-modal { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0.8; transition: all 0.2s ease; }
+            .btn-close-modal:hover { opacity: 1; color: white !important; background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
 
-            .modal-body { padding: 2rem; }
+            .modal-body { 
+                padding: 2rem; 
+                overflow-y: auto;
+                overflow-x: hidden;
+                flex: 1;
+                -webkit-overflow-scrolling: touch;
+            }
             .modal-footer { padding: 1rem 2rem; background: #f9f9f9; text-align: right; display: flex; justify-content: flex-end; gap: 1rem; }
 
             .form-group { margin-bottom: 1rem; }
@@ -883,6 +1293,22 @@ function addVendasStyles() {
             .fw-bold { font-weight: 600; }
             .text-blue { color: #0066cc; }
             .text-muted { color: #888; font-size: 0.85rem; }
+
+            /* Estilos para itens do pedido */
+            .item-pedido {
+                transition: all 0.2s ease;
+            }
+            .item-pedido:hover {
+                border-color: #0066cc !important;
+                box-shadow: 0 2px 8px rgba(0, 102, 204, 0.1);
+            }
+            .item-pedido button[onclick*="removerItemPedido"] {
+                transition: all 0.2s ease;
+            }
+            .item-pedido button[onclick*="removerItemPedido"]:hover {
+                background: #c82333 !important;
+                transform: scale(1.1);
+            }
 
             @media (max-width: 768px) {
                 .vendas-row { flex-direction: column; gap: 0; }
